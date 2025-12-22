@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { Link } from "react-router";
 import { fetchJobLocations, fetchJobs } from "../../../apis/jobsApi";
 import type { Job } from "../../../types/job.type";
@@ -14,6 +15,9 @@ import sliderIcon from "../../../assets/images/Sliders.png";
 import userIcon from "../../../assets/images/user-icon.png";
 import crosshairIcon from "../../../assets/images/Crosshair.png";
 
+const ALL_LOCATIONS_LABEL = "T\u1ea5t c\u1ea3 \u0111\u1ecba \u0111i\u1ec3m";
+const DEFAULT_COMPANY_LOGO = "https://www.google.com/favicon.ico";
+
 const JobListingSection = () => {
   const pageSize = 6;
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -24,6 +28,8 @@ const JobListingSection = () => {
   const [error, setError] = useState<string | null>(null);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filterLocationInput, setFilterLocationInput] = useState("");
+  const [filterLocationDropdownOpen, setFilterLocationDropdownOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -62,10 +68,17 @@ const JobListingSection = () => {
     };
   }, [location]);
 
-  const dropdownOptions = useMemo(
-    () => ["Tất cả địa điểm", ...locations],
-    [locations],
-  );
+  const dropdownOptions = useMemo(() => [ALL_LOCATIONS_LABEL, ...locations], [locations]);
+
+  useEffect(() => {
+    setFilterLocationInput(location);
+  }, [location]);
+
+  const filteredLocationSuggestions = useMemo(() => {
+    const keywordLower = filterLocationInput.trim().toLowerCase();
+    if (!keywordLower) return dropdownOptions;
+    return dropdownOptions.filter((option) => option.toLowerCase().includes(keywordLower));
+  }, [dropdownOptions, filterLocationInput]);
 
   const filteredJobs = useMemo(() => {
     if (!keyword.trim()) return jobs;
@@ -91,9 +104,26 @@ const JobListingSection = () => {
   }, [keyword, location]);
 
   const handleLocationSelect = (value: string) => {
-    setLocation(value === "Tất cả địa điểm" ? "" : value);
+    setLocation(value === ALL_LOCATIONS_LABEL ? "" : value);
     setLocationDropdownOpen(false);
   };
+
+  const handleFilterLocationSelect = (value: string) => {
+    setFilterLocationInput(value === ALL_LOCATIONS_LABEL ? "" : value);
+    handleLocationSelect(value);
+    setFilterLocationDropdownOpen(false);
+  };
+
+  const handleFilterLocationInputChange = (value: string) => {
+    setFilterLocationInput(value);
+    setFilterLocationDropdownOpen(true);
+  };
+
+  const handleFilterApply = () => {
+    handleLocationSelect(filterLocationInput.trim() || ALL_LOCATIONS_LABEL);
+    setFilterLocationDropdownOpen(false);
+  };
+
 
   return (
     <>
@@ -120,8 +150,19 @@ const JobListingSection = () => {
 
       <section className="bg-white pb-16 mt-[20px]">
         <div className="mx-auto w-full max-w-[1320px] px-6">
-          <FilterBar />
-      <JobGrid jobs={paginatedJobs} loading={loading} error={error} />
+          <FilterBar
+            keyword={keyword}
+            onKeywordChange={setKeyword}
+            locationInput={filterLocationInput}
+            onLocationInputChange={handleFilterLocationInputChange}
+            locationOptions={filteredLocationSuggestions}
+            onLocationSelect={handleFilterLocationSelect}
+            dropdownOpen={filterLocationDropdownOpen}
+            setDropdownOpen={setFilterLocationDropdownOpen}
+            onToggleFilters={() => setFilterLocationDropdownOpen((prev) => !prev)}
+            onSubmit={handleFilterApply}
+          />
+          <JobGrid jobs={paginatedJobs} loading={loading} error={error} />
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
@@ -174,11 +215,10 @@ const HeroSearchBar = ({
                     <button
                       type="button"
                       onClick={() => onSelectLocation(item)}
-                      className={`flex w-full items-center px-3 py-2 text-sm ${
-                        (selectedLocation || "Tất cả địa điểm") === item
-                          ? "bg-[#fdecec] font-semibold text-[#c71c1c]"
-                          : "hover:bg-[#f5f5f5]"
-                      }`}
+                      className={`flex w-full items-center px-3 py-2 text-sm ${(selectedLocation || "Tất cả địa điểm") === item
+                        ? "bg-[#fdecec] font-semibold text-[#c71c1c]"
+                        : "hover:bg-[#f5f5f5]"
+                        }`}
                     >
                       {item}
                     </button>
@@ -212,36 +252,96 @@ const HeroSearchBar = ({
   </div>
 );
 
-const FilterBar = () => (
-  <div className="rounded-[1px] border border-[#E4E5E8] px-6 py-5">
+type FilterBarProps = {
+  keyword: string;
+  onKeywordChange: (value: string) => void;
+  locationInput: string;
+  onLocationInputChange: (value: string) => void;
+  locationOptions: string[];
+  onLocationSelect: (value: string) => void;
+  dropdownOpen: boolean;
+  setDropdownOpen: Dispatch<SetStateAction<boolean>>;
+  onToggleFilters: () => void;
+  onSubmit: () => void;
+};
+
+const FilterBar = ({
+  keyword,
+  onKeywordChange,
+  locationInput,
+  onLocationInputChange,
+  locationOptions,
+  onLocationSelect,
+  dropdownOpen,
+  setDropdownOpen,
+  onToggleFilters,
+  onSubmit,
+}: FilterBarProps) => (
+  <div className="">
     <div className="flex flex-wrap items-center gap-4">
-      <div className="flex flex-1 min-w-[320px] items-center rounded-[1px] border border-[#ececec] bg-white text-sm text-[#8a8a8a]">
+      <div className="flex flex-1 min-w-[320px] min-h-[60px] items-center rounded-[1px] border border-[#ececec] bg-white text-sm text-[#8a8a8a]">
         <div className="flex min-w-[240px] flex-1 items-center gap-3 px-4 py-3">
           <img src={searchIcon} alt="Search" className="h-4 w-4" />
           <input
+            value={keyword}
+            onChange={(event) => onKeywordChange(event.target.value)}
             className="w-full bg-transparent text-sm outline-none placeholder:text-[#bababa]"
             placeholder="Search by: Job title, Position, Keyword..."
           />
         </div>
         <span className="w-px self-stretch bg-[#e5e5e5]" />
-        <div className="flex flex-1 min-w-[200px] items-center gap-3 px-4 py-3">
+        <div className="relative flex flex-1 min-w-[200px] items-center gap-3 px-4 py-3">
           <img src={mapPinRedIcon} alt="Location" className="h-4 w-4" />
           <input
+            value={locationInput}
+            onChange={(event) => onLocationInputChange(event.target.value)}
+            onFocus={() => setDropdownOpen(true)}
+            onBlur={() => setTimeout(() => setDropdownOpen(false), 120)}
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-[#bababa]"
             placeholder="City, state or zip code"
           />
+          {dropdownOpen && (
+            <div className="absolute left-0 top-full z-20 mt-2 w-full rounded-[1px] border border-[#e3e3e3] bg-white shadow-lg">
+              <ul className="max-h-48 overflow-y-auto text-left text-sm text-[#505050]">
+                {locationOptions.length ? (
+                  locationOptions.map((item) => (
+                    <li key={item}>
+                      <button
+                        type="button"
+                        className="flex w-full items-center px-3 py-2 text-left hover:bg-[#f5f5f5]"
+                        onMouseDown={(event) => {
+                          event.preventDefault();
+                          onLocationSelect(item);
+                        }}
+                      >
+                        {item}
+                      </button>
+                    </li>
+                  ))
+                ) : (
+                  <li className="px-3 py-2 text-xs text-[#9a9a9a]">Không tìm thấy địa điểm</li>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
-        <button className="px-3 py-3">
+        <button className="px-3 py-3" type="button" onClick={() => onLocationSelect(ALL_LOCATIONS_LABEL)}
+        >
           <img src={crosshairIcon} alt="Locate me" className="h-4 w-4" />
         </button>
+        <button
+          type="button"
+          onClick={onToggleFilters}
+          className="flex items-center gap-2 rounded-[4px] bg-[#F1F2F4] px-4 py-2 text-sm font-semibold text-[#505050] mr-2"
+        >
+          <img src={sliderIcon} alt="Filters" className="h-4 w-4" />
+          Filters
+        </button>
+        <button className="rounded-[4px] bg-[#BC2228] px-4 py-2 text-sm font-semibold text-white mr-2" type="button" onClick={onSubmit}>
+          Find Job
+        </button>
       </div>
-      <button className="flex items-center gap-2 rounded-[1px] border border-[#c1c1c1] bg-[#F1F2F4] px-5 py-3 text-sm font-semibold text-[#505050]">
-        <img src={sliderIcon} alt="Filters" className="h-4 w-4" />
-        Filters
-      </button>
-      <button className="rounded-[1px] bg-[#c71c1c] px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_20px_rgba(199,28,28,0.2)]">
-        Find Job
-      </button>
+
     </div>
   </div>
 );
@@ -280,7 +380,7 @@ const JobGrid = ({ jobs, loading, error }: { jobs: Job[]; loading: boolean; erro
   );
 };
 
-const JobCard = ({ id, title, type, salary, company, location }: Job) => {
+const JobCard = ({ id, title, type, salary, company, location, logo }: Job) => {
   const badgeColor =
     type === "Full-time"
       ? "bg-[#ebfff3] text-[#13ae4b]"
@@ -296,28 +396,33 @@ const JobCard = ({ id, title, type, salary, company, location }: Job) => {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-semibold text-[#202020]">{title}</h3>
-          <p className="mt-1 text-sm text-[#8e8e8e]">Salary: {salary}</p>
+          <div className="flex items-center justify-center gap-3">
+            <span className={`mt-1 inline-flex rounded-[1px] px-3 py-1 text-xs font-semibold ${badgeColor}`}>
+              {type.toUpperCase()}
+            </span>
+            <p className="mt-1 text-sm text-[#8e8e8e]">Salary: {salary}</p>
+          </div>
         </div>
-        <span className="text-[#d0d0d0]">
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="mt-4 flex items-center gap-3">
+          <img
+            src={logo || DEFAULT_COMPANY_LOGO}
+            alt={company}
+            className="h-8 w-8 rounded-[1px] border border-[#e7e7e7] bg-[#EDEFF5] object-contain p-1"
+          />
+          <div>
+            <p className="text-sm font-semibold text-[#3d3d3d]">{company}</p>
+            <p className="flex items-center gap-1 text-xs text-[#9a9a9a]">
+              <img src={mapPinIcon} alt="Location" className="h-4 w-4" />
+              {location}
+            </p>
+          </div>
+        </div>
+        <span className="text-[#d0d0d0] text-[14px] mt-4">
           <BookmarkIcon className="h-5 w-5" />
         </span>
-      </div>
-      <span className={`mt-4 inline-flex rounded-[1px] px-3 py-1 text-xs font-semibold ${badgeColor}`}>
-        {type.toUpperCase()}
-      </span>
-      <div className="mt-4 flex items-center gap-3">
-        <img
-          src="https://www.google.com/favicon.ico"
-          alt="Company"
-          className="h-8 w-8 rounded-[1px] border border-[#e7e7e7] object-cover"
-        />
-        <div>
-          <p className="text-sm font-semibold text-[#3d3d3d]">{company}</p>
-          <p className="flex items-center gap-1 text-xs text-[#9a9a9a]">
-            <img src={mapPinIcon} alt="Location" className="h-3 w-3" />
-            {location}
-          </p>
-        </div>
       </div>
     </Link>
   );
