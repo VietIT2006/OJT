@@ -1,10 +1,25 @@
-import React from "react";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import "./index.css";
-import ReactDOM from "react-dom/client";
-import RouterConfig from "./router/RouterConfig";
+import App from "./App.tsx";
+import { ConfigProvider } from "antd";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <RouterConfig />
-  </React.StrictMode>
+createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimary: "#BC2228",
+                    borderRadius: 4,
+                },
+                components: {
+                    Select: {
+                        colorText: "#000000",
+                    }
+                }
+            }}
+        >
+            <App />
+        </ConfigProvider>
+    </StrictMode>
 );
