@@ -1,5 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomepageMain } from "../pages/Homepage/HomepageMain";
+import CandidateCvPage from "../pages/candidate/CandidateCvPage";
+import CandidateSupportPage from "../pages/candidate/CandidateSupportPage";
+import JobDetailPage from "../pages/job/JobDetailPage";
+import NotFoundPage from "../components/common/NotFoundPage";
 import Login from "../pages/Authentication/User/Login";
 import OutCandidateMain from "../pages/Business/OutCandidate/OutCandidateMain";
 import OutCandidateDetailMain from "../pages/Business/OutCandidateDetail/OutCandidateDetailMain";
@@ -12,6 +16,30 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <HomepageMain />,
+    },
+    {
+        path: "/viec-lam",
+        element: <HomepageMain />,
+    },
+    {
+        path: "/viec-lam/:jobId",
+        element: <JobDetailPage />,
+    },
+    {
+        path: "/cv-cua-ban",
+        element: <CandidateCvPage />,
+    },
+    {
+        path: "/customer-supports",
+        element: <CandidateSupportPage />,
+    },
+    {
+        path: "*",
+        element: <NotFoundPage />,
+    },
     {
         path: "/",
         element: <HomepageMain />,
