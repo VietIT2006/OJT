@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
+import type { ReactNode } from "react";
 import { Link, useParams } from "react-router";
-import Header from "../../components/layout/Header";
-import Footer from "../../components/layout/Footer";
-import CandidateBreadcrumb from "../../components/candidate/CandidateBreadcrumb";
-import { fetchJobById, fetchJobs, fetchJobLocations } from "../../apis/jobsApi";
-import type { Job } from "../../types/job.type";
-import mapPinIcon from "../../assets/images/MapPin.png";
-import searchIcon from "../../assets/images/fi_search.png";
-import bellIcon from "../../assets/images/bell.fill.png";
-import userIcon from "../../assets/images/user-icon.png";
-import rikkeiLogo from "../../assets/images/rikkeiEduAvatar.png";
+import Header from "../../../../components/Header/Header";
+import Footer from "../../../../components/Footer/Footer";
+import CandidateBreadcrumb from "../../../../components/candidate/CandidateBreadcrumb";
+import { fetchJobById, fetchJobs, fetchJobLocations } from "../../../../apis/jobsApi";
+import type { Job } from "../../../../types/job.type";
+import mapPinIcon from "../../../../assets/images/MapPin.png";
+import mapTrifoldIcon from "../../../../assets/images/MapTrifold.png";
+import searchIcon from "../../../../assets/images/fi_search.png";
+import bellIcon from "../../../../assets/images/bell.fill.png";
+import userIcon from "../../../../assets/images/user-icon.png";
+import rikkeiLogo from "../../../../assets/images/rikkeiEduAvatar.png";
+import { Calendar, Clock, Layers, Briefcase, GraduationCap, Link2, Linkedin, Facebook, Twitter, Mail, Calendar1, Timer, Clock1, CaptionsIcon } from 'lucide-react';
 
 const ALL_LOCATIONS_LABEL = "Tat ca dia diem";
 const DEFAULT_COMPANY_LOGO = "https://www.google.com/favicon.ico";
@@ -60,7 +63,7 @@ const JobDetailPage = () => {
     let mounted = true;
     fetchJobLocations()
       .then((data) => mounted && setLocations(data))
-      .catch(() => {});
+      .catch(() => { });
     return () => {
       mounted = false;
     };
@@ -71,35 +74,46 @@ const JobDetailPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <HeroSearchShell
-        keyword={keyword}
-        onKeywordChange={setKeyword}
-        selectedLocation={location}
-        onSelectLocation={(value: string) => setLocation(value === ALL_LOCATIONS_LABEL ? "" : value)}
-        dropdownOpen={dropdownOpen}
-        toggleDropdown={() => setDropdownOpen((prev) => !prev)}
-        locations={locationOptions}
-      />
-      <CandidateBreadcrumb
-        items={[
-          { label: "Trang chu", to: "/" },
-          { label: "Viec lam", to: "/viec-lam" },
-          { label: job?.title || "Job Details", highlight: true },
-        ]}
-      />
-      {loading && (
-        <div className="py-16 text-center text-sm text-[#707070]">Dang tai thong tin cong viec...</div>
-      )}
-      {!loading && error && (
-        <div className="py-16 text-center text-sm text-[#d00000]">{error}</div>
-      )}
-      {!loading && job && (
-        <>
-          <JobHero job={job} />
-          <JobBody job={job} />
-          <RelatedJobsSection jobs={relatedJobs} />
-        </>
-      )}
+      <main
+        style={{
+          fontFamily: "'Inter', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+          fontSize: "14px",
+          lineHeight: "20px",
+          fontWeight: 400,
+          letterSpacing: "0px",
+          color: "#333333",
+        }}
+      >
+        <HeroSearchShell
+          keyword={keyword}
+          onKeywordChange={setKeyword}
+          selectedLocation={location}
+          onSelectLocation={(value: string) => setLocation(value === ALL_LOCATIONS_LABEL ? "" : value)}
+          dropdownOpen={dropdownOpen}
+          toggleDropdown={() => setDropdownOpen((prev) => !prev)}
+          locations={locationOptions}
+        />
+        <CandidateBreadcrumb
+          items={[
+            { label: "Trang chủ", to: "/" },
+            { label: "Việc làm", to: "/viec-lam" },
+            { label: job?.title || "Job Details", highlight: true },
+          ]}
+        />
+        {loading && (
+          <div className="py-16 text-center text-sm text-[#707070]">Đang tải thông tin công việc...</div>
+        )}
+        {!loading && error && (
+          <div className="py-16 text-center text-sm text-[#d00000]">{error}</div>
+        )}
+        {!loading && job && (
+          <>
+            <JobHero job={job} />
+            <JobBody job={job} />
+            <RelatedJobsSection jobs={relatedJobs} />
+          </>
+        )}
+      </main>
       <Footer />
     </div>
   );
@@ -128,7 +142,7 @@ const HeroSearchShell = ({
   return (
     <section className="bg-white">
       <div className="mx-auto w-full max-w-[1320px] px-6 py-6">
-        <div className="rounded-[1px] bg-white p-6 shadow-[0_15px_35px_rgba(0,0,0,0.08)]">
+        <div className="rounded-[1px] bg-white p-6">
           <div className="flex flex-wrap items-center gap-4">
             <img src={rikkeiLogo} alt="Rikkei Education" className="h-10 w-auto" />
             <div className="flex min-w-[300px] flex-1 items-center rounded-[1px] border border-[#e3e3e3] bg-white text-sm text-[#777]">
@@ -150,11 +164,10 @@ const HeroSearchShell = ({
                           <button
                             type="button"
                             onClick={() => onSelectLocation(item)}
-                            className={`flex w-full items-center px-3 py-2 text-sm ${
-                              currentLocation === item
+                            className={`flex w-full items-center px-3 py-2 text-sm ${currentLocation === item
                                 ? "bg-[#fdecec] font-semibold text-[#c71c1c]"
                                 : "hover:bg-[#f5f5f5]"
-                            }`}
+                              }`}
                           >
                             {item}
                           </button>
@@ -194,36 +207,39 @@ const JobHero = ({ job }: { job: Job }) => {
   const badgeTags = (job.tags && job.tags.length > 0 ? job.tags : ["Featured"]).filter(Boolean);
   const companyLogo = job.logo || DEFAULT_COMPANY_LOGO;
   return (
-    <section className="bg-white">
-      <div className="mx-auto w-full max-w-[1320px] px-6 py-10">
-        <div className="flex flex-col gap-6 rounded-[12px] bg-white px-8 py-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center">
-            <img
-              src={companyLogo}
-              alt={job.company}
-              className="h-16 w-16 rounded-[10px] border bg-white object-cover"
-            />
+    <section className="bg-white shadow-[0_6px_18px_rgba(0,0,0,0.04)]">
+      <div className="mx-auto w-full max-w-[1320px] px-6 py-8 mt-[38px]">
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <div className="flex items-start gap-4">
+            <div className="flex h-18 w-35 items-center justify-center">
+              <img src={companyLogo} alt={job.company} className="h-full w-full object-contain" />
+            </div>
             <div>
-              <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
-                <p className="text-sm text-black">at {job.company}</p>
-              </div>
-              <h1 className="mt-1 text-3xl font-semibold">{job.title}</h1>
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs font-semibold">
-                <span className="rounded-full bg-[#16a24b] px-3 py-1 ">{job.type.toUpperCase()}</span>
+              <h1 className="text-[24px] font-[500] text-[#18191C] md:text-3xl">{job.title}</h1>
+              <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-[#6a6a6a]">
+                <span className="text-[#474C54]">
+                  at {job.company}
+                </span>
+                <span className="rounded-[3px] bg-[#0BA02C] px-3 py-0.5 text-xs font-semibold uppercase text-white">
+                  {job.type}
+                </span>
                 {badgeTags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-[#ffe6e6] px-3 py-1 text-[#d44f4f]">
+                  <span
+                    key={tag}
+                    className="rounded-full bg-[#ffe8e7] px-3 py-0.5 text-xs font-semibold text-[#E05151]"
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3 md:flex-col md:items-end">
-            <button className="flex h-11 w-11 items-center justify-center rounded-[6px] bg-[#aa1b1b]  shadow-[0_8px_18px_rgba(170,27,27,0.4)]">
+          <div className="flex items-center gap-3 md:mt-0">
+            <button className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#e4e4e4] bg-[#fff3f3] text-[#c71c1c] transition hover:bg-[#ffe0e0]">
               <BookmarkIcon className="h-4 w-4" />
             </button>
-            <button className="flex items-center gap-2 rounded-[6px] bg-[#c71c1c] px-6 py-3 text-sm font-semibold  shadow-[0_18px_30px_rgba(199,28,28,0.35)] transition hover:bg-[#b41717]">
-              Ung tuyen ngay
+            <button className="flex items-center gap-2 rounded-lg bg-[#c71c1c] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_15px_30px_rgba(199,28,28,0.25)] transition hover:bg-[#b41717]">
+              Ứng tuyển ngay
               <ArrowRightIcon />
             </button>
           </div>
@@ -239,19 +255,17 @@ const JobBody = ({ job }: { job: Job }) => {
   const benefits = job.benefits && job.benefits.length > 0 ? job.benefits : FALLBACK_BENEFITS;
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-[1320px] px-6 pb-12">
-        <div className="flex flex-col gap-6 lg:flex-row">
-          <article className="flex-1 space-y-10 rounded-[14px] text-black bg-white px-10 py-8">
+      <div className="mx-auto w-full max-w-[1320px] ">
+        <div className="grid gap-8 lg:grid-cols-12">
+          <article className="space-y-8 rounded-2xl bg-white px-8 py-8 text-[#282828] lg:col-span-8">
             <JobSection title="Job Description" paragraphs={description} />
             <ListSection title="Requirements" items={requirements} />
             <ListSection title="Desirable" items={desirable} />
             <ListSection title="Benefits" items={benefits} />
           </article>
-          <aside className="w-full self-start lg:max-w-[360px]">
-            <div className="space-y-6">
-              <SalaryLocationCard job={job} />
-              <JobOverviewCard job={job} />
-            </div>
+          <aside className="space-y-6 lg:col-span-4">
+            <SalaryLocationCard job={job} />
+            <JobOverviewCard job={job} />
           </aside>
         </div>
       </div>
@@ -259,20 +273,20 @@ const JobBody = ({ job }: { job: Job }) => {
   );
 };
 const SalaryLocationCard = ({ job }: { job: Job }) => (
-  <div className="rounded-2xl border border-[#e2e7ff] bg-white px-6 py-5 shadow-[0_12px_30px_rgba(0,0,0,0.06)]">
-    <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-      <div className="flex-1 text-center md:text-left">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-[#9a9a9a]">Salary (USD)</p>
-        <p className="mt-1 text-2xl font-semibold text-[#12a053]">{job.salary}</p>
-        <p className="text-xs text-[#b0b0b0]">Yearly salary</p>
+  <div className="rounded-[16px] border border-[#e1e1e1] bg-white p-6 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
+    <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+      <div className="flex-1 border-b border-[#e5e5e5] pb-4 text-center sm:border-b-0 sm:pb-0 ">
+        <p className="mb-3 text-xs font-semibold uppercase text-[#18191C]">Salary (USD)</p>
+        <p className="whitespace-nowrap text-xl font-semibold text-[#16a24b]">{job.salary}</p>
+        <p className="mt-1 text-xs text-[#a3a3a3]">Yearly salary</p>
       </div>
-      <span className="hidden h-12 w-px bg-[#e1e8ff] md:block" />
-      <div className="flex-1 text-center md:text-left">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-[#9a9a9a]">Job Location</p>
-        <div className="mt-1 flex items-center justify-center gap-2 text-sm font-semibold text-[#2a2a2a] md:justify-start">
-          <LocationIcon />
-          <span>{job.location}</span>
+      <span className="hidden h-30 w-px bg-[#e5e5e5] sm:block" />
+      <div className="flex-1 text-center ">
+        <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg ">
+          <img src={mapTrifoldIcon} alt="Location" className="h-10 w-10" />
         </div>
+        <p className="text-xs font-semibold uppercase text-[#18191C]">Job Location</p>
+        <p className="whitespace-nowrap mt-1 text-sm font-semibold text-[#767F8C]">{job.location}</p>
       </div>
     </div>
   </div>
@@ -280,10 +294,10 @@ const SalaryLocationCard = ({ job }: { job: Job }) => (
 const RelatedJobsSection = ({ jobs }: { jobs: Job[] }) => {
   if (!jobs.length) return null;
   return (
-    <section className="bg-white pb-16">
+    <section className="bg-white pb-16 pt-20 mt-7 border-t border-[#f0f0f0]">
       <div className="mx-auto w-full max-w-[1320px] px-6">
         <h2 className="text-2xl font-semibold text-[#1f1f1f]">Related Jobs</h2>
-        <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {jobs.map((job) => (
             <Link
               key={job.id}
@@ -293,28 +307,34 @@ const RelatedJobsSection = ({ jobs }: { jobs: Job[] }) => {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="text-base font-semibold text-[#1c1c1c]">{job.title}</h3>
-                  <p className="mt-1 text-xs text-[#8e8e8e]">Salary: {job.salary}</p>
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="rounded-[3px] bg-[#E7F6EA] px-[8px] py-[4px] text-[12px] font-semibold text-[#0BA02C] uppercase">
+                      {job.type}
+                    </span>
+                    <p className="mt-1 text-xs text-[#8e8e8e]">Salary: {job.salary}</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="mt-3 flex items-center gap-3 justify-between">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={job.logo || DEFAULT_COMPANY_LOGO}
+                    alt={job.company}
+                    className="h-6 w-6 rounded-[1px] border border-[#e7e7e7] object-contain"
+                  />
+                  <div>
+                    <p className="text-xs font-semibold text-[#3d3d3d]">{job.company}</p>
+                    <p className="flex items-center gap-1 text-[11px] text-[#9a9a9a]">
+                      <img src={mapPinIcon} alt="Location" className="h-3 w-3" />
+                      {job.location}
+                    </p>
+                  </div>
                 </div>
                 <span className="text-[#d0d0d0]">
-                  <BookmarkIcon className="h-4 w-4" />
+                  <BookmarkIcon className="h-6 w-6" />
                 </span>
-              </div>
-              <span className="mt-3 inline-flex rounded-full bg-[#fef3f2] px-2 py-1 text-[10px] font-semibold text-[#c71c1c]">
-                {job.type}
-              </span>
-              <div className="mt-3 flex items-center gap-3">
-                <img
-                  src={job.logo || DEFAULT_COMPANY_LOGO}
-                  alt={job.company}
-                  className="h-6 w-6 rounded-[1px] border border-[#e7e7e7]"
-                />
-                <div>
-                  <p className="text-xs font-semibold text-[#3d3d3d]">{job.company}</p>
-                  <p className="flex items-center gap-1 text-[11px] text-[#9a9a9a]">
-                    <img src={mapPinIcon} alt="Location" className="h-3 w-3" />
-                    {job.location}
-                  </p>
-                </div>
               </div>
             </Link>
           ))}
@@ -328,8 +348,8 @@ const JobSection = ({ title, paragraphs = [] }: { title: string; paragraphs?: st
   if (!paragraphs.length) return null;
   return (
     <section>
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <div className="mt-3 space-y-3 text-sm leading-relaxed">
+      <h3 className="text-lg font-semibold text-[#1f1f1f]">{title}</h3>
+      <div className="mt-3 space-y-3 text-sm leading-relaxed text-[#4e4e4e]">
         {paragraphs.map((text) => (
           <p key={text}>{text}</p>
         ))}
@@ -342,13 +362,10 @@ const ListSection = ({ title, items = [] }: { title: string; items?: string[] })
   if (!items.length) return null;
   return (
     <section>
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <ul className="mt-4 space-y-2 text-sm leading-relaxed ">
+      <h3 className="text-lg font-semibold text-[#1f1f1f]">{title}</h3>
+      <ul className="mt-4 list-outside list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#4e4e4e]">
         {items.map((item) => (
-          <li key={item} className="flex items-start gap-2">
-            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#c71c1c]" />
-            <span>{item}</span>
-          </li>
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </section>
@@ -357,50 +374,55 @@ const ListSection = ({ title, items = [] }: { title: string; items?: string[] })
 
 const JobOverviewCard = ({ job }: { job: Job }) => {
   const overviewItems = [
-    { label: "Job Posted", value: job.postedDate ?? "Dang cap nhat", icon: <CalendarIcon /> },
-    { label: "Job Expires", value: job.expiryDate ?? "Dang cap nhat", icon: <TimerIcon /> },
-    { label: "Job Level", value: job.level ?? "Dang cap nhat", icon: <BriefcaseIcon /> },
-    { label: "Experience", value: job.experience ?? "Dang cap nhat", icon: <ClockIcon /> },
-    { label: "Education", value: job.education ?? "Dang cap nhat", icon: <CapIcon /> },
+    { label: "Job Posted", value: job.postedDate ?? "Dang cap nhat", icon: <Calendar1 className="w-10 h-8" /> },
+    { label: "Job Expire In", value: job.expiryDate ?? "Dang cap nhat", icon: <Timer className="w-10 h-8" /> },
+    { label: "Job Level", value: job.level ?? "Dang cap nhat", icon: <Layers className="w-10 h-8" /> },
+    { label: "Experience", value: job.experience ?? "Dang cap nhat", icon: <Clock1 className="w-10 h-8" /> },
+    { label: "Education", value: job.education ?? "Dang cap nhat", icon: <GraduationCap className="w-10 h-8" /> },
   ];
   const socials = [
-    { label: "LinkedIn", icon: <LinkedInIcon /> },
-    { label: "Facebook", icon: <FacebookIcon /> },
-    { label: "Twitter", icon: <TwitterIcon /> },
-    { label: "Email", icon: <MailIcon /> },
+    { label: "Copy Links", icon: <LinkIcon />, type: "copy" },
+    { label: "LinkedIn", icon: <LinkedInIcon />, type: "light" },
+    { label: "Facebook", icon: <FacebookIcon />, type: "solid" },
+    { label: "Twitter", icon: <TwitterIcon />, type: "light" },
+    { label: "Email", icon: <MailIcon />, type: "light" },
   ];
+  const topOverview = overviewItems.slice(0, 3);
+  const bottomOverview = overviewItems.slice(3);
   return (
-    <div className="rounded-2xl border border-[#e2e7ff] bg-white shadow-[0_12px_30px_rgba(0,0,0,0.06)]">
-      <div className="px-6 py-5">
-        <h4 className="text-base font-semibold text-[#1f1f1f]">Job Overview</h4>
-        <div className="mt-4 grid gap-4">
-          {overviewItems.map((item) => (
-            <div key={item.label} className="flex items-center gap-3 rounded-xl border border-[#f2f4ff] p-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#fff0f0] text-[#c71c1c]">
-                {item.icon}
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-[#8a8a8a]">{item.label}</p>
-                <p className="text-sm font-semibold text-[#2f2f2f]">{item.value}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="bg-white rounded-lg border border-gray-200 p-6 w-full max-w-md">
+      <h2 className="text-lg font-semibold text-gray-900 mb-6">Job Overview</h2>
+
+      {/* Top row - 3 columns */}
+      <div className="grid grid-cols-3 gap-6 mb-6">
+        {topOverview.map((item) => (
+          <OverviewItem key={item.label} item={item} />
+        ))}
       </div>
-      <div className="border-t border-[#eef0ff] px-6 py-4">
-        <p className="text-sm font-semibold text-[#1f1f1f]">Share this job:</p>
-        <div className="mt-3 flex flex-wrap items-center gap-3">
-          <button className="flex items-center gap-2 rounded-full bg-[#ffe6e6] px-4 py-2 text-sm font-semibold text-[#c71c1c] shadow-[0_6px_12px_rgba(199,28,28,0.15)]">
-            <LinkIcon />
-            Copy Links
-          </button>
+
+      {/* Bottom row - 2 columns (left-aligned) */}
+      <div className="grid grid-cols-3 gap-6 mb-8">
+        {bottomOverview.map((item) => (
+          <OverviewItem key={item.label} item={item} />
+        ))}
+      </div>
+
+      {/* Share section */}
+      <div className="border-t border-gray-200 pt-6">
+        <h3 className="text-base font-semibold text-gray-900 mb-4">Share this job:</h3>
+        <div className="flex items-center gap-3">
           {socials.map((social) => (
             <button
               key={social.label}
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#f7f8ff] text-[#c71c1c] transition hover:bg-[#ffecec]"
-              aria-label={`share-${social.label.toLowerCase()}`}
+              className={`flex items-center justify-center gap-2 rounded transition-colors ${social.type === "copy"
+                  ? "px-4 py-2 bg-red-50 text-red-600 hover:bg-red-100"
+                  : social.type === "solid"
+                    ? "w-10 h-10 bg-red-600 text-white hover:bg-red-700"
+                    : "w-10 h-10 bg-red-100 text-red-600 hover:bg-red-200"
+                }`}
             >
               {social.icon}
+              {social.type === "copy" ? <span className="text-sm font-medium">Copy Links</span> : null}
             </button>
           ))}
         </div>
@@ -417,6 +439,16 @@ const BookmarkIcon = ({ className }: { className?: string }) => (
       d="M6.5 4h11a1.5 1.5 0 0 1 1.5 1.5V21l-7-3-7 3V5.5A1.5 1.5 0 0 1 6.5 4z"
     />
   </svg>
+);
+
+const OverviewItem = ({ item }: { item: { label: string; value: string; icon: ReactNode } }) => (
+  <div>
+    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded  text-red-500">
+      {item.icon}
+    </div>
+    <p className="text-xs font-semibold uppercase text-gray-500">{item.label}:</p>
+    <p className="mt-1 text-sm font-medium text-gray-900">{item.value}</p>
+  </div>
 );
 
 const CaretDownIcon = () => (
@@ -496,13 +528,6 @@ const MailIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5">
     <rect x="3" y="5" width="18" height="14" rx="2" />
     <path d="m4 7 8 6 8-6" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const LocationIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4 text-[#c71c1c]" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M12 21s7-6.1 7-11a7 7 0 0 0-14 0c0 4.9 7 11 7 11z" />
-    <circle cx="12" cy="10" r="2.5" />
   </svg>
 );
 

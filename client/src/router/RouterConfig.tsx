@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { HomepageMain } from "../pages/Homepage/HomepageMain";
-import CandidateCvPage from "../pages/candidate/CandidateCvPage";
-import CandidateSupportPage from "../pages/candidate/CandidateSupportPage";
-import JobDetailPage from "../pages/job/JobDetailPage";
+import CandidateCvPage from "../pages/Candidate/CandidateCvPage";
+import CandidateSupportPage from "../pages/Candidate/CandidateSupportPage";
+import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
+import JobDetailPage from "../pages/Candidate/JobPage/JobDetails/JobDetailPage";
 import NotFoundPage from "../components/common/NotFoundPage";
 import Login from "../pages/Authentication/User/Login";
 import OutCandidateMain from "../pages/Business/OutCandidate/OutCandidateMain";
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/viec-lam",
-        element: <HomepageMain />,
+        element: <JobListingSection />,
     },
     {
         path: "/viec-lam/:jobId",
