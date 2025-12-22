@@ -242,28 +242,33 @@ export default function BusinessRegister() {
     };
 
     return (
-        <div style={{ minHeight: "100vh", display: "flex" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
             {/* LEFT */}
             <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-                <div style={{ width: 560, paddingTop: 53 }}>
-                    <img
-                        src={rikkeiLogo}
-                        alt="Rikkei Logo"
-                        style={{ width: 200, height: 67.6, objectFit: "contain" }}
-                    />
+                <div style={{ width: 560 }}>
 
-                    <h2
-                        style={{
-                            marginTop: 84,
-                            fontSize: 30,
-                            fontWeight: 700,
-                            lineHeight: "40px",
-                            marginBottom: 20,
-                        }}
-                    >
-                        Đăng kí để có thể tiếp cận nguồn nhân lực chất lượng cao
-                    </h2>
+                    {/* HEADER LEFT */}
+                    <div style={{ paddingTop: 13 }}>
+                        <img
+                            src={rikkeiLogo}
+                            alt="Rikkei Logo"
+                            style={{ width: 200, height: 67.6 }}
+                        />
 
+                        <h2
+                            style={{
+                                marginTop: 24,
+                                fontSize: 30,
+                                fontWeight: 700,
+                                lineHeight: "40px",
+                            }}
+                        >
+                            Đăng kí để có thể tiếp cận nguồn nhân lực chất lượng cao
+                        </h2>
+                    </div>
+
+                    {/* FORM LEFT */}
+                    <div style={{ marginTop: 10 }}>
                     <form
                         onSubmit={handleSubmit}
                         style={{
@@ -316,17 +321,17 @@ export default function BusinessRegister() {
                             }
                             error={errors.confirmPassword}
                         />
-
-
                     </form>
+                    </div>
                 </div>
             </div>
+
 
 
             <div
                 style={{
                     width: 120,
-                    marginTop: 220,
+                    marginTop: 100,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -341,7 +346,7 @@ export default function BusinessRegister() {
                     }}
                 />
 
-                <div style={{ marginTop: 48, textAlign: "center" }}>
+                <div style={{  textAlign: "center" }}>
 
                     <button
                         type="submit"
@@ -371,7 +376,7 @@ export default function BusinessRegister() {
 
 
             <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-                <div style={{ width: 560, marginTop: 320 }}>
+                <div style={{ width: 560, marginTop: 220 }}>
                     <SectionTitle title="Thông tin doanh nghiệp" />
 
                     <Input
@@ -414,7 +419,7 @@ export default function BusinessRegister() {
                         error={errors.companyEmail}
                     />
                 </div>
-                
+
             </div>
 
         </div>
