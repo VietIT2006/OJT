@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/img/logo.png";
 import mainheader from "../../assets/img/mainheader.png";
-import {
-  Search,
-  MapPin,
-  Briefcase,
-  Building2,
-  Users,
-  UserPlus,
-  Bookmark,
-  Star,
-  Quote,
-  ChevronRight,
-  ChevronDown,
-} from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark, faBriefcase, faChevronDown, faChevronRight, faCity, faMapPin, faPeopleGroup, faQuoteRight, faSearch, faSquareArrowUpRight, faStar } from "@fortawesome/free-solid-svg-icons";
+
 
 const STATS = [
-  { icon: <Briefcase className="text-blue-600" />, label: "Live Job", count: "1,75,324", bg: "bg-white", active: false },
-  { icon: <Building2 className="text-white" />, label: "Companies", count: "97,354", bg: "bg-[#CC1E1E]", text: "text-white", active: true },
-  { icon: <Users className="text-blue-600" />, label: "Candidates", count: "38,47,154", bg: "bg-white", active: false },
-  { icon: <UserPlus className="text-blue-600" />, label: "New Jobs", count: "7,532", bg: "bg-white", active: false },
+  { icon: <FontAwesomeIcon icon={faBriefcase} className="text-blue-600" />, label: "Live Job", count: "1,75,324", bg: "bg-white", active: false },
+  { icon: <FontAwesomeIcon icon={faCity} className="text-white" />, label: "Companies", count: "97,354", bg: "bg-[#CC1E1E]", text: "text-white", active: true },
+  { icon: <FontAwesomeIcon icon={faPeopleGroup} className="text-blue-600" />, label: "Candidates", count: "38,47,154", bg: "bg-white", active: false },
+  { icon: <FontAwesomeIcon icon={faSquareArrowUpRight} className="text-blue-600" />, label: "New Jobs", count: "7,532", bg: "bg-white", active: false },
 ];
 
 const JOBS = Array(12).fill({
@@ -74,18 +64,18 @@ export const HomepageMain = () => {
           <div className="hidden lg:flex items-center border border-gray-200 rounded-md overflow-hidden flex-1 max-w-2xl bg-white">
             <div className="flex items-center px-4 py-2 border-r border-gray-100 cursor-pointer">
               <span className="text-sm text-gray-700 font-medium">Hà Nội</span>
-              <ChevronDown size={16} className="ml-2 text-gray-400" />
+              <FontAwesomeIcon icon={faChevronDown} className="ml-2 text-gray-400" />
             </div>
             <div className="flex items-center flex-1 px-4 py-2">
-              <Search size={18} className="text-[#CC1E1E] mr-2" />
+              <FontAwesomeIcon icon={faSearch} className="text-[#CC1E1E] mr-2" />
               <input type="text" placeholder="Job tittle, keyword, company" className="bg-transparent outline-none text-sm w-full" />
             </div>
           </div>
         </div>
         <div className="flex items-center gap-3 ml-4">
-          <button className="px-5 py-2 text-sm font-bold bg-[#CC1E1E] text-white rounded-[4px] hover:bg-red-700">Đăng Nhập</button>
-          <button className="px-5 py-2 text-sm font-bold border border-[#CC1E1E] text-[#CC1E1E] rounded-[4px] hover:bg-red-50">Đăng Ký</button>
-          <button className="px-5 py-2 text-sm font-bold bg-[#1B1445] text-white rounded-[4px]">Đăng Tuyển</button>
+          <button className="px-5 py-2 text-sm font-bold bg-[#CC1E1E] text-white rounded-sm hover:bg-red-700">Đăng Nhập</button>
+          <button className="px-5 py-2 text-sm font-bold border border-[#CC1E1E] text-[#CC1E1E] rounded-sm hover:bg-red-50">Đăng Ký</button>
+          <button className="px-5 py-2 text-sm font-bold bg-[#1B1445] text-white rounded-sm">Đăng Tuyển</button>
         </div>
       </nav>
 
@@ -100,11 +90,11 @@ export const HomepageMain = () => {
           </p>
           <div className="mt-10 bg-white p-2 rounded-xl shadow-2xl flex flex-col md:flex-row items-center gap-2 border border-white">
             <div className="flex items-center flex-1 px-4 py-3 border-r border-gray-100 w-full">
-              <Search className="text-[#CC1E1E] mr-3" size={22} />
+              <FontAwesomeIcon icon={faSearch} className="text-[#CC1E1E] mr-3" />
               <input type="text" placeholder="Job tittle, Keyword..." className="w-full outline-none" />
             </div>
             <div className="flex items-center flex-1 px-4 py-3 w-full">
-              <MapPin className="text-[#CC1E1E] mr-3" size={22} />
+              <FontAwesomeIcon icon={faMapPin} className="text-[#CC1E1E] mr-3" />
               <input type="text" placeholder="Your Location" className="w-full outline-none" />
             </div>
             <button className="bg-[#CC1E1E] text-white px-10 py-4 rounded-lg font-bold hover:bg-red-700 transition-all w-full md:w-auto">Find Job</button>
@@ -133,7 +123,7 @@ export const HomepageMain = () => {
         <div className="flex justify-between items-end mb-12">
           <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Công việc nổi bật</h2>
           <button className="text-[#CC1E1E] font-bold text-sm flex items-center gap-1 hover:underline">
-            Xem thêm <ChevronRight size={18} />
+            Xem thêm <FontAwesomeIcon icon={faChevronRight} />
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -141,7 +131,7 @@ export const HomepageMain = () => {
             <div key={i} className="bg-white p-6 border border-[#EDEFF5] rounded-xl hover:shadow-xl transition-all group cursor-pointer">
               <h3 className="font-bold text-lg text-gray-800 group-hover:text-blue-600 mb-2">{job.title}</h3>
               <div className="flex items-center gap-3 mb-6">
-                <span className={`text-[11px] font-bold px-2 py-1 rounded-[4px] ${job.badgeColor}`}>{job.type}</span>
+                <span className={`text-[11px] font-bold px-2 py-1 rounded-sm ${job.badgeColor}`}>{job.type}</span>
                 <p className="text-sm text-[#767F8C]">Salary: {job.salary}</p>
               </div>
               <div className="flex items-center gap-4">
@@ -150,9 +140,9 @@ export const HomepageMain = () => {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-bold text-gray-800">{job.company}</p>
-                  <p className="text-xs text-[#9199A3] flex items-center mt-0.5"><MapPin size={14} className="mr-1"/> {job.location}</p>
+                  <p className="text-xs text-[#9199A3] flex items-center mt-0.5"><FontAwesomeIcon icon={faMapPin}  className="mr-1"/> {job.location}</p>
                 </div>
-                <Bookmark size={20} className="text-[#B1B8C1] hover:text-red-500 transition-colors" />
+                <FontAwesomeIcon icon={faBookmark} className="text-[#B1B8C1] hover:text-red-500 transition-colors" />
               </div>
             </div>
           ))}
@@ -174,13 +164,13 @@ export const HomepageMain = () => {
               {TESTIMONIALS.map((item) => (
                 <div 
                   key={item.id} 
-                  className="px-3 flex-shrink-0"
+                  className="px-3 shrink-0"
                   style={{ width: `${100 / itemsPerView}%` }} 
                 >
                   <div className="bg-white p-8 rounded-xl shadow-sm h-full flex flex-col justify-between hover:shadow-md transition-shadow">
                     <div>
                       <div className="flex gap-1 mb-4 text-[#FFAA00]">
-                        {[1, 2, 3, 4, 5].map(s => <Star key={s} size={18} fill="currentColor" />)}
+                        {[1, 2, 3, 4, 5].map(s => <FontAwesomeIcon key={s} icon={faStar} />)}
                       </div>
                       <p className="text-[#5E6670] text-sm leading-relaxed mb-8 italic">"{item.text}"</p>
                     </div>
@@ -192,7 +182,7 @@ export const HomepageMain = () => {
                           <p className="text-xs text-[#9199A3]">{item.role}</p>
                         </div>
                       </div>
-                      <Quote size={32} className="text-[#E4E5E8] rotate-180" />
+                      <FontAwesomeIcon icon={faQuoteRight} className="text-[#E4E5E8] rotate-180" />
                     </div>
                   </div>
                 </div>
