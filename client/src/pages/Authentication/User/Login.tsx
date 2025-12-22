@@ -1,6 +1,11 @@
 import rikkeiLogo from "../../../assets/img/rikkei logo.png";
 import investmentImg from "../../../assets/img/Investment.png";
 import { useState } from "react";
+import useNotify from "../../../hooks/useNotify";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../apis/authApi";
+import { setLoading, fetchUser } from "../../../store/slices/user.slices";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +18,9 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { notify, contextHolder } = useNotify();
   const validate = () => {
     const newErrors = { email: "", password: "" };
 
@@ -31,15 +39,26 @@ export default function Login() {
     setErrors(newErrors);
     return !newErrors.email && !newErrors.password;
   };
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      console.log("Login OK", formData);
+    if (!validate()) return;
+
+    try {
+      dispatch(setLoading(true));
+      await auth.loginCan({ email: formData.email, password: formData.password });
+      await dispatch(fetchUser() as any);
+      dispatch(setLoading(false));
+      notify(true, "Đăng nhập thành công");
+      setTimeout(() => navigate('/'), 2000);
+    } catch (err: any) {
+      dispatch(setLoading(false));
+      notify(false, err.message || 'Đăng nhập thất bại');
     }
   };
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
+      {contextHolder}
       <div
         style={{
           flex: 1,

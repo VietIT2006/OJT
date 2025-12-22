@@ -1,6 +1,11 @@
 import rikkeiLogo from "../../../assets/img/rikkei logo.png";
 import office from "../../../assets/img/At the office-amico 1.png";
 import { useState } from "react";
+import useNotify from "../../../hooks/useNotify";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../apis/authApi";
+import { setLoading, fetchUser } from "../../../store/slices/user.slices";
 
 export default function BusinessLogin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +18,9 @@ export default function BusinessLogin() {
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { notify, contextHolder } = useNotify();
   const validate = () => {
     const newErrors = { email: "", password: "" };
 
@@ -34,11 +42,24 @@ export default function BusinessLogin() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      console.log("Login OK", formData);
+      (async () => {
+        try {
+          dispatch(setLoading(true));
+          await auth.loginBusiness({ email: formData.email, password: formData.password });
+          await dispatch(fetchUser() as any);
+          dispatch(setLoading(false));
+          notify(true, "Đăng nhập thành công");
+          setTimeout(() => navigate('/'), 2000);
+        } catch (err: any) {
+          dispatch(setLoading(false));
+          notify(false, err.message || 'Login failed');
+        }
+      })();
     }
   };
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
+      {contextHolder}
       {/* LEFT */}
       <div
         style={{

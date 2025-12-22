@@ -57,27 +57,6 @@ export const HomepageMain = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900">
-      {/* 1. NAVBAR */}
-      <nav className="flex items-center justify-between px-6 py-3 border-b md:px-20 bg-white sticky top-0 z-50">
-        <div className="flex items-center gap-8 flex-1">
-          <img src={logo} alt="RikkeiEdu Logo" className="h-9 w-auto object-contain" />
-          <div className="hidden lg:flex items-center border border-gray-200 rounded-md overflow-hidden flex-1 max-w-2xl bg-white">
-            <div className="flex items-center px-4 py-2 border-r border-gray-100 cursor-pointer">
-              <span className="text-sm text-gray-700 font-medium">Hà Nội</span>
-              <FontAwesomeIcon icon={faChevronDown} className="ml-2 text-gray-400" />
-            </div>
-            <div className="flex items-center flex-1 px-4 py-2">
-              <FontAwesomeIcon icon={faSearch} className="text-[#CC1E1E] mr-2" />
-              <input type="text" placeholder="Job tittle, keyword, company" className="bg-transparent outline-none text-sm w-full" />
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 ml-4">
-          <button className="px-5 py-2 text-sm font-bold bg-[#CC1E1E] text-white rounded-sm hover:bg-red-700">Đăng Nhập</button>
-          <button className="px-5 py-2 text-sm font-bold border border-[#CC1E1E] text-[#CC1E1E] rounded-sm hover:bg-red-50">Đăng Ký</button>
-          <button className="px-5 py-2 text-sm font-bold bg-[#1B1445] text-white rounded-sm">Đăng Tuyển</button>
-        </div>
-      </nav>
 
       {/* 2. HERO SECTION */}
       <header className="bg-[#F1F2F4] pt-16 pb-28 px-6 md:px-20 flex flex-col lg:flex-row items-center gap-12">

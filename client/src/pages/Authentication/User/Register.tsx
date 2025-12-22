@@ -1,6 +1,11 @@
 import rikkeiLogo from "../../../assets/img/rikkei logo.png";
 import investmentImg from "../../../assets/img/Investment.png";
 import { useState } from "react";
+import useNotify from "../../../hooks/useNotify";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../apis/authApi";
+import { setLoading, fetchUser } from "../../../store/slices/user.slices";
 
 export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,6 +31,9 @@ export default function Register() {
         password: "",
         confirmPassword: "",
     });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { notify, contextHolder } = useNotify();
     const validate = () => {
         const newErrors = {
             fullName: "",
@@ -68,15 +76,31 @@ export default function Register() {
             !newErrors.confirmPassword
         );
     };
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (validate()) {
-            console.log("Register User OK", formData);
+        if (!validate()) return;
+
+        try {
+            dispatch(setLoading(true));
+            await auth.registerCan({
+                fullname: formData.fullName,
+                email: formData.email,
+                password: formData.password,
+                confirmPassword: formData.confirmPassword,
+            });
+            await dispatch(fetchUser() as any);
+            dispatch(setLoading(false));
+            notify(true, "Đăng ký thành công");
+            navigate('/');
+        } catch (err: any) {
+            dispatch(setLoading(false));
+            notify(false, err.message || 'Đăng ký thất bại');
         }
     };
 
     return (
         <div style={{ display: "flex", minHeight: "100vh" }}>
+            {contextHolder}
             <div
                 style={{
                     flex: 1,
