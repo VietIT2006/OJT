@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { HomepageMain } from "../pages/Homepage/HomepageMain";
-import CandidateCvPage from "../pages/candidate/CandidateCvPage";
-import CandidateSupportPage from "../pages/candidate/CandidateSupportPage";
-import JobDetailPage from "../pages/job/JobDetailPage";
+import CandidateCvPage from "../pages/Candidate/CandidateCvPage";
+import CandidateSupportPage from "../pages/Candidate/CandidateSupportPage";
+import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
+import JobDetailPage from "../pages/Candidate/JobPage/JobDetails/JobDetailPage";
 import NotFoundPage from "../components/common/NotFoundPage";
 import Login from "../pages/Authentication/User/Login";
 import OutCandidateMain from "../pages/Business/OutCandidate/OutCandidateMain";
@@ -21,23 +22,75 @@ import LayoutMain from "../components/Layout/LayoutMain";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LayoutMain />,
-        children: [
-            { index: true, element: <HomepageMain /> },
-            { path: "viec-lam", element: <HomepageMain /> },
-            { path: "viec-lam/:jobId", element: <JobDetailPage /> },
-            { path: "cv-cua-ban", element: <CandidateCvPage /> },
-            { path: "customer-supports", element: <CandidateSupportPage /> },
-            { path: "login", element: <Login /> },
-            { path: "business/login", element: <BusinessLogin /> },
-            { path: "register", element: <Register /> },
-            { path: "business/register", element: <BusinessRegister /> },
-            { path: "candidate/outstanding-company", element: <OutBusinessMain /> },
-            { path: "candidate/outstanding-company/:id", element: <OutBusinessDetailMain /> },
-            { path: "business/outstanding-candidate", element: <OutCandidateMain /> },
-            { path: "business/outstanding-candidate/:id", element: <OutCandidateDetailMain /> },
-            { path: "*", element: <NotFoundPage /> },
-        ],
+        element: <HomepageMain />,
+    },
+    {
+        path: "/viec-lam",
+        element: <JobListingSection />,
+    },
+    {
+        path: "/viec-lam/:jobId",
+        element: <JobDetailPage />,
+    },
+    {
+        path: "/cv-cua-ban",
+        element: <CandidateCvPage />,
+    },
+    {
+        path: "/customer-supports",
+        element: <CandidateSupportPage />,
+    },
+    {
+        path: "*",
+        element: <NotFoundPage />,
+    },
+    {
+        path: "/",
+        element: <HomepageMain />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/business/login",
+        element: <BusinessLogin />,
+    },
+    {
+        path: "/register",
+        element: <Register />,
+    },
+    {
+        path: "/business/register",
+        element: <BusinessRegister />,
+    },
+    {
+        path: "/footer",
+        element: <Footer />,
+    },
+    {
+        path: "/header",
+        element: <Header />,
+    },
+    {
+        path: "/",
+        element: <HomepageMain />,
+    },
+    {
+        path: "/candidate/outstanding-company",
+        element: <OutBusinessMain />,
+    },
+    {
+        path: "/candidate/outstanding-company/:id",
+        element: <OutBusinessDetailMain />,
+    },
+    {
+        path: "/business/outstanding-candidate",
+        element: <OutCandidateMain />,
+    },
+    {
+        path: "/business/outstanding-candidate/:id",
+        element: <OutCandidateDetailMain />,
     },
 ]);
 const RouterConfig = () => {

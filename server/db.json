@@ -240,39 +240,785 @@
   ],
   "jobs": [
     {
-      "id": "job_1",
-      "company_id": "com_1",
-      "type_job_id": "tj_1",
-      "location_id": "loc_2",
-      "title": "Backend Developer (Node.js)",
-      "description": "Phát triển REST API, làm việc với Node.js, PostgreSQL.",
-      "salary": "20 - 30 triệu",
-      "expire_at": "2025-03-31",
-      "created_at": "2025-01-05T08:00:00.000Z",
-      "updated_at": "2025-01-05T08:00:00.000Z"
+      "id": 1,
+      "title": "Technical Support Specialist",
+      "type": "Part-time",
+      "salary": "$20,000 - $25,000",
+      "company": "Google Inc.",
+      "location": "Dhaka, Bangladesh",
+      "logo": "https://yt3.googleusercontent.com/odrAJvMOjh8b_ZbM1lDejSL1VM7BOdAHyH0DNhTtW0o1K71FWCKxQXBaHX5BVVKxXZQW2-HV=s900-c-k-c0x00ffffff-no-rj",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Google Inc. is hiring a Technical Support Specialist in Dhaka, Bangladesh to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering technical support specialist solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-01-22",
+      "expiryDate": "2024-03-22",
+      "level": "Entry Level",
+      "experience": "1-3 years",
+      "education": "Bachelor's degree in Computer Science or related field"
     },
     {
-      "id": "job_2",
-      "company_id": "com_1",
-      "type_job_id": "tj_3",
-      "location_id": "loc_3",
-      "title": "Frontend Developer (React)",
-      "description": "Xây dựng UI với React, làm việc remote.",
-      "salary": "15 - 25 triệu",
-      "expire_at": "2025-04-15",
-      "created_at": "2025-01-10T08:00:00.000Z",
-      "updated_at": "2025-01-10T08:00:00.000Z"
-    }
-  ],
-  "job_candidates": [
+      "id": 2,
+      "title": "Senior UX Designer",
+      "type": "Full-time",
+      "salary": "$20,000 - $25,000",
+      "company": "Google Inc.",
+      "location": "Dhaka, Bangladesh",
+      "logo": "https://yt3.googleusercontent.com/odrAJvMOjh8b_ZbM1lDejSL1VM7BOdAHyH0DNhTtW0o1K71FWCKxQXBaHX5BVVKxXZQW2-HV=s900-c-k-c0x00ffffff-no-rj",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Google Inc. is hiring a Senior UX Designer in Dhaka, Bangladesh to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering senior ux designer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-01-29",
+      "expiryDate": "2024-03-29",
+      "level": "Mid Level",
+      "experience": "3-5 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
     {
-      "id": "jc_1",
-      "job_id": "job_1",
-      "candidate_id": "cand_1",
-      "cv_url": "https://cv-storage.com/nguyenvana.pdf",
-      "content": "Em có 3 năm kinh nghiệm backend Node.js, mong muốn được phỏng vấn.",
-      "status": 1,
-      "created_at": "2025-01-12T09:00:00.000Z"
+      "id": 3,
+      "title": "Marketing Officer",
+      "type": "Internship",
+      "salary": "$15,000 - $18,000",
+      "company": "Viettel",
+      "location": "Hà Nội, Việt Nam",
+      "logo": "https://play-lh.googleusercontent.com/nc0SSBJurEA55LimjVcQBUziYQSzWeEctjb5uLtzBsBa_oI3EEbzxtp9uIaqvP2jtl8=w3840-h2160-rw",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Viettel is hiring a Marketing Officer in Hà Nội, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering marketing officer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-02-05",
+      "expiryDate": "2024-04-05",
+      "level": "Senior Level",
+      "experience": "5+ years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 4,
+      "title": "Frontend Developer",
+      "type": "Full-time",
+      "salary": "$25,000 - $35,000",
+      "company": "FPT Software",
+      "location": "Đà Nẵng, Việt Nam",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMJX6E9M9KL6aCiWpUg0sNDrPVB-mFLjvtJw&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "FPT Software is hiring a Frontend Developer in Đà Nẵng, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering frontend developer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-02-12",
+      "expiryDate": "2024-04-12",
+      "level": "Entry Level",
+      "experience": "1-3 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 5,
+      "title": "Product Designer",
+      "type": "Full-time",
+      "salary": "$30,000 - $40,000",
+      "company": "Grab",
+      "location": "TP.HCM, Việt Nam",
+      "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXkAAACGCAMAAAAPbgp3AAAAw1BMVEX///8AsU8AsEwAr0kAqz0Arkbt+vMArUL3/frp9+7C6dIZuWG248bh9um36MxZxH990580vGlDvW/Y8+X0/PhMyINCxXsAtVaj3rkltl0FuV7q+fFQxoDl+e4xuGIfumPO7tuW2rBeyYm/5cvI7diQ2q6g476u5cZ0052l3rq/7NS64sZJwHWH2arT7dtuzZOd165j0JQtwHCR3rSD0Z4AqTOO0qN2y5JjxYWJ2602xHh616Rt0Zlbzo9Exn+u374ApianaNlfAAAgAElEQVR4nO1dCZeiuhKWRBYX3KDFtUUb13Fp7Z7uGXt7//9XPZJAUkFAsLeZe6bOufeMtpDwUalUvqpUCoV/Ei+lHlKo4Lbmf6zp7JOidozv7tp/XJKQ1/8h/8nyT+e/S/4h/13yD/nvkn92/rvkn85/l/ypyPctr7yq1Wrzea22KnuuNbS/tT8fL38e8oZX69w+7OrrQ7M5qlR6o1GztR5MdvcPt51a2frPDMVE5Jff8ojWfPq4HjlIxRhBwRirKnKarfrjdG59R88+XP4knXfHj/WmoqKgRzHivwJVuV4/Tld/v+35Y5AfznYtx9f0RNQF/Bg7zfq997X9+3D5Q5Cv7VrdFF2PUX7nelL7q23+H4H8bN1V8uDOwFe669lfjP0fgPxdMz/sgeIrh9VX9fLD5duRnylZbHsi+Orhb/V0vtmrdEd6Au4oKgnY45/7r+jox8u36vxwr8YASlB2nG73utlsv14NXlvN6+tut+s47HWc/F7t/ZUm5xt13pg56insWOk2B4u7uafB32rWan73NFm3rru+dYqgj52/0cP8PuSt3Yn+IuKoL5Zm8kW2O9vVfQdUmhtQ929U+u9C3q6u1VPYf22yYOjOHusjBf9Xkf9cO1+aOjiCe/fXdJW5zeH8vu6Eiv8P+exi7SKuJHYmnSH8hWa6Xvnm5ocvNzflsuea/UiHrM6uwu7yH0P+M62N+0tWeKxMoHE3veryfrJu9hwF6zr2HZ1esz1pjN+qZasPbjOsPlLs/2PIf6LOrwY6xB3hNcDdXd7uDo6uYuBAUp5YVf2JYPB4O/cET9m/efSt1j/kM8q8Jc2t2Jm64Z+G84eBoyYvahHGurN+vF1x1e+Xd6r630L+06xNbQRNDSpO3FCH3fGv6/M8sa/+SnM39sL+DX8MlH/IZxDvGgKPUacU/uF+7WSlcHwPdL3rhGsts/o3cjdfjbzVhMDrbTdoxto1lVzMGULd+jjE/m8ki7/YzpstCfhNoPD2JifuDHuntdHS2/uD5WuRt9cQX30cWPjVIT/uDHyl+fsTuvkl8rXWZgdR0zsB8JtY845IuoFORFVpKkIC9r35J3T0C+RLkb9zBHwILdmXxvGEsSTeO+4d9093s/lqPrv7/bR/PTgJLwCpV39lIsJX5lXWrgHwzhv70sI4gqSidF9/uzHXD2t3z0fK0stXqL3v9G0uxSkBefQJyJtrQC86HfZlOWJpSE7BPK1pu7ZoReLlF69hDcOGYmR9ZMPWVnfPr6Oeg4tFXelVDvvN3PJvkKfxWOSR0t1DNfI7WFqNFy9Xr8fDoX318jytmTnb8aUBNX5Mrzbm8tTqeyvTDKbDa5Bkhfchb5e2y83z1aHiILXoiz56fR6XTe3cUxl9c7nvFf3Jh/MblNvQi8gfqaXsvlYc8qi7E7gbWsnbHBXaFE25o4l2ehEf9nOzn8PCzoWtQc6UAT+WgPeXR3cZb2jMff8fX4q8XbKqi5GqsxzC8C7ksXB7uk3JnTVK2+lB1xMWfD78vX1VIvVS5BR5pKxroiWrc+UU46Klfk91/bDZljKq/vAXmEh3tHfGDMy4frutTcZOUyFrXnQJ8uZ2PHD02Gci87XqP9Qw9kLDfJsoCdcJUHqTakpQTcgJ8sh5DBXett4GStILDvs5WFpZRpgxdsRVLZd+teyCW+PuLm801Z0O6JjJhbxZHagpnBx9KDSpxuQsW8uWilOu4+Crgx8ZsI8iX2yGS3JtOx7p51vCamXjlVLbIOKJxSvqUg/cmEMGB/F284g7Xvsg5kDe19qoLxX/UK8dV8be6qyzXBlcPqnGDxsgUeRDS2O4m1H6wBKgqb3H6hnYtHvQ6wZ9pjIgEpBSL1/mS3kPFTUz8tqPiZIRPYzXMEjWXw4y404vV3Y3Z0xnBHnTZV9b41aO1C+kdu+36QA1xfR6oE9k1YFzouwu9siN8kTPiLx7P8qBHlYEKVR7dPLgTi+vNNKtZwR5JtpbPatuBILQYJnilmgbcDtqa0oLcLGzODs2U8TsDLK8N3s+yMUO4WY1eCJ7mjz8k5PfEFqnLkzikDfvu4m4J2fZVRrJ08p2xC/DE/KF0YFuzS6PT3MqRpYtPMPGdcxDoZAb0mn8ET5Pq8wJ7Jg3xi7ETqXnIHZxzM2vpykPJpA/hsh7EyehpaLqt6Rgtow4fSf1pOFlT7lHiRT6fraApkeTL6B6rfrJQ2G16BwGi/Gy6m237ltjcOypXLdRM3yY2uDkUX3H3V+1dm62261l+f9zl9P9EZ16gcjZJWsjR16fBq943jq5gVpEh8mmUyUt+f9tf4wbk4p64mLh5iy+EbPCb6k+kS+0BgC+/QWElxt9KN91vJp6ZqmkBWtxf8VYMsuNI6aPha5D4DvNkyvVq4411OBq17C1krXcO1FfECmTROhD5PVF4BluIpaGLC38Lg77kC2w7ZLpTtvR5Qh2GnFtGB2xiFKZXyPGL3LeY+MzSvk60lF9NDW1mDdua1rnWMTICefscUW+EhUrm1I8ceK/u9pLZKWFlEES9AHyejAs7IilQary7MV1kfbSnB6KkYYWcW288pfJVL40EG+3+AXRa0t+KFy8WqWwY4Z1VQwGr7GJXKkfa6nMjmFuHCmlJXTlToUhrwbegXaQZ1BVmaUSeIaxkrFHSkw2+1b0BTOVF1+oca/qg0WT4EPF49lRFv5gKs2tSB240R9arhnRS+NO9vzxMV5xKfL4wO6o9eQ3/PM5ArttulFCyKj15LylSbQJe8GNjbqhzYgxgJxzIHyA9KRsB6cm/mLePV8dR44/1fYOL3du9MKOTOhVluJP2vz5taIWqVdUdI77GXBs+6/SXKu+xiovQR6NyvTfQ2m5gNQrAPJwtj86QUPq6OqpJl6kvZG9rqgWg/ep08nEK/Lf6l9ga14AVYcQD2AZ7rNTDLleSvQWnYVklKsyoTfh4Fp7Hwrg3tGL8VWZXzmTTIceu6vFRx5VmBYMocbzb32xVy9+S8DdpXR0ZcMtnjUALSHnTm5ixYHG1I2xr/gLxi8X45lZ5pAdcqbhc3dGxVMv0HdbeN5VoQxXvGgU+H6GvTzEk7dYr0zNcA0gxfSLcT6fj3wQHhoeIPDOPlB423zqnfaRdlN/DVMcNTgToesabMEAxoa2NARm3/0geJPFBIRowNUR3CsJ+7OwfhWotlmHYyXks7ROCp2FdGcfEG3GHkKvxzg4pZ7yQH9bkhIymkEAXHNf1OSWfCfBDVZBc+D24rUU0OJvFDnU2Gz4E+HJ57vyEwB8k8Fnl4/FZPQQMxr2BgCPQw+k1j7Dz6vOlKFsNIAy4uOpqS/12NLdhj1Ugjnc9q7O8MRYfw6W7jUAPWqAVWlfAP1CvraFUUPlaHc+XGpC5VGzyh55nPZQarAkmQOE1ToD3mqcJ86Q3ma0gzEF0KvTk56V2LxhgzfE5xJzmiESgEcdZpcA9KjbAc/OjQuLqpe52Uft9/E1GQQoFLpm49jcyw53BLgR8ygtoEgqWw0ZtUEm/hY7LOMTeh7IcaNdM+g3RgeohsMoW8N7Pd26F9dXJfAIAPR4LRp6FjpPmeQ9f5v6+NPzIUXYCzkbatqsQao2qUFovgGWHMx42uOsHDPS7yn0pR0wA5P4Z601gYfNgOx3KlkbQoFxmouVNr7n9obTlOhAbyyMjZPO6X+A2L+EQjEGxTrlvyD/ippMi1wlqkXa5oRyo9kAOC77Sm0EMQgAa2wq3Fboga/B9CKzEddQUppXnXbOX3nwbyo34c258uBn8jY08Xnw6YyNyHdALTqnDPfRrmPdqVQcTIhehat8YSLIVYdeaDciVDFSUeUwmDw+TgbH0Um0Wt1RzVsBjV7HmNYhGBXKjr2tnRNtSO21d/f3jd2k3TzZ1oHqTH13gqDZBQzckJt1/Y081Zwjr356IrDxKMYXWz3fy0SC7hwXb2XPK9/86NwPHB2P2HPUAMU3pt80IrSKemhUPdcy+0PTcr3y26Inu6nonjysMebtoe6pU68BdgJNKPDbifyGMW5Pq2V3qGn9oeW65eWkJ0++wVjuA2aPORJwgqXE64sw8zcnXflgKXNuGK1p/zow2wGp645nhcF7QzPd8SFwyg5Ag6iq/pbwUNHzzVZW4b47lko4IIe+sb7QRfQr6kIbc9EdPKEdcQcQVQWjwZslXWaY22hImPVwpUduVRBBEWbWhXff+3QzP+a9Y2vXMmTpVbHiDMU2GZziKVDPpV9IwBf3ZozlsK1xBa692OJBuB3oOmrpQXhIZW6eKy2q/Am0GpPOZJSqB9iQwpLhBTMQOOvclUGsHoowoO0s0dNaPbeswwWj9sjbbpGhbN+DqRRN3ETP6gjcL/JUhsQj4E6ClTTcCfwdMx8N8cWj/HNNzK64R28px29ws5ZkjrUNGF+IlX0wBVVAJ9TCMfwJpl4xmGD3WSbYWeA/5JBi+EaBitPlUU1Eg8P8wljxhHYc6Lh8hsvZXkp+Skmah6m9EWqMgKtdINw/cGtol62DBHyaA2KswFoaHyjSgqVht+N3wwsyoFaAMc4ywc6U3KKHyC/DtDZ0Tb4COT8nrJ4kYsWhUl7YBYDg9EpGBlw9rakucqVHvQ78KZjF2QyoScDrm3RgXKD1zCPT+A3ZQonbOZW6+DOB/Fv6rZm8A3njIWwLrcnnslD52NAZF+GPsLjFEajX6JyJBJwBvidfeAAB8DsQrinSGcGQ2Ozi2Z0wAHqkEGgNYdhpNkOFI03zs+9yujbvQN4SVpdspjLGYt5cpzU553diugS6gM4CLxn2Jo0+7IS5AckZwn3Smbu5KYJ2cIYc0xVwfZ/pA/M7FIlhF8jTyer31yFfDpUNdck327YgEty0Jl/471jESMwWqJKB4jNE8hx+IF9w3xE5Iqi1AQtM6posIfBKpuTeGYCe3EPj7g0l6HgKsXpL/iqmFfWzkX/jZr5JPv4QgKTaGoM72fixD4HzZZl2YSira3lO7fNXh8fhb1xBGw6icTr/DdWS7i2JJga1Skf1kptXwkrz+7E9b09fh/xtqFaIROPsB6EhqUQd4JXpTDQRiOyy0R3Poi/0DpyxwGEynWDKUZN6TzaMLMVTPDGyFbfpkc8mv4uqQeQpR5xb5zN7lSLYy5AXUCNiSE2uIGdCkBs+VKhZtsQ6eJRNFQtWV/Yq5vIdpbmwS5f6cHaVKPZ0sQWaRdf/3Of3JfHtiJ3PO8NmX0m1wucLkB/yhTuiZp57NmcyfDijj+9Jh8ddDkkjK8+05y+rTQDhAckwtt0RMw5bf3ZgabAc3PmWszU0e8Z445tqnwBJzHwbMSvoP7Lc2zYzynAZ9iJAXlC0NMkHOOWpDWpiQr0lnznPHAkvp4kniDqqXoJBoBOFLQIZzH65gu7yl3g5IqRag49ram5c4VeClVQw8gTymfz57MLd9QB598hdCvLxJlQHfJV6Gz4/ohExtxZfguJddmpVuPAUaj4GdPoyh7yJATXypmBrkHKfi8C94Q6MTt6hiKQhsAxRG2R6ESs3dfyx4e8o8nwFgw7+J4PPt2p6pYQZNw003iMYfmecep0kPHqu0nTVO/7MFNcQ+SAwbIOaBGh3fuMTFBFhU8lkNuSTWVErvAqdIW/FFfR8ZrOZTRKRx68FwjGFYJxJruITLH4k/Zvy2bGVIymLr2nwK+kMX5thmr4aIB9yR2PAFddz7p0RbgTey0/pCfKSMWYgRDXJ4qMNaxmEYhJFnn9myHOLWEzft8cVkK39Od2JT+j1NOHmd+QWSGyRY0A+hjofxq0E8K3cyRjV8Fo2spe8esKssIiwxJxRysYSz5sZpE5+mYw8MewA+fTxLCK3ZB1oiyqDsQnqScJnN8rg2hyeFvnIkA+CNSAWgrr5y3zwpwxmM27mnoQzg6KRkVGWyMjstCj3ieCm1Id3IW+HHhFjFrmD5Dt7eQDhkTfmO4crHLYThSIfbGg0hZFHziZ/LgaIpZBp1OO2cg/iO/pW6pOiZiEnsqxhUQR5Zk7KlUuQ18InYa6NF/qYpxGlVHni9pZOohV+U2JOmM7TN2k8AEKfZdxpWXfVUwG0IIHT5UPgSoqAk5/egSzLDJbzEuTZEv0y5IdrCWpuhJmdyCx8pLPsrnCgox4ZAgR5xBbSVZBw12IaM03dURiVPp+I6J5Ll7d0BFMqc2YElYmzeFA5kOcrKeYzJSKfOrFz3xo1yZPUBPK5vA5RoYkujDhN6pAh4COPehReVwRDUJct1GqVXPVt7HuuycSt5IQsGoHMJvxKn1mE2ioZqgNkR/4mbKjIrrwMeU7TsAj2pchz/WLqdsUBDpCnNIvvfgO6hu5jKpi/ivky7275Lcg6Rfj3PRgTdyjSYsNIMQNzkx35aji5nEM+daR9EPJmBHn+zAx5Pcj+ESmEiO1uMB5UNQ99UChwP1Ihr07wggpkaorUWxWGniWdpUsm5Fvkl9yzfZfOm7KdB8i7efCIIi/rfPdIfmO8CY3HR3bd3EE5V5gRnedkle9kmiCpjLzNkgjKZTA3aV4lvw8N7lX5Z3blZTrfl32bVeu9yN/H6HyT8WQgYlthaLstzBOVsokINiskqC+sTcX/mwgos23mwtzo5z21eStRrjnyA/LLkCElcwuRy3ReC2N5qEL8eeFVNvNVL0q1NvRWQ7hPjzlOpUeVoJSpMFHY35QZ1gAePLWVIrMSn9/+rVmJwikVhcR/7bEKgC5cirwhVlLkSVzZ+GSWVJ1nDYlIbBiEMm7pz5w8yJsifZDMS8KrJGTCTJib3zQvRIwy/T0JfsvwLtTC9UNowx22lyFfEIaSLHWG/GMv1xo21c5TmQO3JkitWTHvrJiHvHFFohpRa870I0JWWWJUHWiCbUPMsQn5/JnkVlpD8FldDZKYLkSe8zY0ccAQKnWfellEziIPjLwa7BYzAxDZdJhRRIIFjS6XObKUujxGdHwLWr18PyxfQyCHvu2wFT0IHV2IPK+7w/KSeKlH/CuPkqTaeV/6InWT7+erBdegdg7nRnCVdHr7wVdwZByBFCOWkQM2hePDxUovyCzaZpm780F8/zLfRhDyLFFA8PNyVuQZOWfnF8DBC4OMPBMEZV86GNyppHSEiP8w52Wr8GYUqnAe/yLYj3+J3HCTRqfUNz4Cgr9fqPPzhJhUjpSAwllrw0PgvvDQnCki1pnVEWRUECNb4saRLZJBaY+g8MEOVBq6tLLtWGqTe1c0DkLkQuQ9DjVdxIo4LMpj6NOtjQdKXDV4Kn6JB45HmZH3ODdDuXGLG/Yi22gnVrhsHih4YC9b67Kg4JZXOVZJ38PpSYRZL7Q2tsg9oEoucg/WOdjKVGsD8v/UX8KFtHkX1awerM3Vjw11bl1QJUBJAK3fsSvADvxd9gcSYow5IgfaBDfzIT4XIl+oS86NMPQBo55NUpHv86g6Dt6mTU0BDyhlVnqh42wG5fk2OChyARZayKFmzYWnXlxi6kXiEn2XomyUGprNC61N4YmrBN2QLZKw8Ul1m2Q5w5jxdXKQqPlMGQ+xc+FMfkQoxlKwj+QVil1ZergdzgMUBXsbb2KOids1d07Azi+VfC6FMw1uh+pyKfLzMKksyOYTG2jRbeb+pTNmHPlA52YO7ZQ9FU5gpgxOE5SUoJ+51ecPWQJTKuMoJIY0N/SgMhqrz8VzOVVuEi61Nn2RFUmRvuPmRtTzOyuZdB7/YlOc1URs+eeKWMYhQyOgKAYbJDybC1W4uboBKt6m37jSOQA5oRdJ+4im7omyjDrH9VLkYYYQmf5sUX1OzZhMfI6rZHfEIf1ZR8GaRAOr++fzjYj9XGzg2zyhVV1w5AFjrzjMiIG9+r7Lk2fFXFiJjSo0tUoURUKiaNil1kZkhKEeNTfc8IexvQwSRT7G2vCRTjeZsEo/wOdDZ5XRFMFzNvAtkWzgip/9ALVEglqQY5gzrk4yL9yMmtgXx9bAYpUMFiEX63xfZKE/0K0YYOsC235xXrLofODTsbUai0kJL/H89gWtAn5L90k9C98IeOoaPOuiTv8glyRUm7VsD6U9ie0VwbaWEl/OKsI9vhh5Ea8OdqjdAT8Mn02YoH8/jzxas7FnMhKEkU8wfeZMhfG+2Gil4BnRt6EYAg3YyTIof8OKEESqOGC82J7H3naPoDwNYrlBnOpWQXzxcuTB/kWWBwDrteNOalEew6Lnwp1FPkw1sLlGBj4f8AK782Q8TLANHA/oU4tdu0j2BB4AYEF1JU0uoKFWpm56rSHbmsIi4UGTpjgrBFDbF9t5uC2z6ZLPnlSTbJESVCgtmz1y/7O+TehQ8tkOdWlTfbG1kGhogpb0q6AETnClBbh3mRaAlWVwkJir3UdKcTq78jaJTTBMVy5HHtYv4rkTeAB6+g7k70COEFW7KSzxoB4SDhKxt9Wdgkeyzscjj+vBfATKMTG7b00AHqhejauwsF2AWivIYQMT1D2oRi4Ah+vwZbMhV0ElBQGPDz+8aCkIsnek3Jk4Uvm2MPNWRHfQG7jucmsDombBPGeI9Qjt5OTNjeqHZpUfjgj7s1sGa4P52WOa2FMU7EnxYNUJ7DxGj2AdenJxKbSgXQEx1teobkkl1fhSvCNVUKXPhQ678Vt1RcrHDIfDvuWtqsuH3ShyaC9eswIEllh+1KEuvgN5uFuVZfyaa/kcZ9y+f6u59AmNvunSg8srVC8yIa+K7Z1Lsb8vCJHAo+aIGZjcVl3aZ7tvuauOD4Skf6y+jQmKjZ5mJPcn8IqgDlShtj6p6IawinrN9aD+a/f4+DhZN53Tgvch8LZYKTjS/p93WBtYNDWo5ec15aJuSMWj9e7h9vb2/vHXoNXjHYwiH2dtumBDrikqboUnIHTk8kdYrQweb2lLk8EIRfSPwWiArbFx+xJgQTxf64MZ2N3F1YBEiO/HjDnnAYUFvAxROUWV8zTfg3yhA7SB6edK1nraB1JdLDjgTHwbi7y0kjKlKh6w7BOLktjLaEEtHLYUhSLU37H4bS9q5anU4C1DW18odZrRpzojvF4gqJaNKnKT70K+JLxl1GXTSXmQVm1RdO28zvclyz0UbH2YWmLcZKveh1Cw/pzDMRrvHnbgHXGLH6HUyHWiDK6ExX3AOhjdy97vu5AHRcAU3AxKWO6ylKvMgHzEDMOKlUEV2YJ1yKCLSAlGOdjwg5pJOSNTqDj4OqTm7VX285oI08A6b4M5W41u7nof8iBgqahBlajS2DmPB4r15yVrExEDnu/UDLJ8S/vkAr6BYCVgkcpr8G1y+OYZQo+cQeid2d4EZTk6DBcrIc3Qh4Vlm1Ga433I+1oHVudBIrHhDs51UUU0CTuVMYuKB4tWh7lsWtVJbQvp7a0RAA94pV8pT9eW9AYUEzCsxckRKdHm1J/tGq+9XodrgZPA1nu8SiKA2PbxCDgUYz5KKOLNuqeHhYXP5NvIMoX3cML8+dJCSWwLFXvh1pJVCw6ZNJrNaMtnNCgvYlFizI/FpCMiSXX90RN/pcYYlsvHuxMf9r3I29AwsixL2u6sF68eSC32nsIFxfm8SknaUoW6l/BZtLvYAvR+SyPOIXcADEg5LTwtyV62lliBRcWM+UuPHoQQ2f+Hndc7MJLcNtQHXD+lHN5pbaQ4BXkosStzdaVjmEZO+4cOGzDR5LI2Un1ycg04XXt1peBoU444Nnm4k4bFuZ2jRkN+kUgdzSS/ZDjfvBy7XYdKtztqvyxm0vzZb0iFSmM3dLxX52G1EHqbNmAAV5urJumf/z3t48uM+3Ks4Hc+nS9Ykk1H+jM4TGT+EjRFW2o/gW6UR5ISn8/iiLI1flOV8elmRG1oudbpscuGNu/Jc0Vsbvv7kS9YE9hNrDRkPslazWd3s7kHT9fxJ6uzXmWcRI7lVvGddGgVbWpek9gio7SRNBhlOUfBWDZPsO89u6UMl2qlTaQEMI7fMPlua1OgxKFsBhqJTCp7Lt/x7J3lbWJl5kTsQGWWCodmLmQfN+shgN7JOX6+YzBqbOPqznKxS2b1OXoetHy2hpCPQJ5s0ZZpbGVQtRK2CpOju5tqPEt8xs4TuTs5vG40TTrr2zbL0VNIoqR8yjPdd09mbR/85q66NWNett23tmVyfneU2UT1hC0WH4J8YRitBk8O+l5uT9DXLHc5cXSUhbdJkE7zhLVVJsvTA7x8Gzw+RHBA2YH3sXyLO6+V1IMf7KZvN2XPdV3LslyXFCl/Gy/aMYSlgiv3SYPkY5AvaNGTA0kXleOiU/a2wbahrevd3L86zB3OwB4kSW19wg36aLQbBAzPpa1tvZvO7nBy6A5y8m0odB/ijmylzJyuOqPm4dgetI+HUU9Ro6e3hr+sJ9cx/CDkySa5U86A0JSV9oBJ+1DRua91uc4T1jbmBBnfEKhKb3SgrbV7OOaAWLWZ99wQ42aXyJQFbry0/TLaYKWREhL9MOQLXiyNzQ+7wFIP34N8od9JOAQcBaR5HBa+/mWusCZk+FbHGQ96jwp2dqnnvn8c8oXh8pDCGURwuNzaFMixOnFqnyq+wl92iLp1s0unhuIFo/pbumP+gcgTw5iBpqSCKnm5SlmGywS1T8DB2aVUZT/XljcdJZE1CaKiSUL8X8iHIl/QyjslC/ZIp07G5cj7a7FpJasqYh+HfCXnImJbVeqRZROkol35fHsfi7xvg8sZaGy1N2YB6cuRJ976714WNDBuz9+FOxXNGh/VDJqP1OJxamVxoW6cIpOfJHlZW/wMPv7v4rOUNG8xih7ALfcN74IjNMz/hY3TnIx22HgxW5FOu9RJOJATNIb2q1zlnxLF0KzOfiSduxp9x6quH36bqcdBw/uVNColdpZc8El7j5bYmvc00mMVxHf+lGdxxClvLaiQFXzKDJWPxlOlmHB6oL+i+HlIJxfyimFo8+d2r0jwD5016lD5mBdRe1OOP/v8K8UwSjNyXG54pi91LtVi8fBc++DOGYZ196pAVaRIqPrP3n6eekj4O8SqTQvs/mQAAAA3SURBVBcvV0d/DeVURofD6/733PvsY79yie3Nnq7oIs9pnnDYHyp9wpizstrO6HB8eZp52UD/P07DoFM3kwIbAAAAAElFTkSuQmCC",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Grab is hiring a Product Designer in TP.HCM, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering product designer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-02-19",
+      "expiryDate": "2024-04-19",
+      "level": "Mid Level",
+      "experience": "3-5 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 6,
+      "title": "Project Manager",
+      "type": "Full-time",
+      "salary": "$35,000 - $45,000",
+      "company": "Shopee",
+      "location": "Singapore",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9Ana0g1Cq4lEK6kjWFYJFaBtCEQJ51iCmUg&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Shopee is hiring a Project Manager in Singapore to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering project manager solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-02-26",
+      "expiryDate": "2024-04-26",
+      "level": "Senior Level",
+      "experience": "5+ years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 7,
+      "title": "Data Engineer",
+      "type": "Full-time",
+      "salary": "$28,000 - $38,000",
+      "company": "Microsoft",
+      "location": "Seattle, USA",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzAm1zvZuFboxzOS73NfeLfMX5pg4uFtGivQ&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Microsoft is hiring a Data Engineer in Seattle, USA to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering data engineer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-03-04",
+      "expiryDate": "2024-05-03",
+      "level": "Entry Level",
+      "experience": "1-3 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 8,
+      "title": "Blockchain Developer",
+      "type": "Full-time",
+      "salary": "$40,000 - $55,000",
+      "company": "Binance",
+      "location": "Singapore",
+      "logo": "https://public.bnbstatic.com/20190405/eb2349c3-b2f8-4a93-a286-8f86a62ea9d8.png",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Binance is hiring a Blockchain Developer in Singapore to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering blockchain developer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-03-11",
+      "expiryDate": "2024-05-10",
+      "level": "Mid Level",
+      "experience": "3-5 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 9,
+      "title": "QA Engineer",
+      "type": "Full-time",
+      "salary": "$20,000 - $28,000",
+      "company": "Tiki",
+      "location": "TP.HCM, Việt Nam",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQng0iy_OBOBxLvuc4RRpFFHYS2PA_TfDpTbQ&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Tiki is hiring a QA Engineer in TP.HCM, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering qa engineer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-03-18",
+      "expiryDate": "2024-05-17",
+      "level": "Senior Level",
+      "experience": "5+ years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 10,
+      "title": "Mobile Developer",
+      "type": "Full-time",
+      "salary": "$25,000 - $32,000",
+      "company": "MoMo",
+      "location": "Hà Nội, Việt Nam",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTepW9oXtSheSZoOWbGZq577FcGgN50NTuvoQ&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "MoMo is hiring a Mobile Developer in Hà Nội, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering mobile developer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-03-25",
+      "expiryDate": "2024-05-24",
+      "level": "Entry Level",
+      "experience": "1-3 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 11,
+      "title": "AI Engineer",
+      "type": "Full-time",
+      "salary": "$35,000 - $45,000",
+      "company": "VinAI",
+      "location": "Hà Nội, Việt Nam",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGoJXxqHcE-GqVQUKNtzLYObwRmZzz73KLhw&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "VinAI is hiring a AI Engineer in Hà Nội, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering ai engineer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-04-01",
+      "expiryDate": "2024-05-31",
+      "level": "Mid Level",
+      "experience": "3-5 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 12,
+      "title": "Backend Developer",
+      "type": "Full-time",
+      "salary": "$28,000 - $37,000",
+      "company": "Be Group",
+      "location": "TP.HCM, Việt Nam",
+      "logo": "https://imgmainsite.be.com.vn/2020/08/388c3d6a-logo-be.jpeg",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Be Group is hiring a Backend Developer in TP.HCM, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering backend developer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-04-08",
+      "expiryDate": "2024-06-07",
+      "level": "Senior Level",
+      "experience": "5+ years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 13,
+      "title": "DevOps Engineer",
+      "type": "Full-time",
+      "salary": "$30,000 - $40,000",
+      "company": "TMA Solutions",
+      "location": "Đà Nẵng, Việt Nam",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/f/f9/TMA-Solutions-Logo.png",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "TMA Solutions is hiring a DevOps Engineer in Đà Nẵng, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering devops engineer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-04-15",
+      "expiryDate": "2024-06-14",
+      "level": "Entry Level",
+      "experience": "1-3 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 14,
+      "title": "UI Designer",
+      "type": "Full-time",
+      "salary": "$22,000 - $30,000",
+      "company": "NAB Innovation Centre",
+      "location": "Hồ Chí Minh, Việt Nam",
+      "logo": "https://media.licdn.com/dms/image/v2/C560BAQE3i2Nzcaodmw/company-logo_200_200/company-logo_200_200/0/1652687824764/nabvietnam_logo?e=2147483647&v=beta&t=K9VGrRXhUB8hBL9gawhw8Gcv-nrkiqkfJBuN2ghxN9Q",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "NAB Innovation Centre is hiring a UI Designer in Hồ Chí Minh, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering ui designer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-04-22",
+      "expiryDate": "2024-06-21",
+      "level": "Mid Level",
+      "experience": "3-5 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 15,
+      "title": "Cybersecurity Specialist",
+      "type": "Full-time",
+      "salary": "$38,000 - $48,000",
+      "company": "Kaspersky",
+      "location": "Singapore",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Kaspersky_logo.svg/1024px-Kaspersky_logo.svg.png",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Kaspersky is hiring a Cybersecurity Specialist in Singapore to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering cybersecurity specialist solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-04-29",
+      "expiryDate": "2024-06-28",
+      "level": "Senior Level",
+      "experience": "5+ years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 16,
+      "title": "System Analyst",
+      "type": "Full-time",
+      "salary": "$27,000 - $34,000",
+      "company": "VNPT",
+      "location": "Hà Nội, Việt Nam",
+      "logo": "https://vnptgroup.vn/wp-content/uploads/2020/06/cropped-logo-vnpt-2.jpg",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "VNPT is hiring a System Analyst in Hà Nội, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering system analyst solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-05-06",
+      "expiryDate": "2024-07-05",
+      "level": "Entry Level",
+      "experience": "1-3 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 17,
+      "title": "Cloud Architect",
+      "type": "Full-time",
+      "salary": "$45,000 - $60,000",
+      "company": "Amazon Web Services",
+      "location": "Singapore",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2xQcwKitRgXfqdi34DYlocPSEXD2G2zZipg&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Amazon Web Services is hiring a Cloud Architect in Singapore to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering cloud architect solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-05-13",
+      "expiryDate": "2024-07-12",
+      "level": "Mid Level",
+      "experience": "3-5 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 18,
+      "title": "Fullstack Developer",
+      "type": "Full-time",
+      "salary": "$30,000 - $42,000",
+      "company": "ZaloPay",
+      "location": "TP.HCM, Việt Nam",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTlp4qW2M8xPofmuZHwEfGi9mNMWUG0zs53A&s",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "ZaloPay is hiring a Fullstack Developer in TP.HCM, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering fullstack developer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-05-20",
+      "expiryDate": "2024-07-19",
+      "level": "Senior Level",
+      "experience": "5+ years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 19,
+      "title": "Business Analyst",
+      "type": "Full-time",
+      "salary": "$26,000 - $33,000",
+      "company": "ACB Bank",
+      "location": "Hà Nội, Việt Nam",
+      "logo": "data:image/png;base64,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",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "ACB Bank is hiring a Business Analyst in Hà Nội, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering business analyst solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-05-27",
+      "expiryDate": "2024-07-26",
+      "level": "Entry Level",
+      "experience": "1-3 years",
+      "education": "Bachelor's degree in Computer Science or related field"
+    },
+    {
+      "id": 20,
+      "title": "QA Automation Engineer",
+      "type": "Full-time",
+      "salary": "$24,000 - $32,000",
+      "company": "Luxoft",
+      "location": "Đà Nẵng, Việt Nam",
+      "logo": "https://content.partnerpage.io/eyJidWNrZXQiOiJwYXJ0bmVycGFnZS5wcm9kIiwia2V5IjoibWVkaWEvY29udGFjdF9pbWFnZXMvNmQ5ZWI4ZWYtYjFkMS00ZDU3LWIxNTktMWUxZDliZDFlZTZiLzg1ODRkZjBjLTVjMGQtNDQ3Ny1hYmVjLTBlMWNiZWYzMjdmYy5wbmciLCJlZGl0cyI6eyJ0b0Zvcm1hdCI6IndlYnAiLCJyZXNpemUiOnsid2lkdGgiOjEyMDAsImhlaWdodCI6NjI3LCJmaXQiOiJjb250YWluIiwiYmFja2dyb3VuZCI6eyJyIjoyNTUsImciOjI1NSwiYiI6MjU1LCJhbHBoYSI6MH19fX0=",
+      "tags": [
+        "Featured"
+      ],
+      "description": [
+        "Luxoft is hiring a QA Automation Engineer in Đà Nẵng, Việt Nam to support a growing product portfolio.",
+        "You will partner with product, design, and business teams to plan, build, and launch measurable improvements.",
+        "Ownership spans discovery, delivery, launch, and follow-up analysis so we can move quickly but carefully."
+      ],
+      "requirements": [
+        "Hands-on experience delivering qa automation engineer solutions for global users.",
+        "Solid understanding of agile planning, testing, and code review best practices.",
+        "Ability to break down ambiguous problems into iterative milestones.",
+        "Excellent communication skills in English; Vietnamese is a plus."
+      ],
+      "desirable": [
+        "Experience presenting work to leadership and clients.",
+        "Comfort using data and experiments to guide decisions.",
+        "Enthusiasm for mentoring and sharing knowledge across teams."
+      ],
+      "benefits": [
+        "Competitive salary reviews twice per year.",
+        "Flexible PTO policy and remote-friendly working setup.",
+        "Annual health check and premium insurance package.",
+        "Company-sponsored workshops, clubs, and community events."
+      ],
+      "postedDate": "2024-06-03",
+      "expiryDate": "2024-08-02",
+      "level": "Mid Level",
+      "experience": "3-5 years",
+      "education": "Bachelor's degree in Computer Science or related field"
     }
   ]
 }
+
