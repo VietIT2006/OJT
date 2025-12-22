@@ -13,8 +13,11 @@ import OutBusinessDetailMain from "../pages/Candidate/OutBusinessDetail/OutBusin
 import BusinessLogin from "../pages/Authentication/Bussiness/BusinessLogin";
 import Register from "../pages/Authentication/User/Register";
 import BusinessRegister from "../pages/Authentication/Bussiness/BusinessRegister";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
+import LayoutMain from "../components/Layout/LayoutMain";
+// import Footer from "../components/layout/Footer";
+// import Header from "../components/layout/Header";
+
+
 
 const router = createBrowserRouter([
     {

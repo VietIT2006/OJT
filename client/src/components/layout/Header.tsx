@@ -1,100 +1,75 @@
-import rikkeiLogo from "../../assets/images/rikkeiEduAvatar.png";
-import phoneIcon from "../../assets/images/PhoneCall.png";
+import rikkeiLogo from "../../assets/img/rikkei logo.png";
+import phonecall from "../../assets/img/PhoneCall.png";
+import america from "../../assets/img/America.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
-const navItems = [
-  { label: "Trang chủ" },
-  { label: "Việc làm", isActive: true },
-  { label: "CV của bạn" },
-  { label: "Customer Supports" },
-];
 
-const UsaFlag = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 28 20"
-    className="h-4 w-6 rounded-[1px] border border-[#d0d0d0]"
-  >
-    <rect width="28" height="20" fill="#b22234" />
-    <g fill="#fff">
-      <rect y="2" width="28" height="2" />
-      <rect y="6" width="28" height="2" />
-      <rect y="10" width="28" height="2" />
-      <rect y="14" width="28" height="2" />
-      <rect y="18" width="28" height="2" />
-    </g>
-    <rect width="12" height="10" fill="#3c3b6e" />
-    <g fill="#fff">
-      <circle cx="2" cy="1.5" r=".4" />
-      <circle cx="4" cy="3.5" r=".4" />
-      <circle cx="6" cy="1.5" r=".4" />
-      <circle cx="8" cy="3.5" r=".4" />
-      <circle cx="10" cy="1.5" r=".4" />
-      <circle cx="2" cy="5.5" r=".4" />
-      <circle cx="4" cy="7.5" r=".4" />
-      <circle cx="6" cy="5.5" r=".4" />
-      <circle cx="8" cy="7.5" r=".4" />
-      <circle cx="10" cy="5.5" r=".4" />
-    </g>
-  </svg>
-);
+export default function Header() {
+    const leftMenuItemClass = "text-sm text-[#333333] font-normal cursor-pointer";
+    const { userId, displayName } = useSelector((state: RootState) => state.user);
 
-const CaretIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    className="h-4 w-4 text-[#7b7b7b]"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
-  </svg>
-);
+    return (
+        <header className="w-full">
 
-const Header = () => {
-  return (
-    <header className="bg-[#F1F2F4]">
-      <div className="flex items-center justify-between px-8 py-3">
-        <div className="flex items-center gap-8">
-          <nav className="flex h-[48px] items-center gap-8 text-[15px]">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                className={`group relative inline-flex h-full items-center pb-1 font-medium transition-colors ${
-                  item.isActive
-                    ? "text-[#c71c1c]"
-                    : "text-[#707070] hover:text-[#c71c1c]"
-                }`}
-              >
-                {item.label}
-                <span
-                  className={`absolute inset-x-0 bottom-0 h-[2px] rounded-[1px] transition ${
-                    item.isActive
-                      ? "bg-[#c71c1c]"
-                      : "bg-transparent group-hover:bg-[#c71c1c]"
-                  }`}
-                />
-              </button>
-            ))}
-          </nav>
-        </div>
+            <div className="w-full h-12 bg-[#F1F2F4] flex justify-between items-center px-8 box-border">
+                <div className="flex gap-6">
+                    <span className={leftMenuItemClass}>Trang chủ</span>
+                    <span className={leftMenuItemClass}>Việc làm</span>
+                    <span className={leftMenuItemClass}>CV của bạn</span>
+                    <span className={leftMenuItemClass}>Customer Supports</span>
+                </div>
 
-        <div className="flex items-center gap-6 text-sm text-[#3d3d3d]">
-          <div className="flex items-center gap-2 font-semibold">
-            <img src={phoneIcon} alt="Phone" className="h-5 w-5" />
-            <span>+1-202-555-0178</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <UsaFlag />
-            <span className="text-[15px] font-medium text-[#5a5a5a]">
-              English
-            </span>
-            <CaretIcon />
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-};
+                <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-1.5">
+                        <img src={phonecall} alt="phone icon" className="w-4 h-4" />
+                        <span className="text-sm font-medium text-[#333]">+1-202-555-0178</span>
+                    </div>
 
-export default Header;
+                    <div className="flex items-center gap-1.5 cursor-pointer">
+                        <img src={america} alt="america icon" className="w-5 h-3.5" />
+                        <span className="text-sm text-[#333]">English</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="w-full h-35 bg-white flex justify-center shadow-md">
+                <div className="w-max px-5 flex items-center justify-start gap-6 box-border">
+                    <div className="flex items-center gap-6">
+                        <img src={rikkeiLogo} alt="Rikkei Edu" className="h-9 w-24 cursor-pointer" />
+
+                        <div className="w-167 h-12 flex items-center border border-gray-200 rounded-md px-4 gap-3 box-border">
+                            <div className="flex items-center gap-1.5 whitespace-nowrap text-sm">Hà Nội</div>
+
+                            <div className="w-px h-6 bg-gray-200" />
+
+                            <input
+                                placeholder="Job title, keyword, company"
+                                className="flex-1 border-none outline-none text-sm"
+                            />
+                        </div>
+                    </div>
+
+                    {userId ? (
+                        <div className="flex items-center gap-3 text-[#BC2228]">
+                            <FontAwesomeIcon icon={faBell} className="text-xl text-[#BC2228]!" />
+                            <FontAwesomeIcon icon={faUserCircle} className="text-xl text-[#BC2228]!" />
+                            <span className="font-semibold text-[#BC2228] text-xl whitespace-nowrap">{displayName || "Người dùng"}</span>
+                        </div>
+                    ) : (
+                        <div className="flex gap-3 ml-auto">
+                            <button className="w-34 h-12 rounded-sm border border-[#C62828] bg-[#C62828] text-white font-semibold cursor-pointer">Đăng Nhập</button>
+
+                            <button className="w-34 h-12 rounded-sm border border-[#C62828] bg-white text-[#C62828] font-semibold cursor-pointer">Đăng Kí</button>
+
+                            <button className="w-35 h-12 rounded-sm border-0 bg-[#24125F] text-white font-semibold cursor-pointer">Đăng Tuyển</button>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+        </header>
+    );
+}

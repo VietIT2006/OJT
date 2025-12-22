@@ -1,5 +1,10 @@
 import rikkeiLogo from "../../../assets/img/rikkei logo.png";
 import { useState } from "react";
+import useNotify from "../../../hooks/useNotify";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../apis/authApi";
+import { setLoading, fetchUser } from "../../../store/slices/user.slices";
 
 export default function BusinessRegister() {
     const [showPassword, setShowPassword] = useState(false);
@@ -234,15 +239,39 @@ export default function BusinessRegister() {
 
         return Object.values(newErrors).every((e) => e === "");
     };
-    const handleSubmit = (e: React.FormEvent) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { notify, contextHolder } = useNotify();
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (validate()) {
-            console.log("Register Business OK", formData);
+        if (!validate()) return;
+
+        try {
+            dispatch(setLoading(true));
+            await auth.registerBusiness({
+                fullname: formData.fullName,
+                email: formData.email,
+                password: formData.password,
+                confirmPassword: formData.confirmPassword,
+                companyName: formData.companyName,
+                location: formData.location,
+                phone: formData.phone,
+                companyEmail: formData.companyEmail,
+            });
+            await dispatch(fetchUser() as any);
+            dispatch(setLoading(false));
+            notify(true, "Đăng ký thành công");
+            navigate('/');
+        } catch (err: any) {
+            dispatch(setLoading(false));
+            notify(false, err.message || 'Đăng ký thất bại');
         }
     };
 
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
+            {contextHolder}
             {/* LEFT */}
             <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
                 <div style={{ width: 560 }}>
@@ -349,7 +378,8 @@ export default function BusinessRegister() {
                 <div style={{  textAlign: "center" }}>
 
                     <button
-                        type="submit"
+                        type="button"
+                        onClick={handleSubmit}
                         style={{
                             width: 474.95,
                             height: 65,
