@@ -11,7 +11,8 @@ import Register from "../pages/Authentication/User/Register";
 import BusinessRegister from "../pages/Authentication/Bussiness/BusinessRegister";
 import LayoutMain from "../components/Layout/LayoutMain";
 import CandidateSupportPage from "../pages/Candidate/CandidateSupportPage";
-import CandidateCvPage from "../pages/Candidate/CandidateCvPage";
+import Profile from "../pages/Candidate/myCVPage/Profile";
+import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
 import JobDetailPage from "../pages/Candidate/JobPage/JobDetails/JobDetailPage";
 import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
 
@@ -26,9 +27,9 @@ const router = createBrowserRouter([
         element: <LayoutMain />,
         children: [
             { index: true, element: <HomepageMain /> },
-            { path: "viec-lam", element: <HomepageMain /> },
-            { path: "viec-lam/:jobId", element: <JobDetailPage /> },
-            { path: "cv-cua-ban", element: <CandidateCvPage /> },
+            { path: "job", element: <JobListingSection /> },
+            { path: "job/:jobId", element: <JobDetailPage /> },
+            { path: "my-cv", element: <Profile /> },
             { path: "customer-supports", element: <CandidateSupportPage /> },
             { path: "login", element: <Login /> },
             { path: "business/login", element: <BusinessLogin /> },

@@ -93,7 +93,7 @@ const JobDetailPage = () => {
         <CandidateBreadcrumb
           items={[
             { label: "Trang chủ", to: "/" },
-            { label: "Việc làm", to: "/viec-lam" },
+            { label: "Việc làm", to: "/job" },
             { label: job?.title || "Job Details", highlight: true },
           ]}
         />
@@ -297,7 +297,7 @@ const RelatedJobsSection = ({ jobs }: { jobs: Job[] }) => {
           {jobs.map((job) => (
             <Link
               key={job.id}
-              to={`/viec-lam/${job.id}`}
+              to={`/job/${job.id}`}
               className="rounded-[1px] border border-[#ededed] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="flex items-start justify-between gap-4">
