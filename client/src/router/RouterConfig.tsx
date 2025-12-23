@@ -14,6 +14,7 @@ import CandidateSupportPage from "../pages/Candidate/CandidateSupportPage";
 import CandidateCvPage from "../pages/Candidate/CandidateCvPage";
 import JobDetailPage from "../pages/Candidate/JobPage/JobDetails/JobDetailPage";
 import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
+
 // import Footer from "../components/layout/Footer";
 // import Header from "../components/layout/Header";
 
