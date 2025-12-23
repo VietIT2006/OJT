@@ -4,15 +4,15 @@ import youtubeIcon from "../../assets/img/ytbicon.png";
 
 export default function Footer() {
     const FooterTitle = ({ title }: { title: string }) => (
-        <div className="h-6 mb-4 font-semibold text-base text-white leading-6 whitespace-nowrap">{title}</div>
+        <div className="h-6 mb-4 font-semibold text-base text-white leading-6">{title}</div>
     );
     const footerItemClass = "font-medium text-sm leading-[150%] text-[#EBB0B2] mb-2";
 
     return (
-        <footer className="w-full bg-[#BC2228] pt-10 pb-4 px-6 box-border text-white">
-            <div className="w-max mx-auto flex gap-14">
+        <footer className="w-full bg-[#BC2228] pt-10 pb-6 px-4 box-border text-white">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 md:gap-14">
                 <div className="flex-1">
-                    <img src={rikkeiwhite} alt="Rikkei Education" className="w-24 h-9 mb-12" />
+                    <img src={rikkeiwhite} alt="Rikkei Education" className="w-24 h-9 mb-6" />
 
                     <p className="text-sm leading-5">
                         Tầng 7 tháp A tòa Sông Đà, đường Phạm Hùng,
@@ -29,8 +29,8 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="flex gap-12">
-                    <div className="min-w-40">
+                <div className="flex flex-col sm:flex-row gap-8 md:gap-12">
+                    <div className="w-full sm:w-48">
                         <FooterTitle title="Khóa học" />
                         <div className="mt-2">
                             <p className={footerItemClass}>Làm quen với Code</p>
@@ -41,7 +41,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="min-w-40">
+                    <div className="w-full sm:w-48">
                         <FooterTitle title="Tài nguyên học tập" />
                         <div className="mt-2">
                             <p className={footerItemClass}>Blog</p>
@@ -52,7 +52,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="min-w-50">
+                    <div className="w-full sm:w-56">
                         <FooterTitle title="Vì sao chọn Rikkei Academy" />
                         <div className="mt-2">
                             <p className={footerItemClass}>Về Rikkei Academy</p>

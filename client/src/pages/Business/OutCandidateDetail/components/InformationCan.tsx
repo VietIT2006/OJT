@@ -3,7 +3,12 @@ import { Avatar, Tag } from "antd";
 import { FavoriteAndScheduleCan } from "./FavoriteAndScheduleCan";
 
 interface PropsType {
-    data: any;
+    data: {
+        avatar?: string;
+        name: string;
+        position: string;
+        level: string;
+    };
 }
 
 export const InformationCan = ({ data }: PropsType) => {
