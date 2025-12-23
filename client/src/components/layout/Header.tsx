@@ -1,45 +1,55 @@
-import { useState } from "react";
-import { Select } from "antd";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setUser } from "../../store/slices/user.slices";
-import type { AppDispatch } from "../../store";
+import { Link, useLocation } from "react-router";
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import rikkeiLogo from "../../assets/img/rikkei logo.png";
 import phonecall from "../../assets/img/PhoneCall.png";
 import america from "../../assets/img/America.png";
-import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { Select } from "antd";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
-export default function Header() {
+
+
+
+const navLinks = [
+    { path: "/", label: "Trang chu" },
+    { path: "/job", label: "Viec lam" },
+    { path: "/my-cv", label: "CV cua ban" },
+    { path: "/customer-support", label: "Customer Supports" },
+];
+
+const Header = () => {
     const [city, setCity] = useState("Ha Noi");
-    const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
-    const leftMenuItemClass = "text-sm text-[#333333] font-normal cursor-pointer";
+    const location = useLocation();
     const { userId, displayName } = useSelector((state: RootState) => state.user);
-    // console.log(role);
+    const navigate = useNavigate();
+
+    const leftMenuItemClass = (path: string) =>
+        `text-sm font-normal cursor-pointer transition-colors ${
+            location.pathname === path ? "text-[#BC2228]" : "text-[#333333] hover:text-[#BC2228]"
+        }`;
 
     return (
         <header className="w-full">
-            <div className="w-full h-12 bg-[#F1F2F4] flex justify-between items-center px-8 box-border">
-                <div className="flex gap-6">
-                    <span className={leftMenuItemClass}>Trang chủ</span>
-                    <span className={leftMenuItemClass}>Việc làm</span>
-                    <span className={leftMenuItemClass}>CV của bạn</span>
-                    <span className={leftMenuItemClass}>Customer Supports</span>
-                </div>
-
+            <div className="flex h-12 w-full items-center justify-between bg-[#F1F2F4] px-8">
+                <nav className="flex gap-6">
+                    {navLinks.map(({ path, label }) => (
+                        <Link key={path} to={path} className={leftMenuItemClass(path)}>
+                            {label}
+                        </Link>
+                    ))}
+                </nav>
                 <div className="flex items-center gap-6">
                     <div className="flex items-center gap-1.5">
-                        <img src={phonecall} alt="phone icon" className="w-4 h-4" />
+                        <img src={phonecall} alt="phone icon" className="h-4 w-4" />
                         <span className="text-sm font-medium text-[#333]">+1-202-555-0178</span>
                     </div>
-
-                    <div className="flex items-center gap-1.5 cursor-pointer">
-                        <img src={america} alt="america icon" className="w-5 h-3.5" />
+                    <button className="flex items-center gap-1.5">
+                        <img src={america} alt="america icon" className="h-3.5 w-5" />
                         <span className="text-sm text-[#333]">English</span>
-                    </div>
+                    </button>
                 </div>
             </div>
 
@@ -123,4 +133,6 @@ export default function Header() {
             </div>
         </header>
     );
-}
+};
+
+export default Header;

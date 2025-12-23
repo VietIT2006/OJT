@@ -1039,6 +1039,107 @@
       "experience": "3-5 years",
       "education": "Bachelor's degree in Computer Science or related field"
     }
+  ],
+  "cv_sections": [
+    {
+      "id": "cv_section_1",
+      "title": "Thêm giới thiệu bản thân",
+      "description": "Tóm tắt ngắn gọn về bạn, mục tiêu nghề nghiệp, tính cách và điểm mạnh nổi bật."
+    },
+    {
+      "id": "cv_section_2",
+      "title": "Thêm thông tin học vấn",
+      "description": "Liệt kê trường học, chuyên ngành, thời gian học và các thành tích học tập quan trọng."
+    },
+    {
+      "id": "cv_section_3",
+      "title": "Thêm kinh nghiệm làm việc",
+      "description": "Ghi rõ vị trí, công ty, thời gian làm việc, mô tả trách nhiệm và thành tựu đạt được."
+    },
+    {
+      "id": "cv_section_4",
+      "title": "Thêm kỹ năng chuyên môn",
+      "description": "Liệt kê kỹ năng kỹ thuật, phần mềm, kỹ năng mềm kèm mức độ thành thạo."
+    },
+    {
+      "id": "cv_section_5",
+      "title": "Thêm ngôn ngữ",
+      "description": "Các ngôn ngữ bạn sử dụng kèm trình độ như sơ cấp, trung cấp hoặc thành thạo."
+    },
+    {
+      "id": "cv_section_6",
+      "title": "Thêm chứng chỉ",
+      "description": "Các chứng chỉ chuyên môn, bằng lái xe hoặc chứng nhận hoàn thành khóa học."
+    },
+    {
+      "id": "cv_section_7",
+      "title": "Thêm sở thích",
+      "description": "Sở thích cá nhân liên quan công việc hoặc thể hiện tính cách tích cực."
+    },
+    {
+      "id": "cv_section_8",
+      "title": "Thêm dự án",
+      "description": "Mô tả các dự án từng tham gia, vai trò và kết quả bạn đạt được."
+    },
+    {
+      "id": "cv_section_9",
+      "title": "Thêm khóa học",
+      "description": "Các khóa học ngắn hạn, trực tuyến (MOOC) hoặc chương trình đào tạo nội bộ."
+    },
+    {
+      "id": "cv_section_10",
+      "title": "Thêm giải thưởng",
+      "description": "Giải thưởng học thuật, nghề nghiệp hoặc từ các cuộc thi chuyên môn."
+    },
+    {
+      "id": "cv_section_11",
+      "title": "Thêm tổ chức",
+      "description": "Hoạt động tình nguyện, câu lạc bộ, tổ chức xã hội mà bạn từng tham gia."
+    },
+    {
+      "id": "cv_section_12",
+      "title": "Thêm ấn phẩm",
+      "description": "Các bài báo khoa học, sách hoặc nội dung chuyên môn bạn từng xuất bản."
+    },
+    {
+      "id": "cv_section_13",
+      "title": "Thêm người giới thiệu",
+      "description": "Thông tin liên hệ của người xác nhận năng lực và đạo đức nghề nghiệp của bạn."
+    },
+    {
+      "id": "cv_section_14",
+      "title": "Thêm tuyên bố",
+      "description": "Phần cam kết thông tin trung thực, có thể đính kèm chữ ký hoặc xác nhận."
+    },
+    {
+      "id": "cv_section_15",
+      "title": "Thêm hoạt động ngoại khóa",
+      "description": "Các hoạt động ngoài giờ học/làm việc như thể thao, nghệ thuật, sự kiện cộng đồng."
+    },
+    {
+      "id": "cv_section_16",
+      "title": "Thêm mục tùy chỉnh",
+      "description": "Tạo mục riêng phù hợp với hồ sơ cá nhân hoặc gộp các mục để tiết kiệm không gian."
+    }
+  ],
+  "candidate_cv_sections": [
+    {
+      "id": "5f23",
+      "candidateId": "demo_candidate",
+      "cvSectionId": "cv_section_3",
+      "title": "Thêm kinh nghiệm làm việc",
+      "description": "Ghi rõ vị trí, công ty, thời gian làm việc, mô tả trách nhiệm và thành tựu đạt được.",
+      "created_at": "2025-12-23T07:45:37.244Z",
+      "updated_at": "2025-12-23T07:45:37.244Z"
+    },
+    {
+      "id": "23d2",
+      "candidateId": "demo_candidate",
+      "cvSectionId": "cv_section_4",
+      "title": "Thêm kỹ năng chuyên môn",
+      "description": "Liệt kê kỹ năng kỹ thuật, phần mềm, kỹ năng mềm kèm mức độ thành thạo.",
+      "created_at": "2025-12-23T07:45:57.496Z",
+      "updated_at": "2025-12-23T07:45:57.496Z"
+    }
   ]
 }
-
