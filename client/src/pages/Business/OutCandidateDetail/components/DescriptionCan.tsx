@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faFileLines, faLink, faLocationArrow, faTools } from "@fortawesome/free-solid-svg-icons";
 
 interface PropsType {
-    data: any;
+    data: {
+        location?: string;
+        skills: string[];
+        languages: string[];
+    };
 }
 
 export const DescriptionCan = ({ data }: PropsType) => {
@@ -47,7 +51,7 @@ export const DescriptionCan = ({ data }: PropsType) => {
                         <h4 className="font-medium! mb-2 text-[16px]!">
                             <FontAwesomeIcon icon={faLocationArrow} className="text-[#BC2228]" /> Địa chỉ cá nhân
                         </h4>
-                        <div className="text-sm text-gray-700">Đường D1, Khu Công Nghệ Cao, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh</div>
+                        <div className="text-sm text-gray-700">{data.location || "Chưa cập nhật"}</div>
                     </Card>
 
                     <Card>

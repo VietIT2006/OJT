@@ -1,6 +1,6 @@
-import en from "./en.json"
-import vi from "./vi.json"
-import i18n from "i18next"
+import en from "../locales/en.json"
+import vi from "../locales/vi.json"
+import i18next from "i18next"
 import { initReactI18next } from "react-i18next"
 
 const resources = {
@@ -12,9 +12,9 @@ const resources = {
     }
 };
 
-i18n.use(initReactI18next).init({
+i18next.use(initReactI18next).init({
     lng: localStorage.getItem("language") || "vi",
     resources,
 })
 
-export default i18n;
+export default i18next;

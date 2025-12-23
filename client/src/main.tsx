@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
 import { store } from "./store/index.ts";
+import "./i18n/i18n.setup.ts";
 
 createRoot(document.getElementById("root")!).render(
     <ConfigProvider

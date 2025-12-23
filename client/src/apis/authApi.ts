@@ -53,6 +53,8 @@ export const auth = {
 
             try {
                 const res = await axios.get(`${API}/candidates/${payload.id}`);
+                console.log(payload);
+                
                 return { ...res.data, role: payload.role || "candidate" };
             } catch {
                 // 
@@ -139,14 +141,14 @@ export const auth = {
 };
 
 const encodeToken = async (id: string | number, role: string) => {
-    const secret = new TextEncoder().encode(import.meta.env.VITE_JWT_SECRET || "dev-secret");
+    const secret = new TextEncoder().encode(import.meta.env.VITE_JWT_SECRET || "123456789");
     const token = await new jose.SignJWT({ id, role }).setProtectedHeader({ alg: "HS256" }).setExpirationTime("12h").sign(secret);
     return token;
 };
 
 const decodeToken = async (token: string) => {
     try {
-        const secret = new TextEncoder().encode(import.meta.env.VITE_JWT_SECRET || "dev-secret");
+        const secret = new TextEncoder().encode(import.meta.env.VITE_JWT_SECRET || "123456789");
         const { payload } = await jose.jwtVerify(token, secret, {
             algorithms: ["HS256"],
         });

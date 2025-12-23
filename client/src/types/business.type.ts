@@ -38,6 +38,7 @@ export type Job = {
   id: string;
   company_id: string;
   type_job_id: string;
+  tag_id: string
   location_id: string;
   title: string;
   description: string;
@@ -69,6 +70,14 @@ export type TypeJob = {
   updated_at: string;
 };
 
+export type TagJob = {
+  id: string;
+  /** Designer, Mobile, Frontend, Backend*/
+  name: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type JobCandidate = {
   id: string;
   job_id: string;
@@ -85,4 +94,33 @@ export type AddressCompany = {
   location_id: string;
   address: string;
   map_url: string | null;
+};
+
+export type RatingScale = 1 | 2 | 3 | 4 | 5;
+
+export type CompanyReview = {
+  // Company đánh giá candidate theo Job ứng tuyển
+  // Mỗi job_candidate chỉ được đánh giá 1 lần
+
+  id: string;
+
+  company_id: string;
+  candidate_id: string;
+  job_candidate_id: string;
+
+  rating: RatingScale; //1–5
+  comment: string | null;
+
+  created_at: string;
+  updated_at: string;
+};
+
+export type CompanyFavoriteCandidate = {
+  id: string;
+
+  company_id: string;
+  candidate_id: string;
+
+  created_at: string;
+  updated_at: string;
 };

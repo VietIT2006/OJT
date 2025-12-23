@@ -1,6 +1,3 @@
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
-
 const NotFoundPage = () => {
   return (
     <div className="min-h-screen bg-[#f5f5f5]">

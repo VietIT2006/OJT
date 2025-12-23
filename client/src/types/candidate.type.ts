@@ -1,3 +1,5 @@
+import { RatingScale } from "./business.type";
+
 export enum Gender {
   Female = 0,
   Male = 1,
@@ -8,6 +10,33 @@ export enum JobLevel {
   Junior = 1,
   Senior = 2,
 }
+
+export enum LanguageCertType {
+  IELTS = "IELTS",
+  TOEIC = "TOEIC",
+  JLPT = "JLPT",
+  TOPIK = "TOPIK",
+  HSK = "HSK",
+}
+
+export type JLPTLevel = "N1" | "N2" | "N3" | "N4" | "N5";
+export type TOPIKLevel = "1" | "2" | "3" | "4" | "5" | "6";
+export type HSKLevel = "1" | "2" | "3" | "4" | "5" | "6";
+export type CEFRLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
+
+
+
+export enum CandidateRole {
+  Frontend = "Frontend",
+  Backend = "Backend",
+  Fullstack = "Fullstack",
+  Mobile = "Mobile",
+  DevOps = "DevOps",
+  QA = "QA",
+  Data = "Data",
+  UIUX = "UIUX",
+}
+
 
 export type JobOpenStatus = 0 | 1;
 
@@ -20,9 +49,13 @@ export type Candidate = {
   address: string | null;
   phone: string | null;
   gender: Gender;
+
   link_fb: string | null;
   link_linkedin: string | null;
   link_git: string | null;
+
+  role: CandidateRole | null;
+
   created_at: string;
   updated_at: string;
 };
@@ -81,6 +114,59 @@ export type SkillCandidate = {
   candidate_id: string;
   name: string;
   level: JobLevel;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CandidateLanguage = {
+  id: string;
+
+  candidate_id: string;
+
+  type: LanguageCertType; 
+  value: JLPTLevel | TOPIKLevel | HSKLevel | CEFRLevel | string;
+
+  created_at: string;
+  updated_at: string;
+};
+
+
+
+export type CandidateReview = {
+  // Candidate đánh giá company theo Job đã ứng tuyển
+  // Mỗi job_candidate chỉ được đánh giá 1 lần
+
+  id: string;
+
+  candidate_id: string;
+  company_id: string;
+  job_candidate_id: string;
+
+  rating: RatingScale; // 1–5
+  comment: string | null;
+
+  created_at: string;
+  updated_at: string;
+};
+
+export type CandidateSavedCompany = {
+  // Lưu công ty yêu thích
+  id: string;
+
+  candidate_id: string;
+  company_id: string;
+
+  created_at: string;
+  updated_at: string;
+};
+
+export type CandidateFavoriteJob = {
+  // Lưu công việc yêu thích
+  id: string;
+
+  candidate_id: string;
+  job_id: string;
+
   created_at: string;
   updated_at: string;
 };
