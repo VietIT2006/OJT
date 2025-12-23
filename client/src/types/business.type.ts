@@ -6,6 +6,18 @@ export enum JobCandidateStatus {
   Rejected = 4,     // Từ chối
 }
 
+export enum CompanyType {
+  Startup = "Startup",
+  Outsourcing = "Outsourcing",
+  Software = "Software",
+  Finance = "Finance",
+  Education = "Education",
+  Healthcare = "Healthcare",
+  Retail = "Retail",
+  Manufacturing = "Manufacturing",
+  Other = "Other",
+}
+
 export type Company = {
   id: string;
   user_id: string;
@@ -37,7 +49,7 @@ export type Job = {
 
 export type TypeCompany = {
   id: string;
-  name: string;
+  name: CompanyType;
   created_at: string;
   updated_at: string;
 };
@@ -74,4 +86,3 @@ export type AddressCompany = {
   address: string;
   map_url: string | null;
 };
-
