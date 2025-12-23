@@ -51,7 +51,7 @@ export type Location = {
 
 export type TypeJob = {
   id: string;
-  /** Fulltime, Part-time, Remote */
+  /** Fulltime, Part-time, Remote, Internship */
   name: string;
   created_at: string;
   updated_at: string;

@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, useParams } from "react-router";
-import Header from "../../../../components/Header/Header";
-import Footer from "../../../../components/Footer/Footer";
 import CandidateBreadcrumb from "../../../../components/candidate/CandidateBreadcrumb";
 import { fetchJobById, fetchJobs, fetchJobLocations } from "../../../../apis/jobsApi";
 import type { Job } from "../../../../types/job.type";
@@ -73,7 +71,6 @@ const JobDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <main
         style={{
           fontFamily: "'Inter', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif",
@@ -114,7 +111,6 @@ const JobDetailPage = () => {
           </>
         )}
       </main>
-      <Footer />
     </div>
   );
 };
