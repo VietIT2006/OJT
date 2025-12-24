@@ -5,7 +5,7 @@ import Login from "../pages/Authentication/User/Login";
 import OutCandidateMain from "../pages/Business/OutCandidate/OutCandidateMain";
 import OutCandidateDetailMain from "../pages/Business/OutCandidateDetail/OutCandidateDetailMain";
 import OutBusinessMain from "../pages/Candidate/OutBusiness/OutBusinessMain";
-import OutBusinessDetailMain from "../pages/Candidate/OutBusinessDetail/OutBusinessDetailMain";
+// import OutBusinessDetailMain from "../pages/Candidate/OutBusinessDetail/OutBusinessDetailMain";
 import BusinessLogin from "../pages/Authentication/Bussiness/BusinessLogin";
 import Register from "../pages/Authentication/User/Register";
 import BusinessRegister from "../pages/Authentication/Bussiness/BusinessRegister";
@@ -14,6 +14,7 @@ import CandidateSupportPage from "../pages/Candidate/CandidateSupportPage";
 import Profile from "../pages/Candidate/myCVPage/Profile";
 import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
 import JobDetailPage from "../pages/Candidate/JobPage/JobDetails/JobDetailPage";
+import OutBusinessDetailMain from "../pages/Candidate/OutBusinessDetail/OutBusinessDetailMain";
 
 // import Footer from "../components/layout/Footer";
 // import Header from "../components/layout/Header";
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
             { path: "register", element: <Register /> },
             { path: "business/register", element: <BusinessRegister /> },
             { path: "candidate/outstanding-company", element: <OutBusinessMain /> },
-            { path: "candidate/outstanding-company/:id", element: <OutBusinessDetailMain /> },
+            { path: "candidate/outstanding-company/:id", element: <OutBusinessDetailMain/> },
             { path: "business/outstanding-candidate", element: <OutCandidateMain /> },
             { path: "business/outstanding-candidate/:id", element: <OutCandidateDetailMain /> },
             { path: "*", element: <NotFoundPage /> },
