@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DatePickerInput from "../components/DatePickerInput";
 import type { CandidateCvSection } from "../../../../types/cv-section.type";
 
 type Props = {
@@ -86,25 +87,21 @@ const EducationSectionModal = ({ section, saving, onCancel, onSave }: Props) => 
         <div>
           <label className="mb-2 block text-gray-700">Thời gian học tập</label>
           <div className="flex items-center gap-4">
-            <div className="flex-1">
-              <div className="mb-1 text-xs text-red-600">Start Date</div>
-              <input
-                type="text"
-                value={data.startDate}
-                onChange={handleChange("startDate")}
-                className="w-full border-b border-gray-300 px-0 py-2"
-              />
-            </div>
+            <DatePickerInput
+              label="Start Date"
+              value={data.startDate}
+              onChange={(value) => setData((prev) => ({ ...prev, startDate: value }))}
+              className="flex-1"
+              variant="underline"
+            />
             <span className="text-gray-500">to</span>
-            <div className="flex-1">
-              <div className="mb-1 text-xs text-red-600">End Date</div>
-              <input
-                type="text"
-                value={data.endDate}
-                onChange={handleChange("endDate")}
-                className="w-full border-b border-gray-300 px-0 py-2"
-              />
-            </div>
+            <DatePickerInput
+              label="End Date"
+              value={data.endDate}
+              onChange={(value) => setData((prev) => ({ ...prev, endDate: value }))}
+              className="flex-1"
+              variant="underline"
+            />
           </div>
         </div>
 

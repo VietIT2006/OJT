@@ -1,24 +1,48 @@
 import type { CandidateCvSection } from "../../../types/cv-section.type";
+import type { CandidateProfile } from "../../../types/candidate.type";
+import basicAvatar from "../../../assets/images/basicAvatar.jpg";
 
 type PreviewCVProps = {
   sections: CandidateCvSection[];
+  profile: CandidateProfile;
 };
 
-const PreviewCV = ({ sections }: PreviewCVProps) => (
-  <div className="bg-[#EDF0F5] px-4 pb-12">
-    <div className="mx-auto max-w-[920px]">
-      <div className="rounded-[16px] bg-white p-10 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
-        <div className="flex flex-col gap-6 border-b border-[#E5E7EB] pb-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="text-sm uppercase tracking-[0.4em] text-[#B71C1C]">Ứng viên</p>
-            <h1 className="mt-2 text-3xl font-bold text-[#111827]">Nguyễn Minh Dương</h1>
-            <p className="text-sm text-[#6B7280]">Full-Stack Developer</p>
+const PreviewCV = ({ sections, profile }: PreviewCVProps) => {
+  const displayName = profile.fullName?.trim() || "Chưa cập nhật";
+  const displayRole = profile.position?.trim() || "Ứng viên";
+  const contactDetails = [
+    profile.phone?.trim() && `Điện thoại: ${profile.phone}`,
+    profile.email?.trim() && `Email: ${profile.email}`,
+    profile.address?.trim() && `Địa chỉ: ${profile.address}`,
+    profile.customFields.find((field) => field.value)?.value || (profile.status?.trim() ? `Trạng thái: ${profile.status}` : ""),
+  ].filter(Boolean);
+  const avatarSrc = profile.avatar?.trim() || basicAvatar;
+
+  return (
+  <div className="bg-[#EDF0F5] px-4 pb-12 pt-7 print:bg-white print:px-0 print:pb-0 print:pt-0">
+    <div className="mx-auto max-w-[920px] print:mx-0 print:max-w-full">
+      <div
+        id="cv-print-area"
+        className="rounded-[16px] bg-white p-10 shadow-[0_25px_60px_rgba(15,23,42,0.12)] print:mx-auto print:max-w-[210mm] print:rounded-none print:p-10 print:shadow-none"
+      >
+        <div className="flex flex-col gap-6 border-b border-[#E5E7EB] pb-6 md:flex-row md:items-center md:justify-between print:flex-row print:items-center print:justify-between">
+          <div className="flex items-start gap-4">
+            <img src={avatarSrc} alt={displayName} className="h-20 w-20 rounded-full border border-[#E5E7EB] object-cover" />
+            <div>
+              <p className="text-sm uppercase text-[#B71C1C]">Ứng viên</p>
+              <h1 className="mt-2 text-3xl font-bold text-[#111827]">{displayName}</h1>
+              <p className="text-sm text-[#6B7280]">{displayRole}</p>
+            </div>
           </div>
           <div className="rounded-2xl bg-[#F7F8FD] p-4 text-sm text-[#374151]">
-            <p>📞 0123456789</p>
-            <p>✉️ Abc@Gmail.Com</p>
-            <p>📍 Địa chỉ hiện tại</p>
-            <p>🌐 Trang cá nhân</p>
+            {contactDetails.length ? (
+              contactDetails.map((item, index) => <p key={`${item}-${index}`}>{item}</p>)
+            ) : (
+              <>
+                <p>Phone: (not set)</p>
+                <p>Email: (not set)</p>
+              </>
+            )}
           </div>
         </div>
         <div className="mt-8 space-y-6">
@@ -37,6 +61,7 @@ const PreviewCV = ({ sections }: PreviewCVProps) => (
     </div>
   </div>
 );
+};
 
 const renderSectionContent = (section: CandidateCvSection) => {
   try {

@@ -26,9 +26,14 @@ const Header = () => {
     const { userId, displayName } = useSelector((state: RootState) => state.user);
     const navigate = useNavigate();
 
+    const isNavActive = (path: string) => {
+        if (path === "/") return location.pathname === "/";
+        return location.pathname === path || location.pathname.startsWith(`${path}/`);
+    };
+
     const leftMenuItemClass = (path: string) =>
         `text-sm font-normal cursor-pointer transition-colors ${
-            location.pathname === path ? "text-[#BC2228]" : "text-[#333333] hover:text-[#BC2228]"
+            isNavActive(path) ? "text-[#BC2228]" : "text-[#333333] hover:text-[#BC2228]"
         }`;
 
     return (

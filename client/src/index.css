@@ -67,3 +67,45 @@ body {
   font-family: "Cabin", sans-serif;
 }
 
+@media print {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #cv-print-area,
+  #cv-print-area * {
+    visibility: visible;
+  }
+  #cv-print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 210mm;
+    line-height: 1.3;
+  }
+  #cv-print-area > *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  @page {
+    margin: 0;
+  }
+}
+
+input[type="date"].custom-date-input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+input[type="date"].custom-date-input {
+  position: relative;
+  background-color: transparent;
+}
+

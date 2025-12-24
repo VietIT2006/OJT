@@ -12,6 +12,8 @@ import BusinessRegister from "../pages/Authentication/Bussiness/BusinessRegister
 import LayoutMain from "../components/Layout/LayoutMain";
 import CandidateSupportPage from "../pages/Candidate/CandidateSupportPage";
 import Profile from "../pages/Candidate/myCVPage/Profile";
+import CvManagement from "../pages/Candidate/myCVPage/CvManagement";
+import WorkingCriteria from "../pages/Candidate/myCVPage/WorkingCriteria";
 import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
 import JobDetailPage from "../pages/Candidate/JobPage/JobDetails/JobDetailPage";
 
@@ -29,6 +31,8 @@ const router = createBrowserRouter([
             { path: "job", element: <JobListingSection /> },
             { path: "job/:jobId", element: <JobDetailPage /> },
             { path: "my-cv", element: <Profile /> },
+            { path: "my-cv/manage", element: <CvManagement /> },
+            { path: "my-cv/job-preferences", element: <WorkingCriteria /> },
             { path: "customer-supports", element: <CandidateSupportPage /> },
             { path: "login", element: <Login /> },
             { path: "business/login", element: <BusinessLogin /> },
