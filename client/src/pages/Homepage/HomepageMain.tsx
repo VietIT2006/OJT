@@ -20,6 +20,8 @@ import { OutBusinessCards } from "../Candidate/OutBusiness/components/OutBusines
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { OutCanCards } from "../Business/OutCandidate/components/OutCanCards";
+import { useTranslation } from "react-i18next";
+
 
 const STATS = [
     {
@@ -119,10 +121,11 @@ const candidate_data = Array(9).fill({
 
 export const HomepageMain = () => {
     const { role } = useSelector((state: RootState) => state.user);
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(3);
-
+    localStorage.setItem('lang','')
     const candidateHTML = (
         <>
 
@@ -134,7 +137,7 @@ export const HomepageMain = () => {
                         className="text-[#CC1E1E] font-bold text-sm flex items-center gap-1 hover:underline"
                         onClick={() => navigate("/viec-lam")}
                     >
-                        Xem thêm <FontAwesomeIcon icon={faChevronRight} />
+                        {t('see-more-0')}<FontAwesomeIcon icon={faChevronRight} />
                     </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -170,7 +173,7 @@ export const HomepageMain = () => {
                         className="text-[#CC1E1E] font-bold text-sm flex items-center gap-1 hover:underline"
                         onClick={() => navigate("/candidate/outstanding-company")}
                     >
-                        Xem thêm <FontAwesomeIcon icon={faChevronRight} />
+                        {t('see-more-0')}<FontAwesomeIcon icon={faChevronRight} />
                     </button>
                 </div>
                 <OutBusinessCards data={company_data} />
@@ -240,7 +243,7 @@ export const HomepageMain = () => {
                         className="text-[#CC1E1E] font-bold text-sm flex items-center gap-1 hover:underline"
                         onClick={() => navigate("/business/outstanding-candidate")}
                     >
-                        Xem thêm <FontAwesomeIcon icon={faChevronRight} />
+                        {t('see-more-0')}<FontAwesomeIcon icon={faChevronRight} />
                     </button>
                 </div>
                 <OutCanCards data={candidate_data} />
@@ -287,7 +290,7 @@ export const HomepageMain = () => {
                             <input type="text" placeholder="Your Location" className="w-full outline-none" />
                         </div>
                         <button className="bg-[#BC2228] text-white! px-10 py-4 rounded-lg font-bold hover:bg-red-700 transition-all w-full md:w-auto">
-                            Find Job
+                            {t('find-job')}
                         </button>
                     </div>
                 </div>
