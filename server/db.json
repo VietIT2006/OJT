@@ -27,12 +27,24 @@
       "updated_at": "2025-12-22T16:22:06.518Z"
     },
     {
-      "id": "74cf",
-      "name": "Lê Thịnh",
-      "email": "lephuthinh387@gmail.com",
-      "password": "123456789",
-      "created_at": "2025-12-24T00:25:49.641Z",
-      "updated_at": "2025-12-24T00:25:49.641Z"
+      "id": "0446",
+      "name": "Vũ Đăng Nguyên",
+      "email": "nguyen@gmail.com",
+      "password": "nguyen123",
+      "created_at": "2025-12-24T00:27:06.820Z",
+      "updated_at": "2025-12-24T00:27:06.820Z",
+      "position": "backend-dev",
+      "phone": "09999999999",
+      "address": "abc",
+      "dob": "2006-05-06",
+      "gender": "nam",
+      "status": "",
+      "customFields": [
+        {
+          "name": "Link Facebook",
+          "value": ""
+        }
+      ]
     }
   ],
   "education_candidates": [
@@ -1078,7 +1090,7 @@
     {
       "id": "cv_section_6",
       "title": "Thêm chứng chỉ",
-      "description": "Các chứng chỉ chuyên môn, bằng lái xe hoặc chứng nhận hoàn thành khóa học."
+      "description": "Bổ sung chứng chỉ liên quan đến kỹ năng của bạn."
     },
     {
       "id": "cv_section_7",
@@ -1167,6 +1179,60 @@
       "description": "Liệt kê trường học, chuyên ngành, thời gian học và các thành tích học tập quan trọng.",
       "created_at": "2025-12-23T18:23:43.434Z",
       "updated_at": "2025-12-23T18:23:43.434Z"
+    },
+    {
+      "id": "7ac4",
+      "candidateId": "0446",
+      "cvSectionId": "cv_section_3",
+      "title": "Thêm kinh nghiệm làm việc",
+      "description": "{\"type\":\"experience\",\"position\":\"RikkeiSoft\",\"company\":\"RikkeiEdu.com\",\"startDate\":\"2025-11-07\",\"endDate\":\"2025-12-19\",\"description\":\"eazy\"}",
+      "created_at": "2025-12-24T00:59:50.987Z",
+      "updated_at": "2025-12-24T10:14:11.626Z"
+    },
+    {
+      "id": "b18f",
+      "candidateId": "0446",
+      "cvSectionId": "cv_section_6",
+      "title": "Thêm chứng chỉ",
+      "description": "{\"type\":\"certificates\",\"name\":\"Toeic 990\",\"organization\":\"\",\"startDate\":\"2025-12-05\",\"endDate\":\"2025-12-25\",\"description\":\"\"}",
+      "created_at": "2025-12-24T08:20:12.429Z",
+      "updated_at": "2025-12-24T10:14:34.645Z"
+    },
+    {
+      "id": "9704",
+      "candidateId": "0446",
+      "cvSectionId": "cv_section_4",
+      "title": "Thêm kỹ năng chuyên môn",
+      "description": "{\"type\":\"skills\",\"advanced\":[\"ReacJS\"],\"intermediate\":[\"Đàn Guitar\"],\"beginner\":[\"Làm game bằng Python\"]}",
+      "created_at": "2025-12-24T08:59:59.263Z",
+      "updated_at": "2025-12-24T10:15:30.527Z"
+    },
+    {
+      "id": "031a",
+      "candidateId": "0446",
+      "cvSectionId": "cv_section_1",
+      "title": "Thêm giới thiệu bản thân",
+      "description": "{\"type\":\"about\",\"summary\":\"cao 1m7\"}",
+      "created_at": "2025-12-24T09:43:49.535Z",
+      "updated_at": "2025-12-24T10:15:39.958Z"
+    },
+    {
+      "id": "6ada",
+      "candidateId": "0446",
+      "cvSectionId": "cv_section_6",
+      "title": "Thêm chứng chỉ",
+      "description": "{\"type\":\"certificates\",\"name\":\"Back-End \",\"organization\":\"\",\"startDate\":\"\",\"endDate\":\"\",\"description\":\"\"}",
+      "created_at": "2025-12-24T10:09:58.411Z",
+      "updated_at": "2025-12-24T10:14:41.992Z"
+    },
+    {
+      "id": "8bf1",
+      "candidateId": "0446",
+      "cvSectionId": "cv_section_11",
+      "title": "Thêm tổ chức",
+      "description": "{\"type\":\"organizations\",\"name\":\"CLB CodeKing\",\"role\":\"Thành viên\",\"startDate\":\"2025-09-19\",\"endDate\":\"\",\"description\":\"\"}",
+      "created_at": "2025-12-24T10:15:44.864Z",
+      "updated_at": "2025-12-24T10:16:09.184Z"
     }
   ]
 }

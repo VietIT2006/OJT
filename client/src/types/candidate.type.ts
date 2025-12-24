@@ -24,6 +24,21 @@ export type TOPIKLevel = "1" | "2" | "3" | "4" | "5" | "6";
 export type HSKLevel = "1" | "2" | "3" | "4" | "5" | "6";
 export type CEFRLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
 
+export type CustomProfileField = { name: string; value: string };
+
+export type CandidateProfile = {
+  id: string | number | null;
+  fullName: string;
+  position: string;
+  email: string;
+  phone: string;
+  address: string;
+  dob: string;
+  gender: string;
+  status: string;
+  avatar?: string;
+  customFields: CustomProfileField[];
+};
 
 
 export enum CandidateRole {
@@ -170,3 +185,30 @@ export type CandidateFavoriteJob = {
   created_at: string;
   updated_at: string;
 };
+
+export type CandidateCvSetting = {
+  id: string;
+  candidateId: string;
+  useDefaultCv: boolean;
+  updatedAt: string;
+};
+
+export type CandidateCvFile = {
+  id: string;
+  candidateId: string;
+  fileName: string;
+  fileType: string;
+  fileSize: number;
+  fileContent: string;
+  uploadedAt: string;
+  isPrimary: boolean;
+};
+
+export type CandidateCoverLetterEntry = {
+  id: string;
+  candidateId: string;
+  title: string;
+  content: string;
+  updatedAt: string;
+};
+
