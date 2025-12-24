@@ -7,6 +7,7 @@ import type { Company, Job as BusinessJob } from "../../../../types/business.typ
 import { businessApi } from "../../../../apis/businessApi";
 import { ModalConfirmDeleteJob } from "../../../../components/business/ModalConfirmDeleteJob";
 
+
 interface PropsType {
     data: Company;
     jobs: BusinessJob[];
