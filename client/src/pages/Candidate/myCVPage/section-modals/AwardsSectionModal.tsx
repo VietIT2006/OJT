@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DatePickerInput from "../components/DatePickerInput";
 import type { CandidateCvSection } from "../../../../types/cv-section.type";
 
 type Props = {
@@ -79,12 +80,11 @@ const AwardsSectionModal = ({ section, saving, onCancel, onSave }: Props) => {
           />
         </div>
         <div>
-          <label className="mb-2 block text-gray-700">Thời gian nhận giải</label>
-          <input
-            type="text"
+          <DatePickerInput
+            label="Thời gian nhận giải"
             value={data.date}
-            onChange={handleChange("date")}
-            className="w-full border-b border-gray-300 px-0 py-2"
+            onChange={(value) => setData((prev) => ({ ...prev, date: value }))}
+            variant="underline"
           />
         </div>
         <div>
