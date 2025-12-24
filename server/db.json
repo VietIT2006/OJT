@@ -241,6 +241,7 @@
   "companies": [
     {
       "id": "com_1",
+      "user_id": "acc_1",
       "type_company_id": "tc_1",
       "name": "TechNova Vietnam",
       "logo": "https://logo.clearbit.com/technova.com",
@@ -259,7 +260,7 @@
       "id": "acc_1",
       "company_id": "com_1",
       "email": "hr@technova.com",
-      "password": "$2b$10$hashedPasswordExample"
+      "password": "123456789"
     }
   ],
   "address_companies": [

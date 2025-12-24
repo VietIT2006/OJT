@@ -27,7 +27,7 @@ export const OutBusinessCards = ({ data }: PropsType) => {
                             </div>
                         </div>
                     </div>
-                    <Button type="primary" block className="bg-[#E7F0FA]! text-[#0A65CC]! border-0! font-medium! mt-4" size="large" onClick={() => navigate(`/candidate/out-business/${c.id}`)}>
+                    <Button type="primary" block className="bg-[#E7F0FA]! text-[#0A65CC]! border-0! font-medium! mt-4" size="large" onClick={() => navigate(`/candidate/outstanding-company/${c.id}`)}>
                         Open Position (3)
                     </Button>
                 </Card>
