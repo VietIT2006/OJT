@@ -27,6 +27,7 @@ export type Company = {
   website: string | null;
   link_fb: string | null;
   link_linkedin: string | null;
+  featured: boolean;
   follower: number;
   size: string | null;
   description: string | null;
