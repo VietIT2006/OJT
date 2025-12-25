@@ -27,6 +27,7 @@ export type CreateCandidateSectionPayload = {
   cvSectionId: string;
   title: string;
   description: string;
+  displayOrder?: number;
 };
 
 export const createCandidateSection = async (
@@ -37,6 +38,7 @@ export const createCandidateSection = async (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       ...payload,
+      displayOrder: typeof payload.displayOrder === "number" ? payload.displayOrder : null,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     }),
@@ -51,7 +53,7 @@ export const createCandidateSection = async (
 
 export const updateCandidateSection = async (
   id: string,
-  data: Partial<Pick<CandidateCvSection, "title" | "description">>,
+  data: Partial<Pick<CandidateCvSection, "title" | "description" | "displayOrder">>,
 ): Promise<CandidateCvSection> => {
   const response = await fetch(`${API_BASE_URL}/candidate_cv_sections/${id}`, {
     method: "PATCH",

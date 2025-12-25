@@ -1,4 +1,24 @@
 {
+  "candidateCvSettings": [
+    {
+      "id": "67f5",
+      "candidateId": "0446",
+      "mode": "profile",
+      "fileId": null,
+      "useDefaultCv": true,
+      "updatedAt": "2025-12-25T11:59:11.060Z"
+    }
+  ],
+  "candidateCvFiles": [],
+  "candidateCoverLetters": [
+    {
+      "id": "80a5",
+      "candidateId": "0446",
+      "content": "tôi là nguyên aaaaaacxcz\nzxc\nzxc\nzx\nczx\nc\nzxc",
+      "title": "Ứng tuyển Back-End",
+      "updatedAt": "2025-12-25T11:47:58.487Z"
+    }
+  ],
   "candidates": [
     {
       "id": "1",
@@ -1330,18 +1350,20 @@
       "candidateId": "demo_candidate",
       "cvSectionId": "cv_section_3",
       "title": "Thêm kinh nghiệm làm việc",
-      "description": "Ghi rõ vị trí, công ty, thời gian làm việc, mô tả trách nhiệm và thành tựu đạt được.",
+      "description": "{\"type\":\"experience\",\"position\":\"acb\",\"company\":\"\",\"startDate\":\"\",\"endDate\":\"\",\"description\":\"\"}",
       "created_at": "2025-12-23T07:45:37.244Z",
-      "updated_at": "2025-12-23T07:45:37.244Z"
+      "updated_at": "2025-12-25T14:08:14.557Z",
+      "displayOrder": 3
     },
     {
       "id": "23d2",
       "candidateId": "demo_candidate",
       "cvSectionId": "cv_section_4",
       "title": "Thêm kỹ năng chuyên môn",
-      "description": "Liệt kê kỹ năng kỹ thuật, phần mềm, kỹ năng mềm kèm mức độ thành thạo.",
+      "description": "{\"type\":\"skills\",\"advanced\":[],\"intermediate\":[],\"beginner\":[\"reacjjs\"]}",
       "created_at": "2025-12-23T07:45:57.496Z",
-      "updated_at": "2025-12-23T07:45:57.496Z"
+      "updated_at": "2025-12-25T14:08:14.557Z",
+      "displayOrder": 4
     },
     {
       "id": "c27e",
@@ -1350,16 +1372,18 @@
       "title": "Thêm giới thiệu bản thân",
       "description": "Tóm tắt ngắn gọn về bạn, mục tiêu nghề nghiệp, tính cách và điểm mạnh nổi bật.",
       "created_at": "2025-12-23T18:23:40.627Z",
-      "updated_at": "2025-12-23T18:23:40.627Z"
+      "updated_at": "2025-12-25T14:08:14.557Z",
+      "displayOrder": 5
     },
     {
       "id": "fba0",
       "candidateId": "demo_candidate",
       "cvSectionId": "cv_section_2",
       "title": "Thêm thông tin học vấn",
-      "description": "Liệt kê trường học, chuyên ngành, thời gian học và các thành tích học tập quan trọng.",
+      "description": "{\"type\":\"education\",\"school\":\"PTIT\",\"major\":\"\",\"startDate\":\"\",\"endDate\":\"\",\"details\":\"\"}",
       "created_at": "2025-12-23T18:23:43.434Z",
-      "updated_at": "2025-12-23T18:23:43.434Z"
+      "updated_at": "2025-12-25T14:15:14.664Z",
+      "displayOrder": 2
     },
     {
       "id": "7ac4",
@@ -1414,6 +1438,36 @@
       "description": "{\"type\":\"organizations\",\"name\":\"CLB CodeKing\",\"role\":\"Thành viên\",\"startDate\":\"2025-09-19\",\"endDate\":\"\",\"description\":\"\"}",
       "created_at": "2025-12-24T10:15:44.864Z",
       "updated_at": "2025-12-24T10:16:09.184Z"
+    },
+    {
+      "id": "7427",
+      "candidateId": "demo_candidate",
+      "cvSectionId": "cv_section_5",
+      "title": "Thêm ngôn ngữ",
+      "description": "{\"type\":\"languages\",\"language\":\"anh\",\"level\":\"Thành thạo\",\"description\":\"\"}",
+      "created_at": "2025-12-25T13:34:46.161Z",
+      "updated_at": "2025-12-25T14:15:09.689Z",
+      "displayOrder": 0
+    },
+    {
+      "id": "53aa",
+      "candidateId": "demo_candidate",
+      "cvSectionId": "cv_section_11",
+      "title": "Thêm tổ chức",
+      "description": "Hoạt động tình nguyện, câu lạc bộ, tổ chức xã hội mà bạn từng tham gia.",
+      "created_at": "2025-12-25T13:34:49.476Z",
+      "updated_at": "2025-12-25T14:15:14.663Z",
+      "displayOrder": 1
+    },
+    {
+      "id": "1ca3",
+      "candidateId": "demo_candidate",
+      "cvSectionId": "cv_section_5",
+      "title": "Thêm ngôn ngữ",
+      "description": "{\"type\":\"languages\",\"language\":\"tiếng veiejt\",\"level\":\"Sơ cấp\",\"description\":\"\"}",
+      "created_at": "2025-12-25T13:34:56.511Z",
+      "updated_at": "2025-12-25T14:15:09.689Z",
+      "displayOrder": 0
     }
   ]
 }

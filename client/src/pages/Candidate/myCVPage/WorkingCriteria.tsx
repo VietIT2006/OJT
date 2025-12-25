@@ -1,5 +1,4 @@
 import { NavLink } from "react-router";
-import CandidateBreadcrumb from "../../../components/candidate/CandidateBreadcrumb";
 
 const tabs = [
   { to: "/my-cv", label: "Hồ sơ" },
@@ -10,13 +9,6 @@ const tabs = [
 const WorkingCriteria = () => {
   return (
     <div className="min-h-screen bg-[#F3F4F6] text-[#333333] antialiased dark:bg-[#121212] dark:text-gray-200">
-      <CandidateBreadcrumb
-        items={[
-          { label: "Trang chủ", to: "/" },
-          { label: "CV của bạn", to: "/my-cv" },
-          { label: "Tiêu chí tìm việc", highlight: true },
-        ]}
-      />
       <div className="border-b border-gray-200 bg-white dark:border-zinc-700 dark:bg-[#1E1E1E]">
         <nav className="mx-auto flex max-w-7xl gap-5 px-4 text-sm font-medium">
           {tabs.map((tab) => (

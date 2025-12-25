@@ -189,7 +189,8 @@ export type CandidateFavoriteJob = {
 export type CandidateCvSetting = {
   id: string;
   candidateId: string;
-  useDefaultCv: boolean;
+  mode: "profile" | "file";
+  fileId?: string | null;
   updatedAt: string;
 };
 
@@ -199,7 +200,8 @@ export type CandidateCvFile = {
   fileName: string;
   fileType: string;
   fileSize: number;
-  fileContent: string;
+  fileUrl: string;
+  storedName?: string;
   uploadedAt: string;
   isPrimary: boolean;
 };

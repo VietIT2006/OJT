@@ -256,7 +256,7 @@ const renderSectionContent = (section: CandidateCvSection) => {
 };
 
 const DetailList = ({ items }: { items: { label: string; value?: string }[] }) => (
-  <ul className="space-y-1">
+  <ul className="grid gap-x-6 gap-y-3 md:grid-cols-2">
     {items.map((item) => (
       <li key={item.label}>
         <strong>{item.label}:</strong> {item.value || "Đang cập nhật"}

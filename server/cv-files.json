@@ -1,0 +1,24 @@
+[
+  {
+    "id": "654929b4-a0c6-4aea-b6c1-4baf2b539bb7",
+    "candidateId": "0446",
+    "fileName": "cv-managerment1.pdf",
+    "storedName": "1766663954250-cv-managerment1.pdf",
+    "fileType": "application/pdf",
+    "fileSize": 155128,
+    "fileUrl": "/uploads/1766663954250-cv-managerment1.pdf",
+    "uploadedAt": "2025-12-25T11:59:14.260Z",
+    "isPrimary": false
+  },
+  {
+    "id": "f97b63a3-67a5-4711-a88e-d6a72bb6de78",
+    "candidateId": "0446",
+    "fileName": "cv-managerment.pdf",
+    "storedName": "1766664635293-cv-managerment.pdf",
+    "fileType": "application/pdf",
+    "fileSize": 155128,
+    "fileUrl": "/uploads/1766664635293-cv-managerment.pdf",
+    "uploadedAt": "2025-12-25T12:10:35.298Z",
+    "isPrimary": true
+  }
+]
