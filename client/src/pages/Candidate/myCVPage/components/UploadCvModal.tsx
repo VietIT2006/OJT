@@ -123,7 +123,7 @@ const UploadCvModal = ({
                     </button>
                   )}
                   <a
-                    href={file.fileContent}
+                    href={file.fileUrl}
                     download={file.fileName}
                     target="_blank"
                     rel="noreferrer"
@@ -151,3 +151,4 @@ const UploadCvModal = ({
 };
 
 export default UploadCvModal;
+

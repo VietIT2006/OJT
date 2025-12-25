@@ -10,6 +10,7 @@ export type CandidateCvSection = {
   cvSectionId: string;
   title: string;
   description: string;
+  displayOrder?: number;
   created_at?: string;
   updated_at?: string;
 };

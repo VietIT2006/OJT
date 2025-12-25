@@ -1,10 +1,11 @@
-﻿import type {
+import type {
   CandidateCoverLetterEntry,
   CandidateCvFile,
   CandidateCvSetting,
 } from "../types/candidate.type";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+const FILE_API_URL = import.meta.env.VITE_FILE_API_URL ?? API_BASE_URL;
 
 const handleJsonResponse = async <T>(
   response: Response,
@@ -20,90 +21,118 @@ const handleJsonResponse = async <T>(
   return response.json();
 };
 
+type RawCvSetting = CandidateCvSetting & { useDefaultCv?: boolean };
+
+const normalizeSetting = (entry: RawCvSetting | null): CandidateCvSetting | null => {
+  if (!entry) return null;
+  const mode =
+    entry.mode ??
+    (typeof entry.useDefaultCv === "boolean" ? (entry.useDefaultCv ? "profile" : "file") : "profile");
+  return {
+    id: entry.id,
+    candidateId: entry.candidateId,
+    mode,
+    fileId: entry.fileId ?? null,
+    updatedAt: entry.updatedAt,
+  };
+};
+
 export const fetchCvSetting = async (candidateId: string): Promise<CandidateCvSetting | null> => {
   const response = await fetch(`${API_BASE_URL}/candidateCvSettings?candidateId=${candidateId}`);
-  const data = await handleJsonResponse<CandidateCvSetting[]>(response, "Không thể tải cài đặt CV mặc định", {
-    ignore404: true,
-    fallbackValue: [],
-  });
-  return data[0] ?? null;
+  const data = await handleJsonResponse<RawCvSetting[]>(
+    response,
+    "Không thể tải cấu hình CV mặc định",
+    {
+      ignore404: true,
+      fallbackValue: [],
+    },
+  );
+  return normalizeSetting(data[0] ?? null);
 };
 
 export const upsertCvSetting = async (
   candidateId: string,
-  useDefaultCv: boolean,
+  mode: "profile" | "file",
+  fileId: string | null,
   setting?: CandidateCvSetting | null,
 ): Promise<CandidateCvSetting> => {
-  const timestamp = new Date().toISOString();
+  const payload = {
+    candidateId,
+    mode,
+    fileId: mode === "file" ? fileId : null,
+    updatedAt: new Date().toISOString(),
+    useDefaultCv: mode === "profile",
+  };
+
   if (setting) {
     const response = await fetch(`${API_BASE_URL}/candidateCvSettings/${setting.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ useDefaultCv, updatedAt: timestamp }),
+      body: JSON.stringify(payload),
     });
-    return handleJsonResponse(response, "Không thể cập nhật cài đặt CV mặc định");
+    const updated = await handleJsonResponse<RawCvSetting>(
+      response,
+      "Không thể cập nhật cấu hình CV mặc định",
+    );
+    return normalizeSetting(updated)!;
   }
 
   const response = await fetch(`${API_BASE_URL}/candidateCvSettings`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      candidateId,
-      useDefaultCv,
-      updatedAt: timestamp,
-    }),
+    body: JSON.stringify(payload),
   });
-  return handleJsonResponse(response, "Không thể tạo cài đặt CV mặc định");
+  const created = await handleJsonResponse<RawCvSetting>(
+    response,
+    "Không thể tạo cấu hình CV mặc định",
+  );
+  return normalizeSetting(created)!;
 };
 
+const withAbsoluteFileUrl = (file: CandidateCvFile): CandidateCvFile => ({
+  ...file,
+  fileUrl: file.fileUrl.startsWith("http") ? file.fileUrl : `${FILE_API_URL}${file.fileUrl}`,
+});
+
 export const fetchCvFiles = async (candidateId: string): Promise<CandidateCvFile[]> => {
-  const response = await fetch(
-    `${API_BASE_URL}/candidateCvFiles?candidateId=${candidateId}&_sort=uploadedAt&_order=desc`,
-  );
-  return handleJsonResponse(response, "Không thể tải danh sách CV đã tải lên", {
+  const response = await fetch(`${FILE_API_URL}/cv-files?candidateId=${candidateId}`);
+  const data = await handleJsonResponse<CandidateCvFile[]>(response, "Không thể tải danh sách CV đã tải lên", {
     ignore404: true,
     fallbackValue: [],
   });
+  return data.map(withAbsoluteFileUrl);
 };
 
-export type UploadCvFilePayload = {
-  candidateId: string;
-  fileName: string;
-  fileType: string;
-  fileSize: number;
-  fileContent: string;
-  isPrimary?: boolean;
-};
+export const uploadCvFile = async (candidateId: string, file: File): Promise<CandidateCvFile> => {
+  const formData = new FormData();
+  formData.append("candidateId", candidateId);
+  formData.append("cv", file);
 
-export const uploadCvFile = async (payload: UploadCvFilePayload): Promise<CandidateCvFile> => {
-  const response = await fetch(`${API_BASE_URL}/candidateCvFiles`, {
+  const response = await fetch(`${FILE_API_URL}/cv-files`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ...payload,
-      isPrimary: payload.isPrimary ?? true,
-      uploadedAt: new Date().toISOString(),
-    }),
+    body: formData,
   });
-  return handleJsonResponse(response, "Không thể tải lên CV mới");
+  const created = await handleJsonResponse<CandidateCvFile>(response, "Không thể tải lên CV mới");
+  return withAbsoluteFileUrl(created);
 };
 
 export const patchCvFile = async (
   id: string,
   data: Partial<Pick<CandidateCvFile, "isPrimary">>,
 ): Promise<CandidateCvFile> => {
-  const response = await fetch(`${API_BASE_URL}/candidateCvFiles/${id}`, {
+  const response = await fetch(`${FILE_API_URL}/cv-files/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  return handleJsonResponse(response, "Không thể cập nhật CV");
+  const updated = await handleJsonResponse<CandidateCvFile>(response, "Không thể cập nhật CV");
+  return withAbsoluteFileUrl(updated);
 };
 
 export const deleteCvFile = async (id: string): Promise<void> => {
-  const response = await fetch(`${API_BASE_URL}/candidateCvFiles/${id}`, { method: "DELETE" });
+  const response = await fetch(`${FILE_API_URL}/cv-files/${id}`, { method: "DELETE" });
   if (!response.ok) {
-    throw new Error("Không thể xoá CV này");
+    throw new Error("Không thể xóa CV này");
   }
 };
 

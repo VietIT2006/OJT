@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { DragEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { NavLink } from "react-router";
 import { useSelector } from "react-redux";
-import { Cake, Globe, Mail, MapPin, Phone, PlusCircle, UserRound, Edit3 } from "lucide-react";
+import { Cake, Globe, Mail, MapPin, Phone, PlusCircle, UserRound } from "lucide-react";
 import axios from "axios";
-import CandidateBreadcrumb from "../../../components/candidate/CandidateBreadcrumb";
 import ModalConfirmDelete from "../../../components/common/ModalConfirmDelete";
 import { createCandidateSection, deleteCandidateSection, fetchCandidateSections, fetchCvSections, updateCandidateSection, } from "../../../apis/cvSectionsApi";
 import type { CandidateCvSection, CvSection } from "../../../types/cv-section.type";
@@ -118,6 +117,55 @@ const tabs = [
   { to: "/my-cv/manage", label: "Quản lý CV" },
   { to: "/my-cv/job-preferences", label: "Tiêu chí tìm việc" },
 ];
+const sortSectionsByOrder = (sections: CandidateCvSection[]) => {
+  return [...sections].sort((a, b) => {
+    const orderA = typeof a.displayOrder === "number" ? a.displayOrder : Number.MAX_SAFE_INTEGER;
+    const orderB = typeof b.displayOrder === "number" ? b.displayOrder : Number.MAX_SAFE_INTEGER;
+    if (orderA !== orderB) return orderA - orderB;
+    const createdA = a.created_at ? new Date(a.created_at).getTime() : 0;
+    const createdB = b.created_at ? new Date(b.created_at).getTime() : 0;
+    return createdA - createdB;
+  });
+};
+
+const ensureDisplayOrder = (sections: CandidateCvSection[]) => {
+  const maxExisting = sections.reduce(
+    (max, section) => (typeof section.displayOrder === "number" ? Math.max(max, section.displayOrder) : max),
+    -1,
+  );
+  let nextOrder = maxExisting + 1;
+  return sortSectionsByOrder(
+    sections.map((section) => {
+      if (typeof section.displayOrder === "number") {
+        return section;
+      }
+      const assignedOrder = nextOrder++;
+      return { ...section, displayOrder: assignedOrder };
+    }),
+  );
+};
+
+const getNextDisplayOrder = (sections: CandidateCvSection[]) =>
+  sections.reduce(
+    (max, section) =>
+      typeof section.displayOrder === "number" && section.displayOrder > max ? section.displayOrder : max,
+    -1,
+  ) + 1;
+
+const buildSectionGroups = (sections: CandidateCvSection[]) => {
+  const map = new Map<string, { title: string; templateId: string; sections: CandidateCvSection[] }>();
+  sections.forEach((section) => {
+    const templateId = section.cvSectionId || section.id;
+    if (!templateId) return;
+    if (!map.has(templateId)) {
+      map.set(templateId, { title: section.title, templateId, sections: [] });
+    }
+    map.get(templateId)!.sections.push(section);
+  });
+  return Array.from(map.values());
+};
+
+
 
 const Profile = () => {
   const { userId } = useSelector((state: RootState) => state.user);
@@ -136,6 +184,8 @@ const Profile = () => {
   const [personalModalOpen, setPersonalModalOpen] = useState(false);
   const [profileSaving, setProfileSaving] = useState(false);
   const highlightTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [draggingTemplateId, setDraggingTemplateId] = useState<string | null>(null);
+  const [dragOverTemplateId, setDragOverTemplateId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCvSections()
@@ -149,13 +199,17 @@ const Profile = () => {
       });
   }, []);
 
-  useEffect(() => {
+  const loadCandidateSections = useCallback(() => {
     fetchCandidateSections(candidateId)
-      .then((data) => setCandidateSections(data))
+      .then((data) => setCandidateSections(ensureDisplayOrder(data)))
       .catch(() => {
         /* ignore */
       });
   }, [candidateId]);
+
+  useEffect(() => {
+    loadCandidateSections();
+  }, [loadCandidateSections]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -180,6 +234,7 @@ const Profile = () => {
   );
 
   const quickSections = useMemo(() => cvSections.slice(0, 4), [cvSections]);
+  const sectionGroups = useMemo(() => buildSectionGroups(candidateSections), [candidateSections]);
 
   const highlightTemporarily = (id: string, options: { scrollIntoView?: boolean } = {}) => {
     if (!id) return;
@@ -198,6 +253,67 @@ const Profile = () => {
     highlightTimeoutRef.current = setTimeout(() => setHighlightedId(null), 900);
   };
 
+  const reorderSectionGroups = (sourceTemplateId: string, targetTemplateId: string) => {
+    if (!sourceTemplateId || !targetTemplateId || sourceTemplateId === targetTemplateId) return;
+    const groups = buildSectionGroups(candidateSections);
+    const sourceIndex = groups.findIndex((group) => group.templateId === sourceTemplateId);
+    const targetIndex = groups.findIndex((group) => group.templateId === targetTemplateId);
+    if (sourceIndex === -1 || targetIndex === -1) return;
+
+    const orderedGroups = [...groups];
+    const [moved] = orderedGroups.splice(sourceIndex, 1);
+    orderedGroups.splice(targetIndex, 0, moved);
+
+    const updates: { id: string; displayOrder: number }[] = [];
+    const flattened: CandidateCvSection[] = [];
+
+    orderedGroups.forEach((group, groupIndex) => {
+      group.sections.forEach((section) => {
+        const newOrder = groupIndex;
+        if (section.displayOrder !== newOrder) {
+          updates.push({ id: section.id, displayOrder: newOrder });
+        }
+        flattened.push({ ...section, displayOrder: newOrder });
+      });
+    });
+
+    setCandidateSections(sortSectionsByOrder(flattened));
+
+    if (updates.length) {
+      Promise.all(updates.map(({ id, displayOrder }) => updateCandidateSection(id, { displayOrder }))).catch(() => {
+        loadCandidateSections();
+      });
+    }
+  };
+
+  const handleDragStart = (templateId: string) => {
+    setDraggingTemplateId(templateId);
+  };
+
+  const handleDragEnter = (event: DragEvent<HTMLDivElement>, templateId: string) => {
+    event.preventDefault();
+    if (!draggingTemplateId || draggingTemplateId === templateId) return;
+    setDragOverTemplateId(templateId);
+  };
+
+  const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleDragEnd = () => {
+    setDraggingTemplateId(null);
+    setDragOverTemplateId(null);
+  };
+
+  const handleDrop = (event: DragEvent<HTMLDivElement>, templateId: string) => {
+    event.preventDefault();
+    if (draggingTemplateId && draggingTemplateId !== templateId) {
+      reorderSectionGroups(draggingTemplateId, templateId);
+    }
+    setDraggingTemplateId(null);
+    setDragOverTemplateId(null);
+  };
+
   const handleAddSection = async (sectionId: string, allowDuplicate = false) => {
     const template = cvSections.find((item) => item.id === sectionId);
     if (!template) return;
@@ -211,13 +327,20 @@ const Profile = () => {
     }
 
     try {
+      const existingTemplateEntry = candidateSections.find((item) => item.cvSectionId === template.id);
+      const fallbackOrder = getNextDisplayOrder(candidateSections);
+      const targetOrder =
+        existingTemplateEntry && typeof existingTemplateEntry.displayOrder === "number"
+          ? existingTemplateEntry.displayOrder
+          : fallbackOrder;
       const created = await createCandidateSection({
         candidateId,
         cvSectionId: template.id,
         title: template.title,
         description: template.description,
+        displayOrder: targetOrder,
       });
-      setCandidateSections((prev) => [...prev, created]);
+      setCandidateSections((prev) => ensureDisplayOrder([...prev, created]));
       highlightTemporarily(created.id);
     } catch {
       alert("Không thể thêm mục mới lúc này.");
@@ -258,7 +381,9 @@ const Profile = () => {
     setSavingSection(true);
     try {
       const updated = await updateCandidateSection(editingSection.id, payload);
-      setCandidateSections((prev) => prev.map((item) => (item.id === editingSection.id ? updated : item)));
+      setCandidateSections((prev) =>
+        sortSectionsByOrder(prev.map((item) => (item.id === editingSection.id ? updated : item))),
+      );
       highlightTemporarily(editingSection.id, { scrollIntoView: false });
       setEditingSection(null);
     } catch {
@@ -282,7 +407,7 @@ const Profile = () => {
     setDeletingSection(true);
     try {
       await deleteCandidateSection(sectionToDelete.id);
-      setCandidateSections((prev) => prev.filter((item) => item.id !== sectionToDelete.id));
+      setCandidateSections((prev) => sortSectionsByOrder(prev.filter((item) => item.id !== sectionToDelete.id)));
       setSectionToDelete(null);
     } catch {
       alert("Không thể xóa mục này.");
@@ -328,12 +453,6 @@ const Profile = () => {
   if (previewMode) {
     return (
       <div className="min-h-screen bg-[#F3F4F6] text-[#333333] antialiased dark:bg-[#0f172a] dark:text-gray-200">
-        <CandidateBreadcrumb
-          items={[
-            { label: "Trang chủ", to: "/" },
-            { label: "CV của bạn", highlight: true },
-          ]}
-        />
         <div className="mx-auto flex flex-wrap items-center justify-between gap-4 px-10 py-6 bg-white">
           <div>
             <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Xem trước CV</h1>
@@ -364,12 +483,6 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-[#F3F4F6] text-[#333333] antialiased dark:bg-[#121212] dark:text-gray-200">
-      <CandidateBreadcrumb
-        items={[
-          { label: "Trang chủ", to: "/" },
-          { label: "CV của bạn", highlight: true },
-        ]}
-      />
 
       <div className="border-b border-gray-200 bg-white dark:border-zinc-700 dark:bg-[#1E1E1E]">
         <nav className="mx-auto flex max-w-7xl gap-5 px-4 text-sm font-medium">
@@ -437,25 +550,10 @@ const Profile = () => {
           <ProfileCard profile={profileInfo} onEdit={() => setPersonalModalOpen(true)} />
           {candidateSections.length === 0 ? (
             <div className="rounded border border-dashed border-gray-300 bg-white p-6 text-sm text-gray-500 dark:border-zinc-700 dark:bg-[#1E1E1E]">
-              Bạn chưa thêm mục nào. Hãy chọn một trường nội dung để bắt đầu hoàn thiện CV.
+              B §­n ch??a thA¦m m¯½s nAÿo. HAœy ch¯?n m¯Tt tr??¯?ng n¯Ti dung ?¯Ÿ b§_t ?§ŕu hoAœn thi¯¸n CV.
             </div>
           ) : (
-            Array.from(
-              candidateSections.reduce((map, section) => {
-                const templateKey = section.cvSectionId || section.id;
-                if (!templateKey) return map;
-                if (!map.has(templateKey)) {
-                  map.set(templateKey, {
-                    title: section.title,
-                    templateId: templateKey,
-                    sections: [] as CandidateCvSection[],
-                  });
-                }
-                map.get(templateKey)?.sections.push(section);
-                return map;
-              }, new Map<string, { title: string; templateId: string; sections: CandidateCvSection[] }>())
-            .values()
-            ).map(({ title, templateId, sections }) => (
+            sectionGroups.map(({ title, templateId, sections }) => (
               <SectionCard
                 key={templateId}
                 title={title}
@@ -464,6 +562,13 @@ const Profile = () => {
                 onAdd={() => handleAddSection(templateId, true)}
                 onEdit={(entry) => handleEditSection(entry)}
                 onDelete={(entry) => handleRequestDelete(entry)}
+                onDragStart={() => handleDragStart(templateId)}
+                onDragEnter={(event) => handleDragEnter(event, templateId)}
+                onDragOver={handleDragOver}
+                onDrop={(event) => handleDrop(event, templateId)}
+                onDragEnd={handleDragEnd}
+                isDragging={draggingTemplateId === templateId}
+                isDragOver={dragOverTemplateId === templateId}
               />
             ))
           )}
@@ -569,6 +674,13 @@ const SectionCard = ({
   onAdd,
   onEdit,
   onDelete,
+  onDragStart,
+  onDragEnter,
+  onDragOver,
+  onDrop,
+  onDragEnd,
+  isDragging,
+  isDragOver,
 }: {
   title: string;
   entries: CandidateCvSection[];
@@ -576,8 +688,28 @@ const SectionCard = ({
   onAdd: () => void;
   onEdit: (entry: CandidateCvSection) => void;
   onDelete: (entry: CandidateCvSection) => void;
+  onDragStart: () => void;
+  onDragEnter: (event: DragEvent<HTMLDivElement>) => void;
+  onDragOver: (event: DragEvent<HTMLDivElement>) => void;
+  onDrop: (event: DragEvent<HTMLDivElement>) => void;
+  onDragEnd: () => void;
+  isDragging: boolean;
+  isDragOver: boolean;
 }) => (
-  <section className="rounded border border-gray-200 bg-white p-6 shadow-sm transition-transform dark:border-zinc-700 dark:bg-[#1E1E1E]">
+  <section
+    className={`rounded border border-gray-200 bg-white p-6 shadow-sm transition-transform dark:border-zinc-700 dark:bg-[#1E1E1E] ${
+      isDragging ? "opacity-80" : ""
+    } ${isDragOver ? "border-dashed border-[#BC2228]" : ""}`}
+    draggable
+    onDragStart={(event) => {
+      event.dataTransfer.effectAllowed = "move";
+      onDragStart();
+    }}
+    onDragEnter={onDragEnter}
+    onDragOver={onDragOver}
+    onDrop={onDrop}
+    onDragEnd={onDragEnd}
+  >
     <div className="mb-4 flex items-center justify-between">
       <h3 className="text-lg font-bold text-gray-800 dark:text-white">{title}</h3>
       <button
