@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, Button, Space, Input, List, Tag, message, Dropdown, Menu, Pagination } from "antd";
 import { LinkedinFilled, FacebookFilled, TwitchFilled, MailFilled, EnvironmentOutlined, MoreOutlined, EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faBookmark, faFileLines, faLink, faLocationArrow, faMapLocation, faSearch } from "@fortawesome/free-solid-svg-icons";
-import type { Company, Job as BusinessJob } from "../../../../types/business.type";
+import type { Company, Job as BusinessJob, Location, TypeJob } from "../../../../types/business.type";
 import { businessApi } from "../../../../apis/businessApi";
 import { ModalConfirmDeleteJob } from "../../../../components/business/ModalConfirmDeleteJob";
+import { useNavigate } from "react-router";
 
 
 interface PropsType {
@@ -17,18 +18,46 @@ interface PropsType {
 }
 
 export const DescriptionBusiness = ({ data, jobs, isOwner = false, onAddJob, onJobUpdated }: PropsType) => {
+    const navigate = useNavigate();
     const [searchText, setSearchText] = useState("");
     const [deleteJobId, setDeleteJobId] = useState<string | null>(null);
     const [deleteJobTitle, setDeleteJobTitle] = useState<string>("");
     const [deleting, setDeleting] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [locations, setLocations] = useState<Location[]>([]);
+    const [typeJobs, setTypeJobs] = useState<TypeJob[]>([]);
     const pageSize = 6;
+
+    useEffect(() => {
+        const fetchMetadata = async () => {
+            try {
+                const [locationsData, typeJobsData] = await Promise.all([
+                    businessApi.getLocations(),
+                    businessApi.getTypeJobs()
+                ]);
+                setLocations(locationsData);
+                setTypeJobs(typeJobsData);
+            } catch (error) {
+                console.error("Failed to fetch metadata:", error);
+            }
+        };
+        fetchMetadata();
+    }, []);
+
+    const getLocationName = (locationId: string) => {
+        const location = locations.find(loc => loc.id === locationId);
+        return location?.name || locationId;
+    };
+
+    const getTypeJobName = (typeJobId: string) => {
+        const typeJob = typeJobs.find(type => type.id === typeJobId);
+        return typeJob?.name || typeJobId;
+    };
 
     const filteredJobs = jobs.filter(job => 
         job.title.toLowerCase().includes(searchText.toLowerCase())
     );
 
-    // Tính toán jobs cho trang hiện tại
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedJobs = filteredJobs.slice(startIndex, endIndex);
@@ -114,7 +143,7 @@ export const DescriptionBusiness = ({ data, jobs, isOwner = false, onAddJob, onJ
                                 value={searchText}
                                 onChange={(e) => {
                                     setSearchText(e.target.value);
-                                    setCurrentPage(1); // Reset về trang 1 khi search
+                                    setCurrentPage(1);
                                 }}
                             />
                         </div>
@@ -125,28 +154,24 @@ export const DescriptionBusiness = ({ data, jobs, isOwner = false, onAddJob, onJ
                             </div>
                         ) : (
                             <>
-                                <List
-                                    itemLayout="horizontal"
-                                    dataSource={paginatedJobs}
-                                    renderItem={(item) => (
-                                    <List.Item className="mb-4">
-                                        <div className="w-full border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
-                                            <div className="flex items-start justify-between">
-                                                <div className="flex-1">
-                                                    <div className="font-medium text-lg mb-2">{item.title}</div>
-                                                    <div className="flex gap-3 mb-2">
-                                                        <Tag color="blue" className="text-sm">
-                                                            {item.type_job_id}
-                                                        </Tag>
-                                                        {item.salary && (
-                                                            <div className="text-sm text-gray-500">
-                                                                Lương: {item.salary}
-                                                            </div>
-                                                        )}
+                                <div className="flex flex-col gap-4">
+                                    {paginatedJobs.map((item) => (
+                                        <div key={item.id} className="bg-white p-5 rounded-lg border border-gray-100 hover:border-red-300 transition-all flex justify-between items-start" onClick={() => navigate(`/job/${item.id}`)}>
+                                            <div className="flex gap-4">
+                                                <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center font-bold text-blue-600">
+                                                    {data.logo ? <img src={data.logo} alt={data.name} className="w-10 h-10 object-contain" /> : data.name.charAt(0)}
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-bold text-gray-800 text-lg mb-1">{item.title}</h4>
+                                                    <div className="flex gap-2 text-xs my-1 items-center">
+                                                        <span className="text-green-600 bg-green-50 px-2 py-0.5 rounded uppercase font-semibold">
+                                                            {getTypeJobName(item.type_job_id)}
+                                                        </span>
+                                                        <span className="text-gray-500 italic">Salary: {item.salary || 'Negotiable'}</span>
                                                     </div>
-                                                    <div className="text-sm text-gray-600">
-                                                        <EnvironmentOutlined className="mr-1" />
-                                                        {item.location_id}
+                                                    <div className="flex items-center gap-1 text-gray-400 text-sm mt-2">
+                                                        <EnvironmentOutlined />
+                                                        <span>{getLocationName(item.location_id)}</span>
                                                     </div>
                                                     {item.expire_at && (
                                                         <div className="text-xs text-gray-400 mt-2">
@@ -154,22 +179,21 @@ export const DescriptionBusiness = ({ data, jobs, isOwner = false, onAddJob, onJ
                                                         </div>
                                                     )}
                                                 </div>
-
-                                                <div className="flex gap-2">
-                                                    {!isOwner && (
-                                                        <Button type="text" icon={<FontAwesomeIcon icon={faBookmark} />} />
-                                                    )}
-                                                    {isOwner && (
-                                                        <Dropdown overlay={getJobMenu(item)} trigger={['click']}>
-                                                            <Button type="text" icon={<MoreOutlined />} />
-                                                        </Dropdown>
-                                                    )}
-                                                </div>
+                                            </div>
+                                            <div className="flex gap-2 items-center">
+                                                {!isOwner && (
+                                                    <Button type="text" icon={<FontAwesomeIcon icon={faBookmark} />} />
+                                                )}
+                                                {isOwner && (
+                                                    <>
+                                                        <Button type="text" icon={<EditOutlined />} onClick={() => message.info('Chức năng chỉnh sửa đang phát triển')} />
+                                                        <Button type="text" icon={<DeleteOutlined />} danger onClick={() => { setDeleteJobId(item.id); setDeleteJobTitle(item.title); }} />
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
-                                    </List.Item>
-                                )}
-                            />
+                                    ))}
+                                </div>
                             
                             {filteredJobs.length > pageSize && (
                                 <div className="flex justify-center mt-6">
@@ -191,20 +215,27 @@ export const DescriptionBusiness = ({ data, jobs, isOwner = false, onAddJob, onJ
                 <Space direction="vertical" size={16} className="w-full">
                     <Card>
                         <h4 className="font-medium! mb-3 text-[16px]!">
-                            <FontAwesomeIcon icon={faLocationArrow} className="text-[#BC2228] mr-2" /> Thông tin công ty
+                            <FontAwesomeIcon icon={faLocationArrow} className="text-[#BC2228] mr-2" /> Địa chỉ công ty
                         </h4>
                         <div className="text-sm text-gray-600 space-y-2">
-                            {data.size && <div>Quy mô: {data.size}</div>}
-                            {data.website && (
-                                <div>
-                                    Website: <a href={data.website} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-                                        {data.website}
-                                    </a>
-                                </div>
-                            )}
+                           {data.address || "Chưa có địa chỉ"}
                         </div>
                     </Card>
-
+                    
+                    <Card>
+                        <h4 className="font-medium! mb-3 text-[16px]!">
+                            <FontAwesomeIcon icon={faAddressCard} className="text-[#BC2228] mr-2" /> Xem trên Map
+                        </h4>
+                        <iframe
+                            title="Company Location"
+                            src={`https://www.google.com/maps?q=${encodeURIComponent(data.address || '')}&output=embed`}
+                            width="100%"
+                            height="200"
+                            className="border-0 rounded"
+                            allowFullScreen
+                            loading="lazy"
+                        ></iframe>
+                    </Card>
                     <Card>
                         <h4 className="font-medium! mb-3 text-[16px]!">
                             <FontAwesomeIcon icon={faAddressCard} className="text-[#BC2228] mr-2" /> Chia sẻ thông tin công ty
@@ -217,7 +248,7 @@ export const DescriptionBusiness = ({ data, jobs, isOwner = false, onAddJob, onJ
                                     className="bg-[#EFC3C4]! text-[#BC2228]! font-bold! border-0!"
                                     icon={<FontAwesomeIcon icon={faLink} />}
                                     onClick={() => {
-                                        navigator.clipboard.writeText(window.location.href);
+                                        navigator.clipboard.writeText(data.website || '');
                                         message.success("Đã copy link!");
                                     }}
                                 >
@@ -244,26 +275,6 @@ export const DescriptionBusiness = ({ data, jobs, isOwner = false, onAddJob, onJ
                             </div>
                         </Space>
                     </Card>
-
-                    {data.website && (
-                        <Card className="text-center">
-                            <div className="mb-3">
-                                <div className="inline-block p-3 bg-gray-50 rounded-md">
-                                    <FontAwesomeIcon icon={faFileLines} className="text-3xl text-[#BC2228]" />
-                                </div>
-                                <div className="mb-4 text-[16px] font-medium">Truy cập trang công ty</div>
-                            </div>
-                            <Button 
-                                type="primary" 
-                                block 
-                                className="bg-[#BC2228] border-0! font-medium!" 
-                                size="large"
-                                onClick={() => window.open(data.website!, '_blank')}
-                            >
-                                Truy cập
-                            </Button>
-                        </Card>
-                    )}
                 </Space>
             </div>
 

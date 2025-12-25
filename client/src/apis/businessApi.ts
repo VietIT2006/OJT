@@ -30,23 +30,33 @@ export type UpdateCompanyDTO = {
 };
 
 export type CreateJobDTO = {
+    is_open?: boolean;
     company_id: string;
     type_job_id: string;
     tag_id: string;
     location_id: string;
+    level: string;
+    experience: string;
+    education: string;
     title: string;
     description: string;
     salary?: string | null;
+    salary_type?: string | null;
     expire_at?: string | null;
 };
 
 export type UpdateJobDTO = {
+    is_open?: boolean;
     type_job_id?: string;
     tag_id?: string;
     location_id?: string;
+    level?: string;
+    experience?: string;
+    education?: string;
     title?: string;
     description?: string;
     salary?: string | null;
+    salary_type?: string | null;
     expire_at?: string | null;
 };
 
@@ -69,6 +79,15 @@ export const businessApi = {
             return res.data;
         } catch (error: any) {
             throw new Error(error?.response?.data?.message || "Failed to fetch company detail");
+        }
+    },
+    
+    getCompanyTypes: async () => {
+        try {
+            const res = await axios.get(`${baseUrl}/type_companies`);
+            return res.data;
+        } catch (error: any) {
+            throw new Error("Không thể tải loại hình công ty");
         }
     },
 
@@ -114,6 +133,7 @@ export const businessApi = {
     createJob: async (data: CreateJobDTO) => {
         try {
             const res = await axios.post(`${baseUrl}/jobs`, {
+                is_open: true,
                 ...data,
                 created_at: new Date().toISOString(),
                 updated_at: new Date().toISOString(),
@@ -163,12 +183,48 @@ export const businessApi = {
         }
     },
 
+    getLocationById: async (id: string) => {
+        try {
+            const res = await axios.get(`${baseUrl}/locations/${id}`);
+            return res.data;
+        } catch (error: any) {
+            throw new Error(error?.response?.data?.message || "Failed to fetch location detail");
+        }
+    },
+
     getTypeJobs: async () => {
         try {
             const res = await axios.get(`${baseUrl}/type_jobs`);
             return res.data;
         } catch (error: any) {
             throw new Error(error?.response?.data?.message || "Failed to fetch job types");
+        }
+    },
+
+    getTypeJobById: async (id: string) => {
+        try {
+            const res = await axios.get(`${baseUrl}/type_jobs/${id}`);
+            return res.data;
+        } catch (error: any) {
+            throw new Error(error?.response?.data?.message || "Failed to fetch job type detail");
+        }
+    },
+
+    getTagJobs: async () => {
+        try {
+            const res = await axios.get(`${baseUrl}/tag_jobs`);
+            return res.data;
+        } catch (error: any) {
+            throw new Error(error?.response?.data?.message || "Failed to fetch job tags");
+        }
+    },
+
+    getTagJobById: async (id: string) => {
+        try {
+            const res = await axios.get(`${baseUrl}/tag_jobs/${id}`);
+            return res.data;
+        } catch (error: any) {
+            throw new Error(error?.response?.data?.message || "Failed to fetch job tag detail");
         }
     },
 

@@ -1,6 +1,3 @@
-import Header from "../../components/layout/Header";
-import Footer from "../../components/layout/Footer";
-
 const CandidateSupportPage = () => {
   return (
     <div className="min-h-screen bg-[#f7f7f7]">

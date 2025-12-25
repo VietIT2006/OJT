@@ -4,6 +4,7 @@ export enum JobCandidateStatus {
   Interview = 2,    // Phỏng vấn
   Offered = 3,      // Đã offer
   Rejected = 4,     // Từ chối
+  Hired = 5        // Đã nhận việc
 }
 
 export enum CompanyType {
@@ -18,12 +19,29 @@ export enum CompanyType {
   Other = "Other",
 }
 
+export enum JobLevel {
+  Intern = "Intern",
+  Fresher = "Fresher",
+  Junior = "Junior",
+  MidLevel = "Mid Level",
+  Senior = "Senior",
+  Lead = "Lead",
+}
+
+
+export enum SalaryType {
+  Monthly = "Monthly",
+  Yearly = "Yearly",
+}
+
 export type Company = {
   id: string;
   user_id: string;
   type_company_id: string;
   name: string;
   logo: string | null;
+  featured: boolean;
+  address: string;
   website: string | null;
   link_fb: string | null;
   link_linkedin: string | null;
@@ -36,13 +54,18 @@ export type Company = {
 
 export type Job = {
   id: string;
+  is_open: boolean;
   company_id: string;
   type_job_id: string;
   tag_id: string
   location_id: string;
+  level: JobLevel;
+  experience: string;
+  education: string;
   title: string;
   description: string;
   salary: string | null;
+  salary_type: SalaryType | null;
   expire_at: string | null;
   created_at: string;
   updated_at: string;
@@ -86,6 +109,7 @@ export type JobCandidate = {
   content: string | null;
   status: JobCandidateStatus;
   created_at: string;
+  updated_at: string;
 };
 
 export type AddressCompany = {

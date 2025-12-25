@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, useParams } from "react-router";
 import CandidateBreadcrumb from "../../../../components/candidate/CandidateBreadcrumb";
-import { fetchJobById, fetchJobs, fetchJobLocations } from "../../../../apis/jobsApi";
-import type { Job } from "../../../../types/job.type";
+import { businessApi } from "../../../../apis/businessApi";
+import type { Job, Location, TypeJob, Company } from "../../../../types/business.type";
 import mapPinIcon from "../../../../assets/images/MapPin.png";
 import mapTrifoldIcon from "../../../../assets/images/MapTrifold.png";
 import searchIcon from "../../../../assets/images/fi_search.png";
@@ -18,13 +18,15 @@ const DEFAULT_COMPANY_LOGO = "https://www.google.com/favicon.ico";
 const JobDetailPage = () => {
   const { jobId } = useParams();
   const [job, setJob] = useState<Job | null>(null);
+  const [company, setCompany] = useState<Company | null>(null);
   const [relatedJobs, setRelatedJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [keyword, setKeyword] = useState("");
   const [location, setLocation] = useState("");
-  const [locations, setLocations] = useState<string[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  
 
   useEffect(() => {
     if (!jobId) return;
@@ -32,14 +34,19 @@ const JobDetailPage = () => {
     const loadData = async () => {
       try {
         setLoading(true);
-        const [jobDetail, jobList] = await Promise.all([fetchJobById(jobId), fetchJobs()]);
+        const [jobDetail, jobList] = await Promise.all([businessApi.getJobById(jobId), businessApi.getJobs()]);
         if (!mounted) return;
         setJob(jobDetail);
-        const related = jobList
-          .filter((item) => item.id !== jobDetail.id && item.location === jobDetail.location)
+        
+        const companyData = await businessApi.getCompanyById(jobDetail.company_id);
+        setCompany(companyData);
+        
+        const openJobs = jobList.filter(item => item.is_open !== false);
+        const related = openJobs
+          .filter((item) => item.id !== jobDetail.id && item.tag_id === jobDetail.tag_id)
           .slice(0, 4);
         const fallback = related.length < 4
-          ? jobList.filter((item) => item.id !== jobDetail.id).slice(0, 4 - related.length)
+          ? openJobs.filter((item) => item.id !== jobDetail.id).slice(0, 4 - related.length)
           : [];
         setRelatedJobs([...related, ...fallback]);
       } catch (err) {
@@ -59,7 +66,7 @@ const JobDetailPage = () => {
 
   useEffect(() => {
     let mounted = true;
-    fetchJobLocations()
+    businessApi.getLocations()
       .then((data) => mounted && setLocations(data))
       .catch(() => { });
     return () => {
@@ -67,7 +74,7 @@ const JobDetailPage = () => {
     };
   }, []);
 
-  const locationOptions = useMemo(() => [ALL_LOCATIONS_LABEL, ...locations], [locations]);
+  const locationOptions = useMemo(() => [ALL_LOCATIONS_LABEL, ...locations.map(loc => loc.name)], [locations]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -105,8 +112,8 @@ const JobDetailPage = () => {
         )}
         {!loading && job && (
           <>
-            <JobHero job={job} />
-            <JobBody job={job} />
+            <JobHero job={job} company={company} />
+            <JobBody job={job} company={company} />
             <RelatedJobsSection jobs={relatedJobs} />
           </>
         )}
@@ -199,34 +206,29 @@ const HeroSearchShell = ({
     </section>
   );
 };
-const JobHero = ({ job }: { job: Job }) => {
-  const badgeTags = (job.tags && job.tags.length > 0 ? job.tags : ["Featured"]).filter(Boolean);
-  const companyLogo = job.logo || DEFAULT_COMPANY_LOGO;
+const JobHero = ({ job, company }: { job: Job; company: Company | null }) => {
+  const companyLogo = company?.logo || DEFAULT_COMPANY_LOGO;
+  const companyName = company?.name || "Unknown Company";
+  
   return (
     <section className="bg-white shadow-[0_6px_18px_rgba(0,0,0,0.04)]">
       <div className="mx-auto w-full max-w-[1320px] px-6 py-8 mt-[38px]">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div className="flex items-start gap-4">
             <div className="flex h-18 w-35 items-center justify-center">
-              <img src={companyLogo} alt={job.company} className="h-full w-full object-contain" />
+              <img src={companyLogo} alt={companyName} className="h-full w-full object-contain" />
             </div>
             <div>
               <h1 className="text-[24px] font-[500] text-[#18191C] md:text-3xl">{job.title}</h1>
               <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-[#6a6a6a]">
                 <span className="text-[#474C54]">
-                  at {job.company}
+                  at {companyName}
                 </span>
-                <span className="rounded-[3px] bg-[#0BA02C] px-3 py-0.5 text-xs font-semibold uppercase text-white">
-                  {job.type}
+                <span className={`rounded-[3px] px-3 py-0.5 text-xs font-semibold uppercase text-white ${
+                  job.is_open ? 'bg-[#0BA02C]' : 'bg-[#d00000]'
+                }`}>
+                  {job.is_open ? 'Đang mở' : 'Đã đóng'}
                 </span>
-                {badgeTags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-[#ffe8e7] px-3 py-0.5 text-xs font-semibold text-[#E05151]"
-                  >
-                    {tag}
-                  </span>
-                ))}
               </div>
             </div>
           </div>
@@ -244,11 +246,12 @@ const JobHero = ({ job }: { job: Job }) => {
     </section>
   );
 };
-const JobBody = ({ job }: { job: Job }) => {
-  const description = job.description && job.description.length > 0 ? job.description : FALLBACK_DESCRIPTION;
-  const requirements = job.requirements && job.requirements.length > 0 ? job.requirements : FALLBACK_REQUIREMENTS;
-  const desirable = job.desirable && job.desirable.length > 0 ? job.desirable : FALLBACK_DESIRABLE;
-  const benefits = job.benefits && job.benefits.length > 0 ? job.benefits : FALLBACK_BENEFITS;
+
+const JobBody = ({ job, company }: { job: Job; company: Company | null }) => {
+  const description = job.description ? [job.description] : FALLBACK_DESCRIPTION;
+  const requirements = FALLBACK_REQUIREMENTS;
+  const desirable = FALLBACK_DESIRABLE;
+  const benefits = FALLBACK_BENEFITS;
   return (
     <section className="bg-white">
       <div className="mx-auto w-full max-w-[1320px] ">
@@ -268,72 +271,111 @@ const JobBody = ({ job }: { job: Job }) => {
     </section>
   );
 };
-const SalaryLocationCard = ({ job }: { job: Job }) => (
-  <div className="rounded-[16px] border border-[#e1e1e1] bg-white p-6 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
-    <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-      <div className="flex-1 border-b border-[#e5e5e5] pb-4 text-center sm:border-b-0 sm:pb-0 ">
-        <p className="mb-3 text-xs font-semibold uppercase text-[#18191C]">Salary (USD)</p>
-        <p className="whitespace-nowrap text-xl font-semibold text-[#16a24b]">{job.salary}</p>
-        <p className="mt-1 text-xs text-[#a3a3a3]">Yearly salary</p>
-      </div>
-      <span className="hidden h-30 w-px bg-[#e5e5e5] sm:block" />
-      <div className="flex-1 text-center ">
-        <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg ">
-          <img src={mapTrifoldIcon} alt="Location" className="h-10 w-10" />
+const SalaryLocationCard = ({ job }: { job: Job }) => {
+  const [locations, setLocations] = useState<Location[]>([]);
+  
+  useEffect(() => {
+    businessApi.getLocations()
+      .then((data) => setLocations(data))
+      .catch(() => {});
+  }, []);
+  
+  const location = locations.find(l => l.id === job.location_id);
+  const salaryLabel = job.salary_type ? `${job.salary_type} salary` : "Salary";
+  
+  return (
+    <div className="rounded-[16px] border border-[#e1e1e1] bg-white p-6 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+        <div className="flex-1 border-b border-[#e5e5e5] pb-4 text-center sm:border-b-0 sm:pb-0 ">
+          <p className="mb-3 text-xs font-semibold uppercase text-[#18191C]">Salary (USD)</p>
+          <p className="whitespace-nowrap text-xl font-semibold text-[#16a24b]">{job.salary || "Negotiable"}</p>
+          <p className="mt-1 text-xs text-[#a3a3a3]">{salaryLabel}</p>
         </div>
-        <p className="text-xs font-semibold uppercase text-[#18191C]">Job Location</p>
-        <p className="whitespace-nowrap mt-1 text-sm font-semibold text-[#767F8C]">{job.location}</p>
+        <span className="hidden h-30 w-px bg-[#e5e5e5] sm:block" />
+        <div className="flex-1 text-center ">
+          <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg ">
+            <img src={mapTrifoldIcon} alt="Location" className="h-10 w-10" />
+          </div>
+          <p className="text-xs font-semibold uppercase text-[#18191C]">Job Location</p>
+          <p className="whitespace-nowrap mt-1 text-sm font-semibold text-[#767F8C]">{location?.name || "Unknown"}</p>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 const RelatedJobsSection = ({ jobs }: { jobs: Job[] }) => {
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [companiesData, locationsData] = await Promise.all([
+          businessApi.getCompanies(),
+          businessApi.getLocations()
+        ]);
+        setCompanies(companiesData);
+        setLocations(locationsData);
+      } catch (error) {
+        console.error("Failed to fetch related data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  
   if (!jobs.length) return null;
+  
+  const getCompany = (companyId: string) => companies.find(c => c.id === companyId);
+  const getLocation = (locationId: string) => locations.find(l => l.id === locationId);
+  
   return (
     <section className="bg-white pb-16 pt-20 mt-7 border-t border-[#f0f0f0]">
       <div className="mx-auto w-full max-w-[1320px] px-6">
         <h2 className="text-2xl font-semibold text-[#1f1f1f]">Related Jobs</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {jobs.map((job) => (
-            <Link
-              key={job.id}
-              to={`/job/${job.id}`}
-              className="rounded-[1px] border border-[#ededed] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="text-base font-semibold text-[#1c1c1c]">{job.title}</h3>
-                  <div className="flex items-center justify-center gap-3">
-                    <span className="rounded-[3px] bg-[#E7F6EA] px-[8px] py-[4px] text-[12px] font-semibold text-[#0BA02C] uppercase">
-                      {job.type}
-                    </span>
-                    <p className="mt-1 text-xs text-[#8e8e8e]">Salary: {job.salary}</p>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className="mt-3 flex items-center gap-3 justify-between">
-                <div className="flex items-center gap-2">
-                  <img
-                    src={job.logo || DEFAULT_COMPANY_LOGO}
-                    alt={job.company}
-                    className="h-6 w-6 rounded-[1px] border border-[#e7e7e7] object-contain"
-                  />
+          {jobs.map((job) => {
+            const company = getCompany(job.company_id);
+            const location = getLocation(job.location_id);
+            return (
+              <Link
+                key={job.id}
+                to={`/job/${job.id}`}
+                className="rounded-[1px] border border-[#ededed] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold text-[#3d3d3d]">{job.company}</p>
-                    <p className="flex items-center gap-1 text-[11px] text-[#9a9a9a]">
-                      <img src={mapPinIcon} alt="Location" className="h-3 w-3" />
-                      {job.location}
-                    </p>
+                    <h3 className="text-base font-semibold text-[#1c1c1c]">{job.title}</h3>
+                    <div className="flex items-center justify-center gap-3">
+                      <span className="rounded-[3px] bg-[#E7F6EA] px-[8px] py-[4px] text-[12px] font-semibold text-[#0BA02C] uppercase">
+                        Full-time
+                      </span>
+                      <p className="mt-1 text-xs text-[#8e8e8e]">Salary: {job.salary || "Negotiable"}</p>
+                    </div>
                   </div>
                 </div>
-                <span className="text-[#d0d0d0]">
-                  <BookmarkIcon className="h-6 w-6" />
-                </span>
-              </div>
-            </Link>
-          ))}
+
+                <div className="mt-3 flex items-center gap-3 justify-between">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={company?.logo || DEFAULT_COMPANY_LOGO}
+                      alt={company?.name || "Company"}
+                      className="h-6 w-6 rounded-[1px] border border-[#e7e7e7] object-contain"
+                    />
+                    <div>
+                      <p className="text-xs font-semibold text-[#3d3d3d]">{company?.name || "Unknown"}</p>
+                      <p className="flex items-center gap-1 text-[11px] text-[#9a9a9a]">
+                        <img src={mapPinIcon} alt="Location" className="h-3 w-3" />
+                        {location?.name || "Unknown"}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-[#d0d0d0]">
+                    <BookmarkIcon className="h-6 w-6" />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -369,12 +411,21 @@ const ListSection = ({ title, items = [] }: { title: string; items?: string[] })
 };
 
 const JobOverviewCard = ({ job }: { job: Job }) => {
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return "Updating...";
+    try {
+      return new Date(dateStr).toLocaleDateString('vi-VN');
+    } catch {
+      return "Updating...";
+    }
+  };
+  
   const overviewItems = [
-    { label: "Job Posted", value: job.postedDate ?? "Dang cap nhat", icon: <Calendar1 className="w-10 h-8" /> },
-    { label: "Job Expire In", value: job.expiryDate ?? "Dang cap nhat", icon: <Timer className="w-10 h-8" /> },
-    { label: "Job Level", value: job.level ?? "Dang cap nhat", icon: <Layers className="w-10 h-8" /> },
-    { label: "Experience", value: job.experience ?? "Dang cap nhat", icon: <Clock1 className="w-10 h-8" /> },
-    { label: "Education", value: job.education ?? "Dang cap nhat", icon: <GraduationCap className="w-10 h-8" /> },
+    { label: "Job Posted", value: formatDate(job.created_at), icon: <Calendar1 className="w-10 h-8" /> },
+    { label: "Job Expire In", value: formatDate(job.expire_at), icon: <Timer className="w-10 h-8" /> },
+    { label: "Job Level", value: job.level || "Not specified", icon: <Layers className="w-10 h-8" /> },
+    { label: "Experience", value: job.experience || "Not specified", icon: <Clock1 className="w-10 h-8" /> },
+    { label: "Education", value: job.education || "Not specified", icon: <GraduationCap className="w-10 h-8" /> },
   ];
   const socials = [
     { label: "Copy Links", icon: <LinkIcon />, type: "copy" },
@@ -389,21 +440,18 @@ const JobOverviewCard = ({ job }: { job: Job }) => {
     <div className="bg-white rounded-lg border border-gray-200 p-6 w-full max-w-md">
       <h2 className="text-lg font-semibold text-gray-900 mb-6">Job Overview</h2>
 
-      {/* Top row - 3 columns */}
       <div className="grid grid-cols-3 gap-6 mb-6">
         {topOverview.map((item) => (
           <OverviewItem key={item.label} item={item} />
         ))}
       </div>
 
-      {/* Bottom row - 2 columns (left-aligned) */}
       <div className="grid grid-cols-3 gap-6 mb-8">
         {bottomOverview.map((item) => (
           <OverviewItem key={item.label} item={item} />
         ))}
       </div>
 
-      {/* Share section */}
       <div className="border-t border-gray-200 pt-6">
         <h3 className="text-base font-semibold text-gray-900 mb-4">Share this job:</h3>
         <div className="flex items-center gap-3">

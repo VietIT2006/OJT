@@ -11,6 +11,7 @@ import type { Company, Job as BusinessJob } from "../../../types/business.type";
 import { RootState } from "../../../store";
 import { ModalUpdateCompany } from "../../../components/business/ModalUpdateCompany";
 import { ModalAddJob } from "../../../components/business/ModalAddJob";
+import { OutBusinessCards } from "../OutBusiness/components/OutBusinessCards";
 
 export const OutBusinessDetailMain = () => {
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ export const OutBusinessDetailMain = () => {
     const [company, setCompany] = useState<Company | null>(null);
     const [jobs, setJobs] = useState<BusinessJob[]>([]);
     const [similarCompanies, setSimilarCompanies] = useState<Company[]>([]);
+    const [positionsMap, setPositionsMap] = useState<Record<string, number>>({});
     const [loading, setLoading] = useState(true);
     const [isOwner, setIsOwner] = useState(false);
 
@@ -30,7 +32,22 @@ export const OutBusinessDetailMain = () => {
         if (id) {
             fetchCompanyDetail();
         }
+        fetchCompanyPositions();
     }, [id]);
+
+    const fetchCompanyPositions = async () => {
+        try {
+            const jobs = await businessApi.getJobs();
+            const map: Record<string, number> = {};
+            jobs.forEach((job: any) => {
+                if (!map[job.company_id]) map[job.company_id] = 0;
+                map[job.company_id]++;
+            });
+            setPositionsMap(map);
+        } catch (error: any) {
+            message.error(error.message || "Không thể tải số lượng công việc");
+        }
+    };
 
     const fetchCompanyDetail = async () => {
         if (!id) return;
@@ -41,15 +58,13 @@ export const OutBusinessDetailMain = () => {
             setCompany(companyData);
 
             if (role === "business" && userId) {
-                console.log(role, userId);
-                
                 const ownerCheck = await businessApi.checkCompanyOwnership(id, userId);
-                console.log(ownerCheck);
-                
                 setIsOwner(ownerCheck);
             }
 
             const jobsData = await businessApi.getJobs({ company_id: id });
+            console.log(jobsData);
+            
             setJobs(jobsData);
 
             if (companyData.type_company_id) {
@@ -114,29 +129,7 @@ export const OutBusinessDetailMain = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {similarCompanies && similarCompanies.map((c) => (
-                        <Card key={c.id} className="border border-gray-200! rounded-lg">
-                            <div className="flex items-center gap-4 mb-2">
-                                <div className="w-16 h-16 bg-gray-200 rounded-xl" />
-                                <div className="flex gap-2 flex-1 flex-col">
-                                    <div className="flex gap-2">
-                                        <div className="font-semibold text-lg">{c.name}</div>
-                                    </div>
-                                    <div className="flex items-center text-gray-500 text-xs">
-                                        <FontAwesomeIcon icon={faLocationDot} className="mr-1" />
-                                        {c.size || "N/A"}
-                                    </div>
-                                </div>
-                            </div>
-                            <Button
-                                type="primary"
-                                block
-                                className="bg-[#E7F0FA]! text-[#0A65CC]! border-0! font-medium! mt-4"
-                                size="large"
-                                onClick={() => navigate(`/candidate/outstanding-company/${c.id}`)}
-                            >
-                                Xem chi tiết
-                            </Button>
-                        </Card>
+                        <OutBusinessCards id={c.id} key={c.id} logo={c.logo} name={c.name} location={c.address} featured={c.featured} positions_quantity={positionsMap[c.id] || 0} />
                     ))}
                 </div>
             </div>

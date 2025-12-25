@@ -8,7 +8,7 @@ interface JobCardProps {
   location: string;
 }
 
-const JobCard: React.FC<JobCardProps> = ({ title, type, salary, location }) => {
+const JobCard = ({ title, type, salary, location }: JobCardProps) => {
   return (
     <div className="bg-white p-5 rounded-lg border border-gray-100 hover:border-red-300 transition-all flex justify-between items-start">
       <div className="flex gap-4">

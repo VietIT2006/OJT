@@ -135,7 +135,7 @@ export const HomepageMain = () => {
                     <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Công việc nổi bật</h2>
                     <button
                         className="text-[#CC1E1E] font-bold text-sm flex items-center gap-1 hover:underline"
-                        onClick={() => navigate("/viec-lam")}
+                        onClick={() => navigate("/job")}
                     >
                         {t('see-more-0')}<FontAwesomeIcon icon={faChevronRight} />
                     </button>
