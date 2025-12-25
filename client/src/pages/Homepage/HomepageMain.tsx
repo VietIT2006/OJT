@@ -33,7 +33,6 @@ const TESTIMONIALS = [
     { id: 2, name: "Bessie Cooper", role: "Creative Director", avatar: "https://i.pravatar.cc/150?u=bessie", text: "Mauris eget lorem odio. Mauris convallis justo molestie metus aliquam lacinia." },
     { id: 3, name: "Sơn Việt", role: "Software Engineer", avatar: "https://i.pravatar.cc/150?u=viet", text: "Rất đáng trải nghiệm cho các bạn sinh viên mới ra trường!" },
 ];
-
 export const HomepageMain = () => {
     const { role } = useSelector((state: RootState) => state.user);
     const { t } = useTranslation();
