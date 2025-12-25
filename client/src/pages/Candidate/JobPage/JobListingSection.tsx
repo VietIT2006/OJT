@@ -4,7 +4,6 @@ import { Link } from "react-router";
 import { businessApi } from "../../../apis/businessApi";
 import type { Job, Location, TypeJob, Company } from "../../../types/business.type";
 import Pagination from "../../../components/common/Pagination";
-import CandidateBreadcrumb from "../../../components/candidate/CandidateBreadcrumb";
 
 import rikkeiLogo from "../../../assets/images/rikkeiEduAvatar.png";
 import searchIcon from "../../../assets/images/fi_search.png";
@@ -147,13 +146,6 @@ const JobListingSection = () => {
 
   return (
     <>
-      <CandidateBreadcrumb
-        items={[
-          { label: "Trang chủ", to: "/" },
-          { label: "Việc làm", highlight: true },
-        ]}
-      />
-
       <section className="bg-white pb-16 mt-[20px]">
         <div className="mx-auto w-full max-w-[1320px] px-6">
           <FilterBar

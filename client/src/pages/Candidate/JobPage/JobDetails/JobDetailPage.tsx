@@ -97,13 +97,6 @@ const JobDetailPage = () => {
           toggleDropdown={() => setDropdownOpen((prev) => !prev)}
           locations={locationOptions}
         />
-        <CandidateBreadcrumb
-          items={[
-            { label: "Trang chủ", to: "/" },
-            { label: "Việc làm", to: "/job" },
-            { label: job?.title || "Job Details", highlight: true },
-          ]}
-        />
         {loading && (
           <div className="py-16 text-center text-sm text-[#707070]">Đang tải thông tin công việc...</div>
         )}
