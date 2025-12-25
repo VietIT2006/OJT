@@ -1,17 +1,9 @@
-import Header from "../../components/Header/Header";
-import  "../../index.css"
-import Footer from "../../components/Footer/Footer";
-import Birthday from "../../assets/img/Birthday.png";
-import Phone from "../../assets/img/Phone.png";
-import Gender from "../../assets/img/Gender.png";
-import Lock from "../../assets/img/Lock.png";
-import Email from "../../assets/img/Email.png";
-import Info from "../../assets/img/Info.png";
-import Address from "../../assets/img/Home Page.png";
-import User from "../../assets/img/User.png";
+import Lock from "../../../assets/img/Lock.png";
+import User from "../../../assets/img/User.png";
 
 
-export default function ChangeAccInfo() {
+
+export default function CandidateAccountSecurity() {
   const labelBold: React.CSSProperties = {
   fontWeight: 600,
 }
@@ -38,21 +30,9 @@ const inputStyle341: React.CSSProperties = {
   color: "#9199A3",
 }
 
-    const inputBox: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: 8,
-  border: "1px solid #797979",
-  borderRadius: 4,
-  padding: "8px 12px",
-  marginTop: 6,
-  outline: "2px solid #797979",
-}
-
 
   return (
     <div className="hide-top-header" style={{ background: "#F5F6F8" }}>
-      <Header />
        {/* CONTENT */}
       <div
         style={{
@@ -96,24 +76,16 @@ const inputStyle341: React.CSSProperties = {
             borderRadius: 8,
             padding: 32,
             boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-            height:749,
-            minWidth:826,
+            maxHeight: 749,
+            minWidth: 826,
 
           }}
         >
           {/* USER HEADER */}
           <div style={{ display: "flex", gap: 16, marginBottom: 32 }}>
-            <div
-              style={{
-                width: 84,
-                height: 84,
-                borderRadius: "50%",
-                background: "#E0E0E0",
-              }}
-            />
+
             <div>
-              <h3 style={{ margin: 0,fontWeight:600,fontSize:24 }}>Nguyễn Văn A</h3>
-              <span style={{ color: "#777" ,fontWeight:400, fontSize:20,fontStyle:"italic" }}>Full-Stack Developer</span>
+              <h3 style={{ margin: 0,fontWeight:600,fontSize:24 }}>Đổi mật khẩu</h3>
             </div>
           </div>
 
@@ -127,10 +99,8 @@ const inputStyle341: React.CSSProperties = {
   }}
 >
   {[
-    { label: "Email", icon: Email, value: "nguyenvana@gmail.com" },
-    { label: "SĐT", icon: Phone, value: "+84 0123 456 789" },
-    { label: "Địa chỉ", icon: Address, value: "abc def" },
-    { label: "Trang cá nhân", icon: Info, value: "fb.com/abc" },
+    { label: "Mật khẩu cũ", icon: Lock, value: "Nhập mật khẩu cũ" },
+    { label: "Mật khẩu mới", icon: Lock, value: "Nhập mật khẩu mới" },
   ].map((item) => (
     <div key={item.label}>
       <label style={labelBold}>{item.label}</label>
@@ -147,39 +117,10 @@ const inputStyle341: React.CSSProperties = {
 </div>
 
 
-{/* GIỚI TÍNH  */}
-<div style={{ marginTop: 24, maxWidth: 151 ,height:50,marginBottom:44,paddingTop:13 }}> 
-  <label style={labelBold}>Giới tính</label>
-  <div style={inputBox}>
-    <img src={Gender} width={32} />
-    <select style={inputStyle341}>
-      <option>Male</option>
-      <option>Female</option>
-    </select>
-  </div>
-</div>
-
-{/* NGÀY SINH  */}
-<div style={{ marginTop: 16, maxWidth: 181, height:50,paddingTop:20 }}>
-  <label style={labelBold}>Ngày sinh</label>
-  <div style={inputBox}>
-    <img src={Birthday} width={32} />
-    <input
-      type="date"
-      style={{
-        ...inputStyle341,
-        width: "auto",
-        flex: 1,
-      }}
-    />
-
-
-  </div>
-</div>
 
 
           {/* SAVE BUTTON */}
-          <div style={{ textAlign: "right", marginTop: 32,paddingTop:30 }}>
+          <div style={{ textAlign: "right", marginTop: 32, }}>
             <button
               style={{
                 background: "#C62828",
@@ -197,7 +138,6 @@ const inputStyle341: React.CSSProperties = {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
