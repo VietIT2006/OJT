@@ -17,6 +17,8 @@ import WorkingCriteria from "../pages/Candidate/myCVPage/WorkingCriteria";
 import JobListingSection from "../pages/Candidate/JobPage/JobListingSection";
 import JobDetailPage from "../pages/Candidate/JobPage/JobDetails/JobDetailPage";
 import OutBusinessDetailMain from "../pages/Candidate/OutBusinessDetail/OutBusinessDetailMain";
+import CandidateAccountInfo from "../pages/Candidate/Account/CandidateAccountInfo";
+import CandidateAccountSecurity from "../pages/Candidate/Account/CandidateAccountSecurity";
 
 // import Footer from "../components/layout/Footer";
 // import Header from "../components/layout/Header";
@@ -40,6 +42,8 @@ const router = createBrowserRouter([
             { path: "register", element: <Register /> },
             { path: "business/register", element: <BusinessRegister /> },
             { path: "candidate/outstanding-company", element: <OutBusinessMain /> },
+            { path: "account/info", element: <CandidateAccountInfo /> },
+            { path: "account/security", element: <CandidateAccountSecurity /> },
             { path: "candidate/outstanding-company/:id", element: <OutBusinessDetailMain/> },
             { path: "business/outstanding-candidate", element: <OutCandidateMain /> },
             { path: "business/outstanding-candidate/:id", element: <OutCandidateDetailMain /> },
