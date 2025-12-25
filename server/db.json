@@ -245,14 +245,139 @@
       "type_company_id": "tc_1",
       "name": "TechNova Vietnam",
       "logo": "https://logo.clearbit.com/technova.com",
-      "website": "https://technova.com",
-      "link_fb": "https://facebook.com/technova",
-      "link_linkedin": "https://linkedin.com/company/technova",
+      "website": "https://technova.vn",
+      "follower": 15000,
+      "size": "100-500",
+      "featured": true,
+      "description": "Dẫn đầu về giải pháp AI và Cloud tại Việt Nam. Môi trường làm việc chuyên nghiệp, sáng tạo và đột phá công nghệ.",
+      "created_at": "2024-01-01T08:00:00.000Z",
+      "updated_at": "2025-01-10T10:30:00.000Z"
+    },
+    {
+      "id": "com_2",
+      "user_id": "acc_2",
+      "type_company_id": "tc_2",
+      "name": "RikkeiSoft",
+      "logo": "https://rikkeisoft.com/wp-content/uploads/2023/05/logo-rikkeisoft.png",
+      "website": "https://rikkeisoft.vn",
       "follower": 12000,
-      "size": "50-100",
-      "description": "Công ty product chuyên về nền tảng tuyển dụng và HR Tech.",
-      "created_at": "2024-02-01T08:00:00.000Z",
-      "updated_at": "2024-02-01T08:00:00.000Z"
+      "size": "1000-2000",
+      "featured": true,
+      "description": "Công ty Outsourcing hàng đầu, đối tác chiến lược của nhiều tập đoàn lớn tại Nhật Bản và Hoa Kỳ.",
+      "created_at": "2024-01-05T08:00:00.000Z",
+      "updated_at": "2025-01-12T09:00:00.000Z"
+    },
+    {
+      "id": "com_3",
+      "user_id": "acc_3",
+      "type_company_id": "tc_2",
+      "name": "FPT Software",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/a/ad/FPT_Software_logo.png",
+      "website": "https://fpt-software.com",
+      "follower": 60000,
+      "size": "10000+",
+      "featured": true,
+      "description": "Tập đoàn công nghệ toàn cầu, cung cấp dịch vụ CNTT, chuyển đổi số và xuất khẩu phần mềm lớn nhất Việt Nam.",
+      "created_at": "2024-01-10T08:00:00.000Z",
+      "updated_at": "2025-01-15T08:00:00.000Z"
+    },
+    {
+      "id": "com_4",
+      "user_id": "acc_4",
+      "type_company_id": "tc_1",
+      "name": "VNG Corp",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/VNG_Logo.png",
+      "website": "https://vng.com.vn",
+      "follower": 35000,
+      "size": "2000-5000",
+      "featured": false,
+      "description": "Kỳ lân công nghệ hàng đầu Việt Nam với hệ sinh thái Zalo, Zing, và các nền tảng thanh toán điện tử hiện đại.",
+      "created_at": "2024-03-10T08:00:00.000Z",
+      "updated_at": "2025-01-18T14:20:00.000Z"
+    },
+    {
+      "id": "com_5",
+      "user_id": "acc_5",
+      "type_company_id": "tc_1",
+      "name": "Viettel IT",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Viettel_logo_2021.svg",
+      "website": "https://viettel.com.vn",
+      "follower": 42000,
+      "size": "10000+",
+      "featured": false,
+      "description": "Đơn vị giải pháp CNTT của tập đoàn Viettel, tiên phong trong lĩnh vực an ninh mạng và hạ tầng số quốc gia.",
+      "created_at": "2024-01-15T08:00:00.000Z",
+      "updated_at": "2025-01-20T11:00:00.000Z"
+    },
+    {
+      "id": "com_6",
+      "user_id": "acc_6",
+      "type_company_id": "tc_2",
+      "name": "NashTech",
+      "logo": "https://logo.clearbit.com/nashtechglobal.com",
+      "website": "https://nashtechglobal.com",
+      "follower": 8000,
+      "size": "1000-2000",
+      "featured": false,
+      "description": "Chuyên gia tư vấn và cung cấp giải pháp công nghệ toàn cầu, đối tác tin cậy của các doanh nghiệp Fortune 500.",
+      "created_at": "2024-01-20T08:00:00.000Z",
+      "updated_at": "2025-01-22T16:00:00.000Z"
+    },
+    {
+      "id": "com_7",
+      "user_id": "acc_7",
+      "type_company_id": "tc_2",
+      "name": "TMA Solutions",
+      "logo": "https://logo.clearbit.com/tmasolutions.com",
+      "website": "https://tmasolutions.com",
+      "follower": 7000,
+      "size": "2000-4000",
+      "featured": false,
+      "description": "Một trong những công ty phần mềm lớn nhất Việt Nam với trung tâm nghiên cứu và phát triển đa quốc gia.",
+      "created_at": "2024-01-01T08:00:00.000Z",
+      "updated_at": "2025-01-23T09:30:00.000Z"
+    },
+    {
+      "id": "com_8",
+      "user_id": "acc_8",
+      "type_company_id": "tc_2",
+      "name": "KMS Technology",
+      "logo": "https://logo.clearbit.com/kms-technology.com",
+      "website": "https://kms-technology.com",
+      "follower": 9000,
+      "size": "500-1000",
+      "featured": false,
+      "description": "Công ty dịch vụ phần mềm uy tín, chú trọng vào chất lượng sản phẩm và phát triển nhân lực trình độ cao.",
+      "created_at": "2024-01-10T08:00:00.000Z",
+      "updated_at": "2025-01-24T10:00:00.000Z"
+    },
+    {
+      "id": "com_9",
+      "user_id": "acc_9",
+      "type_company_id": "tc_1",
+      "name": "Shopee",
+      "logo": "https://logo.clearbit.com/shopee.vn",
+      "website": "https://shopee.vn",
+      "follower": 50000,
+      "size": "5000-10000",
+      "featured": false,
+      "description": "Nền tảng thương mại điện tử hàng đầu khu vực, mang đến trải nghiệm mua sắm trực tuyến tiện lợi và an toàn.",
+      "created_at": "2024-02-28T08:00:00.000Z",
+      "updated_at": "2025-01-25T08:00:00.000Z"
+    },
+    {
+      "id": "com_10",
+      "user_id": "acc_10",
+      "type_company_id": "tc_1",
+      "name": "Grab",
+      "logo": "https://logo.clearbit.com/grab.com",
+      "website": "https://grab.com",
+      "follower": 45000,
+      "size": "5000-10000",
+      "featured": false,
+      "description": "Siêu ứng dụng hàng đầu Đông Nam Á cung cấp các dịch vụ vận chuyển, giao nhận và tài chính số.",
+      "created_at": "2024-05-05T08:00:00.000Z",
+      "updated_at": "2025-01-25T15:00:00.000Z"
     }
   ],
   "account_companies": [
@@ -264,19 +389,75 @@
     }
   ],
   "address_companies": [
-    {
+   {
       "id": "addr_1",
       "company_id": "com_1",
       "location_id": "loc_2",
-      "address": "123 Nguyễn Huệ, Quận 1, TP.HCM",
-      "map_url": "https://maps.google.com/?q=123+Nguyen+Hue"
+      "address": "Toà nhà Bitexco, số 2 Hải Triều, Quận 1, TP.HCM",
+      "map_url": "https://goo.gl/maps/example1"
     },
     {
       "id": "addr_2",
-      "company_id": "com_1",
+      "company_id": "com_2",
       "location_id": "loc_1",
-      "address": "456 Cầu Giấy, Hà Nội",
-      "map_url": "https://maps.google.com/?q=456+Cau+Giay"
+      "address": "Tòa nhà Handico, Khu đô thị mới Mễ Trì, Phạm Hùng, Nam Từ Liêm, Hà Nội",
+      "map_url": "https://goo.gl/maps/example2"
+    },
+    {
+      "id": "addr_3",
+      "company_id": "com_3",
+      "location_id": "loc_3",
+      "address": "F-Complex, Khu đô thị công nghệ FPT Đà Nẵng, Ngũ Hành Sơn, Đà Nẵng",
+      "map_url": "https://goo.gl/maps/example3"
+    },
+    {
+      "id": "addr_4",
+      "company_id": "com_4",
+      "location_id": "loc_2",
+      "address": "VNG Campus, Đường số 13, KCX Tân Thuận, Quận 7, TP.HCM",
+      "map_url": "https://goo.gl/maps/example4"
+    },
+    {
+      "id": "addr_5",
+      "company_id": "com_5",
+      "location_id": "loc_1",
+      "address": "Số 1 Giang Văn Minh, Kim Mã, Ba Đình, Hà Nội",
+      "map_url": "https://goo.gl/maps/example5"
+    },
+    {
+      "id": "addr_6",
+      "company_id": "com_6",
+      "location_id": "loc_2",
+      "address": "Etown 1, 364 Cộng Hòa, Quận Tân Bình, TP.HCM",
+      "map_url": "https://goo.gl/maps/example6"
+    },
+    {
+      "id": "addr_7",
+      "company_id": "com_7",
+      "location_id": "loc_2",
+      "address": "Tòa nhà TMA, Công viên phần mềm Quang Trung, Quận 12, TP.HCM",
+      "map_url": "https://goo.gl/maps/example7"
+    },
+    {
+      "id": "addr_8",
+      "company_id": "com_8",
+      "location_id": "loc_2",
+      "address": "123 Cộng Hòa, Phường 12, Quận Tân Bình, TP.HCM",
+      "map_url": "https://goo.gl/maps/example8"
+    },
+    {
+      "id": "addr_9",
+      "company_id": "com_9",
+      "location_id": "loc_2",
+      "address": "Saigon Centre Tower 2, 67 Lê Lợi, Quận 1, TP.HCM",
+      "map_url": "https://goo.gl/maps/example9"
+    },
+    {
+      "id": "addr_10",
+      "company_id": "com_10",
+      "location_id": "loc_2",
+      "address": "Maple Tree Business Centre, 1060 Nguyễn Văn Linh, Quận 7, TP.HCM",
+      "map_url": "https://goo.gl/maps/example10"
     }
   ],
   "jobs": [
