@@ -1,74 +1,73 @@
 import { faFilter, faLocationDot, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Divider, Input, Select } from "antd";
-import React, { useState, useEffect } from "react";
-import { CompanySearchParams } from "../../../../apis/businessApi";
-import { businessApi } from "../../../../apis/businessApi";
-import type { TypeCompany, Location } from "../../../../types/business.type";
+import { useEffect, useState } from "react";
 
-interface OutBusinessSearchProps {
-    onSearch: (params: CompanySearchParams) => void;
+type FilterState = {
+    typeCompanyId?: string;
+};
+
+interface Props {
+    initialSearch: string;
+    initialLocation: string;
+    initialFilters: FilterState;
+    onSubmit: (values: { search: string; location: string; filters: FilterState }) => void;
+    filterOptions: {
+        locationOptions: string[];
+        typeCompanyOptions: Array<{ label: string; value: string }>;
+    };
 }
 
-export const OutBusinessSearch = ({ onSearch }: OutBusinessSearchProps) => {
+export const OutBusinessSearch = ({ initialSearch, initialLocation, initialFilters, onSubmit, filterOptions }: Props) => {
     const [openFilter, setOpenFilter] = useState(false);
-    const [searchName, setSearchName] = useState("");
-    const [searchLocation, setSearchLocation] = useState("");
-    const [typeCompanyId, setTypeCompanyId] = useState<string | undefined>();
-    const [typeCompanies, setTypeCompanies] = useState<TypeCompany[]>([]);
-    const [locations, setLocations] = useState<Location[]>([]);
+    const [search, setSearch] = useState(initialSearch);
+    const [location, setLocation] = useState(initialLocation);
+    const [filters, setFilters] = useState<FilterState>(initialFilters);
 
     useEffect(() => {
-        Promise.all([
-            businessApi.getTypeCompanies(),
-            businessApi.getLocations(),
-        ]).then(([types, locs]) => {
-            setTypeCompanies(types);
-            setLocations(locs);
-        }).catch(console.error);
-    }, []);
+        setSearch(initialSearch);
+    }, [initialSearch]);
 
-    const handleSearch = () => {
-        const params: CompanySearchParams = {};
-        if (searchName) params.name = searchName;
-        if (searchLocation) params.location = searchLocation;
-        if (typeCompanyId) params.type_company_id = typeCompanyId;
-        onSearch(params);
+    useEffect(() => {
+        setLocation(initialLocation);
+    }, [initialLocation]);
+
+    useEffect(() => {
+        setFilters(initialFilters);
+    }, [initialFilters]);
+
+    const handleSubmit = () => {
+        onSubmit({ search, location, filters });
+        setOpenFilter(false);
     };
 
     return (
         <>
-            <div className="bg-white rounded-lg border border-gray-500 p-4 mb-4 shadow">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4 shadow">
                 <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
                     <div className="flex flex-1 gap-2 items-center">
                         <Input
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                             prefix={<FontAwesomeIcon icon={faSearch} className="text-[#BC2228]!" />}
-                            placeholder="Tìm kiếm theo: Tên công ty"
+                            placeholder="Tìm kiếm theo: Tên công ty, Lĩnh vực..."
                             className="w-full md:w-96 border-0!"
                             size="large"
-                            value={searchName}
-                            onChange={(e) => setSearchName(e.target.value)}
-                            onPressEnter={handleSearch}
+                            allowClear
                         />
                         <Divider orientation="vertical" className="h-10!" />
                         <Select
-                            showSearch
+                            value={location || undefined}
+                            onChange={(val) => setLocation(val || "")}
                             allowClear
                             placeholder="Thành phố"
-                            className="w-40 border-0!"
+                            className="w-full md:w-40"
                             size="large"
-                            value={searchLocation || undefined}
-                            onChange={(value) => setSearchLocation(value || "")}
-                            filterOption={(input, option) =>
-                                (option?.children as string)?.toLowerCase().includes(input.toLowerCase())
-                            }
-                        >
-                            {locations.map((loc) => (
-                                <Select.Option key={loc.id} value={loc.name}>
-                                    {loc.name}
-                                </Select.Option>
-                            ))}
-                        </Select>
+                            options={filterOptions.locationOptions.map((c) => ({ label: c, value: c }))}
+                            showSearch
+                            optionFilterProp="label"
+                            suffixIcon={<FontAwesomeIcon icon={faLocationDot} className="text-[#BC2228]!" />}
+                        />
                     </div>
                     <div className="flex gap-2 mt-2 md:mt-0">
                         <Button
@@ -79,39 +78,25 @@ export const OutBusinessSearch = ({ onSearch }: OutBusinessSearchProps) => {
                         >
                             Lọc
                         </Button>
-                        <Button 
-                            type="primary" 
-                            className="bg-[#BC2228]! border-0!" 
-                            size="large"
-                            onClick={handleSearch}
-                        >
+                        <Button type="primary" className="bg-[#BC2228]! border-0!" size="large" onClick={handleSubmit}>
                             Tìm Công ty
                         </Button>
                     </div>
                 </div>
             </div>
             {openFilter && (
-                <div className="bg-white rounded-lg shadow border border-gray-400 p-4 mb-6">
+                <div className="bg-white rounded-lg shadow border border-gray-200 p-4 mb-6">
                     <div className="flex flex-wrap justify-around gap-2 items-center">
-                        <Select 
-                            className="border-0! rounded-0! bg-[#F1F2F4]!" 
-                            size="large" 
-                            placeholder="Lĩnh vực" 
-                            allowClear
-                            value={typeCompanyId}
-                            onChange={(value) => setTypeCompanyId(value)}
-                        >
-                            {typeCompanies.map((type) => (
-                                <Select.Option key={type.id} value={type.id}>
-                                    {type.name}
-                                </Select.Option>
-                            ))}
-                        </Select>
-                        <Button 
-                            className="border-none! bg-[#BC2228]! text-white! ml-2" 
+                        <Select
+                            value={filters.typeCompanyId || undefined}
+                            onChange={(val) => setFilters((prev) => ({ ...prev, typeCompanyId: val || undefined }))}
+                            className="border-0! rounded-0! bg-[#F1F2F4]!"
                             size="large"
-                            onClick={handleSearch}
-                        >
+                            placeholder="Lĩnh vực công ty"
+                            allowClear
+                            options={filterOptions.typeCompanyOptions}
+                        />
+                        <Button className="border-none! bg-[#BC2228]! text-white! ml-2" size="large" onClick={handleSubmit}>
                             Lọc
                         </Button>
                     </div>

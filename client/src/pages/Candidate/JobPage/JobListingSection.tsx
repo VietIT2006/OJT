@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { Link } from "react-router";
-import { fetchJobLocations, fetchJobs } from "../../../apis/jobsApi";
-import type { Job } from "../../../types/job.type";
+import { businessApi } from "../../../apis/businessApi";
+import type { Job, Location, TypeJob, Company } from "../../../types/business.type";
 import Pagination from "../../../components/common/Pagination";
 
 import rikkeiLogo from "../../../assets/images/rikkeiEduAvatar.png";
@@ -21,7 +21,9 @@ const JobListingSection = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [keyword, setKeyword] = useState("");
   const [location, setLocation] = useState("");
-  const [locations, setLocations] = useState<string[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [typeJobs, setTypeJobs] = useState<TypeJob[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
@@ -31,13 +33,25 @@ const JobListingSection = () => {
 
   useEffect(() => {
     let mounted = true;
-    fetchJobLocations()
+    businessApi.getLocations()
       .then((data) => {
         if (mounted) setLocations(data);
       })
       .catch(() => {
         /* bỏ qua lỗi location */
       });
+
+    businessApi.getCompanies()
+      .then((data) => {
+        if (mounted) setCompanies(data);
+      })
+      .catch(() => {});
+
+    businessApi.getTypeJobs()
+      .then((data) => {
+        if (mounted) setTypeJobs(data);
+      })
+      .catch(() => {});
 
     return () => {
       mounted = false;
@@ -48,11 +62,15 @@ const JobListingSection = () => {
     let mounted = true;
     setLoading(true);
     setError(null);
-    fetchJobs({
-      location,
+    businessApi.getJobs({
+      location_id: location,
     })
       .then((data) => {
-        if (mounted) setJobs(data);
+        if (mounted) {
+          // Filter out closed jobs
+          const openJobs = data.filter(job => job.is_open !== false);
+          setJobs(openJobs);
+        }
       })
       .catch((err) => {
         if (mounted) setError(err instanceof Error ? err.message : "Không thể tải dữ liệu");
@@ -66,7 +84,7 @@ const JobListingSection = () => {
     };
   }, [location]);
 
-  const dropdownOptions = useMemo(() => [ALL_LOCATIONS_LABEL, ...locations], [locations]);
+  const dropdownOptions = useMemo(() => [ALL_LOCATIONS_LABEL, ...locations.map(loc => loc.name)], [locations]);
 
   useEffect(() => {
     setFilterLocationInput(location);
@@ -82,11 +100,13 @@ const JobListingSection = () => {
     if (!keyword.trim()) return jobs;
     const keywordLower = keyword.trim().toLowerCase();
     return jobs.filter(
-      (job) =>
-        job.title.toLowerCase().includes(keywordLower) ||
-        job.company.toLowerCase().includes(keywordLower),
+      (job) => {
+        const company = companies.find(c => c.id === job.company_id);
+        return job.title.toLowerCase().includes(keywordLower) ||
+               (company?.name || "").toLowerCase().includes(keywordLower);
+      }
     );
-  }, [jobs, keyword]);
+  }, [jobs, keyword, companies]);
 
   const totalPages = useMemo(
     () => Math.max(1, Math.ceil(filteredJobs.length / pageSize)),
@@ -102,7 +122,8 @@ const JobListingSection = () => {
   }, [keyword, location]);
 
   const handleLocationSelect = (value: string) => {
-    setLocation(value === ALL_LOCATIONS_LABEL ? "" : value);
+    const locationId = locations.find(loc => loc.name === value)?.id || "";
+    setLocation(value === ALL_LOCATIONS_LABEL ? "" : locationId);
     setLocationDropdownOpen(false);
   };
 
@@ -139,7 +160,7 @@ const JobListingSection = () => {
             onToggleFilters={() => setFilterLocationDropdownOpen((prev) => !prev)}
             onSubmit={handleFilterApply}
           />
-          <JobGrid jobs={paginatedJobs} loading={loading} error={error} />
+          <JobGrid jobs={paginatedJobs} companies={companies} locations={locations} typeJobs={typeJobs} loading={loading} error={error} />
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
@@ -248,7 +269,7 @@ const FilterBar = ({
   </div>
 );
 
-const JobGrid = ({ jobs, loading, error }: { jobs: Job[]; loading: boolean; error: string | null }) => {
+const JobGrid = ({ jobs, companies, locations, typeJobs, loading, error }: { jobs: Job[]; companies: Company[]; locations: Location[]; typeJobs: TypeJob[]; loading: boolean; error: string | null }) => {
   if (loading) {
     return (
       <div className="mt-10 rounded-[1px] border border-dashed border-[#d5d5d5] bg-white p-10 text-center text-sm text-[#757575]">
@@ -276,33 +297,37 @@ const JobGrid = ({ jobs, loading, error }: { jobs: Job[]; loading: boolean; erro
   return (
     <div className="mt-8 grid gap-5  bg-white md:grid-cols-2 lg:grid-cols-3">
       {jobs.map((job) => (
-        <JobCard key={job.id} {...job} />
+        <JobCard key={job.id} job={job} companies={companies} locations={locations} typeJobs={typeJobs} />
       ))}
     </div>
   );
 };
 
-const JobCard = ({ id, title, type, salary, company, location, logo }: Job) => {
+const JobCard = ({ job, companies, locations, typeJobs }: { job: Job; companies: Company[]; locations: Location[]; typeJobs: TypeJob[] }) => {
+  const company = companies.find(c => c.id === job.company_id);
+  const location = locations.find(l => l.id === job.location_id);
+  const typeJob = typeJobs.find(t => t.id === job.type_job_id);
+  
   const badgeColor =
-    type === "Full-time"
+    typeJob?.name === "Fulltime"
       ? "bg-[#ebfff3] text-[#13ae4b]"
-      : type === "Part-time"
+      : typeJob?.name === "Part-time"
         ? "bg-[#fff7e5] text-[#f7a614]"
         : "bg-[#edf5ff] text-[#2470ff]";
 
   return (
     <Link
-      to={`/job/${id}`}
+      to={`/job/${job.id}`}
       className="block rounded-[1px] border border-[#f0f0f0] bg-white p-5 shadow-[0_12px_30px_rgba(0,0,0,0.04)] transition hover:-translate-y-1 hover:shadow-[0_20px_35px_rgba(0,0,0,0.08)]"
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-lg font-semibold text-[#202020]">{title}</h3>
+          <h3 className="text-lg font-semibold text-[#202020]">{job.title}</h3>
           <div className="flex items-center justify-center gap-3">
             <span className={`inline-flex rounded-[1px] px-3 py-1 text-xs font-semibold ${badgeColor}`}>
-              {type.toUpperCase()}
+              {typeJob?.name.toUpperCase() || "N/A"}
             </span>
-            <span className="text-sm text-[#8e8e8e]">Salary: {salary}</span>
+            <span className="text-sm text-[#8e8e8e]">Salary: {job.salary || "Negotiable"}</span>
           </div>
         </div>
       </div>
@@ -310,15 +335,15 @@ const JobCard = ({ id, title, type, salary, company, location, logo }: Job) => {
       <div className="flex items-center justify-between">
         <div className="mt-4 flex items-center gap-3">
           <img
-            src={logo}
-            alt={company}
+            src={company?.logo || "https://www.google.com/favicon.ico"}
+            alt={company?.name || "Company"}
             className="h-8 w-8 rounded-[1px] border border-[#e7e7e7] bg-[#EDEFF5] object-contain p-1"
           />
           <div>
-            <p className="text-sm font-semibold text-[#3d3d3d]">{company}</p>
+            <p className="text-sm font-semibold text-[#3d3d3d]">{company?.name || "Unknown"}</p>
             <p className="flex items-center gap-1 text-xs text-[#9a9a9a]">
               <img src={mapPinIcon} alt="Location" className="h-4 w-4" />
-              {location}
+              {location?.name || "Unknown"}
             </p>
           </div>
         </div>

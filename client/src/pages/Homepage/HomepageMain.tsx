@@ -100,11 +100,11 @@ export const HomepageMain = () => {
             {/* FEATURED JOBS SECTION */}
             <section className="py-24 px-6 md:px-20 max-w-7xl mx-auto">
                 <div className="flex justify-between items-end mb-12">
-                    <div>
-                        <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Công việc nổi bật</h2>
-                       
-                    </div>
-                    <button className="text-[#CC1E1E] font-bold text-sm flex items-center gap-1 hover:underline" onClick={() => navigate("/viec-lam")}>
+                    <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Công việc nổi bật</h2>
+                    <button
+                        className="text-[#CC1E1E] font-bold text-sm flex items-center gap-1 hover:underline"
+                        onClick={() => navigate("/job")}
+                    >
                         {t('see-more-0')}<FontAwesomeIcon icon={faChevronRight} />
                     </button>
                 </div>
